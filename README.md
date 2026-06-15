@@ -1,50 +1,69 @@
 # 🤖 Intelligent Candidate Discovery System
 ### India Runs Hackathon 2026 — Track 01: Data & AI Challenge
 
-## 📌 Problem Statement
-Recruiters struggle to find the right candidates from thousands 
-of profiles using traditional keyword filters. Hidden gems are 
-missed because true potential goes beyond keywords.
+🔗 **Live Demo:** [your-streamlit-url-here]
 
-## 💡 My Solution
-An AI-powered ranking system that:
-- Understands job descriptions deeply using NLP
-- Scores candidates using TF-IDF semantic similarity
-- Combines skill match + experience + activity signals
-- Outputs a precise ranked shortlist instantly
+## 📌 Problem Statement
+Indian companies receive 400+ job applications per role.
+Manual screening wastes 8–12 hours per hire and misses
+the best candidates. Traditional keyword filters fail to
+understand context and true skill fit.
+
+## 💡 Solution
+An AI-powered recruiter that works for **any job role**:
+- Upload any job description (any role, any industry)
+- Upload your own candidate CSV or use the default dataset
+- Instantly get a ranked shortlist with scores
+- Download results as CSV
 
 ## 🧠 How It Works
-1. Input: Job Description text
+1. Paste or upload any job description
 2. TF-IDF vectorizer converts JD + candidate skills to vectors
-3. Cosine similarity measures semantic fit (60% weight)
-4. Experience score added (20% weight)
-5. Activity score added (20% weight)
-6. Final ranked CSV output generated
+3. Cosine similarity measures semantic skill fit
+4. Three signals combined into one final score:
+   - Skill Match — 70%
+   - Experience — 20%
+   - Activity Score — 10%
+5. Candidates ranked and exported as CSV
 
 ## 🛠️ Tech Stack
 - Python 3
-- Google Colab
+- Streamlit (live web app)
+- Google Colab (notebook)
 - scikit-learn (TF-IDF, Cosine Similarity)
-- pandas & numpy
-- matplotlib & seaborn
+- pandas, numpy, matplotlib
 
 ## 📊 Results
-- 50 candidates ranked successfully
-- Top candidate achieved 85%+ match score
-- Ranking chart generated and saved
+- 50 candidates ranked in under 3 seconds
+- Works for any job role — not just one fixed role
+- Adjustable scoring weights via sliders
+- Download ranked output as CSV instantly
 
 ## 📁 Files
 | File | Description |
 |------|-------------|
-| `notebook.ipynb` | Complete Colab code |
-| `candidates.csv` | Candidate dataset |
-| `ranked_output.csv` | Final ranked output |
-| `results_chart.png` | Visualization charts |
+| `app.py` | Streamlit web app |
+| `notebook.ipynb` | Google Colab notebook |
+| `candidates.csv` | Sample candidate dataset |
+| `ranked_output.csv` | Sample ranked output |
+| `results_chart.png` | Visualization chart |
+| `requirements.txt` | Python dependencies |
 
 ## 🚀 How to Run
-1. Open notebook.ipynb in Google Colab
+
+**Option 1 — Live Demo**
+Click the Streamlit link above
+
+**Option 2 — Google Colab**
+1. Open `notebook.ipynb` in Google Colab
 2. Run all cells in order
-3. ranked_output.csv will be generated automatically
+3. `ranked_output.csv` will be generated
+
+**Option 3 — Local**
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+```
 
 ## 👤 Author
 - India Runs Hackathon 2026 participant

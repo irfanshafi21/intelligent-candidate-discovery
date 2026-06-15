@@ -5,8 +5,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
-warnings.filterwarnings('ignore')
 import warnings
+warnings.filterwarnings('ignore')
 
 # ── Page config ──────────────────────────────────────────────
 st.set_page_config(

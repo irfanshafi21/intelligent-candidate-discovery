@@ -340,6 +340,17 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+# Sidebar reopen button
+col_btn, col_empty = st.columns([1, 5])
+with col_btn:
+    if st.button("⚙️ Open Settings"):
+        st.session_state.sidebar_open = True
+        st.rerun()
+
+# ── Sidebar toggle ───────────────────────────────────────────
+if 'sidebar_open' not in st.session_state:
+    st.session_state.sidebar_open = True
+
 # ── Sidebar ───────────────────────────────────────────────────
 st.sidebar.markdown("## 📋 Job Description")
 st.sidebar.markdown("Paste, type or upload any job description")

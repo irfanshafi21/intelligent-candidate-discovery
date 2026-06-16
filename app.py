@@ -32,6 +32,14 @@ html, body, [class*="css"] {
 
 /* ── Always show sidebar toggle button ── */
 [data-testid="collapsedControl"] {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: all !important;
+}
+
+/* ── Keep sidebar toggle always visible ── */
+[data-testid="collapsedControl"] {
     display: flex !important;
     visibility: visible !important;
     background: #7c3aed !important;
@@ -340,19 +348,17 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Sidebar reopen button
-col_btn, col_empty = st.columns([1, 5])
-with col_btn:
-    if st.button("⚙️ Open Settings"):
-        st.session_state.sidebar_open = True
-        st.rerun()
-
-# ── Sidebar toggle ───────────────────────────────────────────
-if 'sidebar_open' not in st.session_state:
-    st.session_state.sidebar_open = True
+# Keep sidebar always expanded
+st.markdown("""
+<script>
+var sidebarToggle = window.parent.document.querySelector('[data-testid="collapsedControl"]');
+if(sidebarToggle) sidebarToggle.style.display = "block";
+</script>
+""", unsafe_allow_html=True)
 
 # ── Sidebar ───────────────────────────────────────────────────
 st.sidebar.markdown("## 📋 Job Description")
+st.sidebar.markdown('<p style="color:#a78bfa;font-size:11px;margin-top:-10px;">💡 Press <b>S</b> key to open/close sidebar</p>', unsafe_allow_html=True)
 st.sidebar.markdown("Paste, type or upload any job description")
 
 job_description = st.sidebar.text_area(

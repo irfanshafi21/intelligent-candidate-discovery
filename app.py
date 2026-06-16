@@ -45,16 +45,16 @@ html, body, [class*="css"]{
 }
 
 .block-container{
-    padding:1rem 1.5rem 2rem !important;
-    max-width:1580px !important;
+    padding:.7rem 1.2rem 1.4rem !important;
+    max-width:1500px !important;
 }
 
 .hero{
     position:relative;
     overflow:hidden;
-    border-radius:24px;
-    padding:1.35rem 1.75rem;
-    margin:.35rem 0 1rem;
+    border-radius:22px;
+    padding:1rem 1.45rem;
+    margin:.2rem 0 .75rem;
     color:white;
     background:linear-gradient(135deg,#0B1028 0%,#312E81 50%,#0891B2 100%);
     border:1px solid rgba(255,255,255,.18);
@@ -115,11 +115,11 @@ html, body, [class*="css"]{
 .glass-card{
     background:var(--card);
     border:1px solid var(--border);
-    border-radius:24px;
-    padding:1.1rem;
-    box-shadow:0 18px 48px rgba(79,70,229,.11);
+    border-radius:22px;
+    padding:.85rem 1rem;
+    box-shadow:0 14px 36px rgba(79,70,229,.10);
     backdrop-filter:blur(16px);
-    margin-bottom:1rem;
+    margin-bottom:.75rem;
 }
 
 .control-title{
@@ -133,13 +133,13 @@ html, body, [class*="css"]{
 .small-title{
     font-family:'Space Grotesk',sans-serif;
     font-weight:900;
-    font-size:.92rem;
+    font-size:.88rem;
     color:var(--ink);
-    margin:.15rem 0 .45rem;
+    margin:0 0 .32rem;
 }
 
 [data-testid="stTextArea"] textarea{
-    min-height:138px !important;
+    min-height:118px !important;
     border-radius:18px !important;
     border:1px solid rgba(139,92,246,.18) !important;
     background:rgba(255,255,255,.88) !important;
@@ -153,9 +153,9 @@ html, body, [class*="css"]{
     align-items:center;
     background:linear-gradient(135deg,rgba(109,40,217,.13),rgba(6,182,212,.13));
     color:#4C1D95;
-    font-size:11px;
+    font-size:10.5px;
     font-weight:800;
-    padding:6px 10px;
+    padding:5px 9px;
     border-radius:999px;
     margin:3px;
     border:1px solid rgba(139,92,246,.18);
@@ -165,9 +165,28 @@ html, body, [class*="css"]{
 .weight-mini{
     background:rgba(255,255,255,.65);
     border:1px solid rgba(139,92,246,.12);
-    border-radius:18px;
-    padding:.7rem .8rem;
-    margin-top:.35rem;
+    border-radius:16px;
+    padding:.5rem .65rem;
+    margin-top:.15rem;
+}
+
+[data-testid="stSlider"]{
+    padding:.05rem 0 .1rem !important;
+}
+
+[data-testid="stSlider"] label{
+    font-size:.78rem !important;
+}
+
+[data-testid="stSlider"] div[data-baseweb="slider"]{
+    margin-top:.05rem !important;
+}
+
+.compact-help{
+    color:#64748B;
+    font-size:.78rem;
+    font-weight:700;
+    margin-top:.3rem;
 }
 
 .stSlider label, .stNumberInput label, .stFileUploader label{
@@ -209,10 +228,10 @@ html, body, [class*="css"]{
 
 .section-title{
     font-family:'Space Grotesk',sans-serif;
-    font-size:1.18rem;
+    font-size:1.05rem;
     font-weight:900;
     color:#111827;
-    margin:.2rem 0 .75rem;
+    margin:.05rem 0 .55rem;
 }
 
 .metric-row{
@@ -327,7 +346,7 @@ st.markdown("""
 st.markdown('<div class="glass-card">', unsafe_allow_html=True)
 st.markdown('<div class="section-title">⚙️ Recruiter Control Panel</div>', unsafe_allow_html=True)
 
-jd_col, key_col, weight_col, select_col = st.columns([2.15, 1.55, 2.05, 1.05], gap="large")
+jd_col, key_col, weight_col, select_col = st.columns([2.05, 1.35, 2.35, .9], gap="medium")
 
 with jd_col:
     st.markdown('<div class="small-title">📋 Job Description</div>', unsafe_allow_html=True)
@@ -356,21 +375,25 @@ with key_col:
 
 with weight_col:
     st.markdown('<div class="small-title">⚖️ Scoring Weights</div>', unsafe_allow_html=True)
-    skill_weight = st.slider("🎯 Skill Match", 0, 100, 70, step=5)
-    exp_weight   = st.slider("📅 Experience",  0, 100, 20, step=5)
-    act_weight   = st.slider("⚡ Activity",    0, 100, 10, step=5)
+    w1, w2, w3 = st.columns(3, gap="small")
+    with w1:
+        skill_weight = st.slider("🎯 Skill", 0, 100, 70, step=5)
+    with w2:
+        exp_weight = st.slider("📅 Exp", 0, 100, 20, step=5)
+    with w3:
+        act_weight = st.slider("⚡ Act", 0, 100, 10, step=5)
     total = skill_weight + exp_weight + act_weight
     if total != 100:
         st.error(f"⚠️ Weights = {total}% · Must be 100%")
     else:
         st.markdown(f"""
         <div class='weight-mini'>
-            <div style='display:flex;gap:4px;height:9px;border-radius:8px;overflow:hidden'>
+            <div style='display:flex;gap:4px;height:8px;border-radius:8px;overflow:hidden'>
                 <div style='width:{skill_weight}%;background:#6D28D9'></div>
                 <div style='width:{exp_weight}%;background:#06B6D4'></div>
                 <div style='width:{act_weight}%;background:#10B981'></div>
             </div>
-            <div style='display:flex;gap:10px;margin-top:7px;font-size:11px;color:#475569;flex-wrap:wrap;font-weight:800'>
+            <div style='display:flex;gap:9px;margin-top:6px;font-size:10.5px;color:#475569;flex-wrap:wrap;font-weight:800'>
                 <span>Skill {skill_weight}%</span>
                 <span>Exp {exp_weight}%</span>
                 <span>Act {act_weight}%</span>
@@ -386,7 +409,7 @@ st.markdown('</div>', unsafe_allow_html=True)
 
 # ── Upload + Run Section ──────────────────────────────────────────────────────
 st.markdown('<div class="glass-card">', unsafe_allow_html=True)
-upload_col, run_col = st.columns([3, 1.15], gap="large")
+upload_col, run_col = st.columns([2.6, 1.15], gap="medium")
 
 with upload_col:
     st.markdown('<div class="small-title">📂 Candidate Data</div>', unsafe_allow_html=True)
@@ -397,9 +420,9 @@ with upload_col:
     )
 
 with run_col:
-    st.markdown('<div class="small-title">🚀 Action</div>', unsafe_allow_html=True)
-    st.write("")
-    run = st.button("Run AI Ranking", use_container_width=True)
+    st.markdown('<div class="small-title">🚀 Final Ranking</div>', unsafe_allow_html=True)
+    run = st.button("🚀 Run AI Ranking", use_container_width=True)
+    st.markdown('<div class="compact-help">Visible action button for demo presentation</div>', unsafe_allow_html=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
 

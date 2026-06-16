@@ -200,6 +200,26 @@ section[data-testid="stSidebar"] input { color: #ffffff !important; background-c
 section[data-testid="stSidebar"] .stTextArea > div > div {
     background-color: #2d1b69 !important;
 }
+section[data-testid="stSidebar"] .stFileUploader {
+    background-color: #2d1b69 !important;
+    border: 1px solid rgba(139,92,246,0.5) !important;
+    border-radius: 8px !important;
+}
+section[data-testid="stSidebar"] .stFileUploader > div {
+    background-color: #2d1b69 !important;
+}
+section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] {
+    background-color: #2d1b69 !important;
+    border: 1px dashed rgba(139,92,246,0.6) !important;
+}
+section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] * {
+    color: #c4b5fd !important;
+}
+section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] button {
+    background-color: rgba(124,58,237,0.3) !important;
+    color: #e9d5ff !important;
+    border: 1px solid rgba(139,92,246,0.5) !important;
+}
 section[data-testid="stSidebar"] .stSlider > div > div > div { background: #7c3aed !important; }
 section[data-testid="stSidebar"] h1,
 section[data-testid="stSidebar"] h2,

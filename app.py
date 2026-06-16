@@ -139,7 +139,6 @@ html, body, [class*="css"]{
 }
 
 [data-testid="stTextArea"] textarea{
-    min-height:118px !important;
     border-radius:18px !important;
     border:1px solid rgba(139,92,246,.18) !important;
     background:rgba(255,255,255,.88) !important;
@@ -348,17 +347,24 @@ st.markdown('<div class="section-title">⚙️ Recruiter Control Panel</div>', u
 
 jd_col, key_col, weight_col, select_col = st.columns([2.05, 1.35, 2.35, .9], gap="medium")
 
+default_job_description = """We are looking for an AI/ML Engineer with strong Python skills.
+Required: machine learning, deep learning, TensorFlow, scikit-learn,
+natural language processing, data analysis, model deployment.
+Experience with neural networks, transformers, and LLM is preferred.
+Minimum 3 years experience. Strong problem solving skills required."""
+
+current_job_text = st.session_state.get("job_description_text", default_job_description)
+line_count = max(4, len(current_job_text.splitlines()))
+auto_textarea_height = min(210, max(118, line_count * 25 + 28))
+
 with jd_col:
     st.markdown('<div class="small-title">📋 Job Description</div>', unsafe_allow_html=True)
     job_description = st.text_area(
         "Paste or type any job description:",
-        value="""We are looking for an AI/ML Engineer with strong Python skills.
-Required: machine learning, deep learning, TensorFlow, scikit-learn,
-natural language processing, data analysis, model deployment.
-Experience with neural networks, transformers, and LLM is preferred.
-Minimum 3 years experience. Strong problem solving skills required.""",
-        height=138,
-        label_visibility="collapsed"
+        value=default_job_description,
+        height=auto_textarea_height,
+        label_visibility="collapsed",
+        key="job_description_text"
     )
 
 with key_col:
@@ -422,7 +428,6 @@ with upload_col:
 with run_col:
     st.markdown('<div class="small-title">🚀 Final Ranking</div>', unsafe_allow_html=True)
     run = st.button("🚀 Run AI Ranking", use_container_width=True)
-    st.markdown('<div class="compact-help">Visible action button for demo presentation</div>', unsafe_allow_html=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
 
@@ -610,36 +615,38 @@ if run:
         st.write("")
         c1, c2 = st.columns(2)
         with c1:
-            fig1, ax1 = plt.subplots(figsize=(6, 4))
+            fig1, ax1 = plt.subplots(figsize=(5.2, 2.9))
             fig1.patch.set_facecolor('#faf9ff')
             ax1.set_facecolor('#faf9ff')
             top10 = df_ranked.head(10)
             colors = ['#7c3aed' if i==0 else '#a78bfa' if i<3 else '#c4b5fd' for i in range(len(top10))]
-            bars = ax1.barh(top10['name'], top10['final_score'], color=colors, height=0.6)
-            ax1.set_xlabel('Final Score', color='#6b7280', fontsize=10)
-            ax1.set_title('Top 10 Candidates', color='#1e1b4b', fontsize=12, fontweight='bold')
+            bars = ax1.barh(top10['name'], top10['final_score'], color=colors, height=0.46)
+            ax1.set_xlabel('Final Score', color='#6b7280', fontsize=8)
+            ax1.set_title('Top 10 Candidates', color='#1e1b4b', fontsize=10, fontweight='bold', pad=6)
             ax1.invert_yaxis()
             ax1.set_xlim(0, 100)
-            ax1.tick_params(colors='#6b7280', labelsize=9)
+            ax1.tick_params(colors='#6b7280', labelsize=7)
             for sp in ['top','right']: ax1.spines[sp].set_visible(False)
             for bar, val in zip(bars, top10['final_score']):
-                ax1.text(bar.get_width()+0.5, bar.get_y()+bar.get_height()/2, f'{val:.1f}', va='center', fontsize=8, color='#7c3aed')
+                ax1.text(bar.get_width()+0.5, bar.get_y()+bar.get_height()/2, f'{val:.1f}', va='center', fontsize=7, color='#7c3aed')
             plt.tight_layout()
-            st.pyplot(fig1)
+            st.pyplot(fig1, use_container_width=True)
 
         with c2:
-            fig2, ax2 = plt.subplots(figsize=(6, 4))
+            fig2, ax2 = plt.subplots(figsize=(5.2, 2.9))
             fig2.patch.set_facecolor('#faf9ff')
             ax2.set_facecolor('#faf9ff')
-            sc = ax2.scatter(df2['skill_match_score'], df2['experience_years'], c=df2['final_score'], cmap='RdPu', s=80, alpha=0.85, edgecolors='white', linewidths=0.5)
-            ax2.set_xlabel('Skill Match Score', color='#6b7280', fontsize=10)
-            ax2.set_ylabel('Experience (years)', color='#6b7280', fontsize=10)
-            ax2.set_title('Skill vs Experience', color='#1e1b4b', fontsize=12, fontweight='bold')
-            ax2.tick_params(colors='#6b7280', labelsize=9)
+            sc = ax2.scatter(df2['skill_match_score'], df2['experience_years'], c=df2['final_score'], cmap='RdPu', s=42, alpha=0.85, edgecolors='white', linewidths=0.35)
+            ax2.set_xlabel('Skill Match Score', color='#6b7280', fontsize=8)
+            ax2.set_ylabel('Experience (years)', color='#6b7280', fontsize=8)
+            ax2.set_title('Skill vs Experience', color='#1e1b4b', fontsize=10, fontweight='bold', pad=6)
+            ax2.tick_params(colors='#6b7280', labelsize=7)
             for sp in ['top','right']: ax2.spines[sp].set_visible(False)
-            plt.colorbar(sc, ax=ax2, label='Final Score')
+            cbar = plt.colorbar(sc, ax=ax2, label='Final Score', fraction=0.035, pad=0.02)
+            cbar.ax.tick_params(labelsize=7)
+            cbar.set_label('Final Score', fontsize=8)
             plt.tight_layout()
-            st.pyplot(fig2)
+            st.pyplot(fig2, use_container_width=True)
 
         st.write("")
         out_cols = [c for c in ['rank','name','job_title','experience_years','skill_match_score','activity_score','final_score'] if c in df_ranked.columns]

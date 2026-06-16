@@ -30,6 +30,29 @@ html, body, [class*="css"] {
 #MainMenu, footer, header { visibility: hidden; }
 .block-container { padding: 0 2rem 2rem 2rem !important; }
 
+/* ── Always show sidebar toggle button ── */
+[data-testid="collapsedControl"] {
+    display: flex !important;
+    visibility: visible !important;
+    background: #7c3aed !important;
+    border-radius: 0 8px 8px 0 !important;
+    color: white !important;
+    width: 24px !important;
+    height: 48px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    top: 50% !important;
+    box-shadow: 2px 2px 8px rgba(124,58,237,0.4) !important;
+}
+[data-testid="collapsedControl"]:hover {
+    background: #6d28d9 !important;
+    width: 28px !important;
+}
+[data-testid="collapsedControl"] svg {
+    color: white !important;
+    fill: white !important;
+}
+
 /* ── Hero header ── */
 .hero {
     background: linear-gradient(135deg, #1a0533 0%, #2d1b69 50%, #0f3460 100%);

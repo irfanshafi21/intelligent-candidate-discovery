@@ -331,15 +331,6 @@ Minimum 3 years experience. Strong problem solving skills required.""",
     height=200
 )
 
-st.sidebar.markdown("""
-<div style="margin-top:8px">
-    <p style="color:#c4b5fd;font-size:13px;margin-bottom:6px;">📄 Or upload a .txt file:</p>
-</div>
-""", unsafe_allow_html=True)
-jd_file = st.sidebar.file_uploader("", type=["txt"], label_visibility="collapsed")
-if jd_file:
-    job_description = jd_file.read().decode("utf-8")
-    st.sidebar.success("✅ JD uploaded!")
 
 # Keyword tags
 if job_description:

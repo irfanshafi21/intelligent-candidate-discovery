@@ -170,13 +170,14 @@ html, body, [class*="css"] {
 /* ── Keyword tags ── */
 .tag {
     display: inline-block;
-    background: #ede9fe;
-    color: #5b21b6;
+    background: rgba(139,92,246,0.3);
+    color: #e9d5ff !important;
     font-size: 11px;
     font-weight: 500;
     padding: 3px 10px;
     border-radius: 20px;
     margin: 2px;
+    border: 1px solid rgba(139,92,246,0.5);
 }
 
 /* ── Sidebar ── */
@@ -298,26 +299,7 @@ top_n = st.sidebar.slider("👥 Show Top N Candidates", 3, 20, 10)
 # ── Candidate Data ─────────────────────────────────────────────
 st.markdown('<div class="section-title">📂 Candidate Data</div>', unsafe_allow_html=True)
 
-col_up, col_dl = st.columns([2, 1])
-with col_up:
-    uploaded = st.file_uploader("Upload your candidates CSV", type=["csv"])
-with col_dl:
-    template = pd.DataFrame({
-        'name': ['Rahul Sharma', 'Priya Nair'],
-        'skills': ['Python machine learning TensorFlow deep learning',
-                   'JavaScript React Node.js HTML CSS'],
-        'experience_years': [5, 3],
-        'job_title': ['ML Engineer', 'Frontend Developer'],
-        'activity_score': [85, 78],
-        'education': ['M.Tech CS', 'B.Tech IT']
-    })
-    st.download_button(
-        "📥 Download CSV Template",
-        template.to_csv(index=False).encode('utf-8'),
-        file_name="candidate_template.csv",
-        mime="text/csv",
-        use_container_width=True
-    )
+uploaded = st.file_uploader("Upload your own candidates CSV (optional)", type=["csv"])
 
 @st.cache_data
 def get_default_data():
@@ -410,8 +392,13 @@ def get_default_data():
     return pd.DataFrame(data)
 
 if uploaded:
-    df = pd.read_csv(uploaded)
-    st.success(f"✅ {len(df)} candidates loaded from your file!")
+    df_upload = pd.read_csv(uploaded)
+    if len(df_upload) < 5:
+        st.warning(f"⚠️ Your CSV only has {len(df_upload)} candidates. Using default 50-candidate dataset for better results.")
+        df = get_default_data()
+    else:
+        df = df_upload
+        st.success(f"✅ {len(df)} candidates loaded from your file!")
 else:
     df = get_default_data()
     st.info(f"ℹ️ Using default dataset — {len(df)} candidates ready.")

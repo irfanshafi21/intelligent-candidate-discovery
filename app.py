@@ -220,6 +220,27 @@ section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] button {
     color: #e9d5ff !important;
     border: 1px solid rgba(139,92,246,0.5) !important;
 }
+section[data-testid="stSidebar"] section[data-testid="stFileUploadDropzone"] {
+    background-color: #2d1b69 !important;
+}
+section[data-testid="stSidebar"] section[data-testid="stFileUploadDropzone"] > div {
+    background-color: #2d1b69 !important;
+}
+section[data-testid="stSidebar"] .stFileUploader div div div div {
+    background-color: #2d1b69 !important;
+    color: #c4b5fd !important;
+}
+section[data-testid="stSidebar"] .stFileUploader small {
+    color: #a78bfa !important;
+}
+section[data-testid="stSidebar"] .stFileUploader span {
+    color: #c4b5fd !important;
+}
+section[data-testid="stSidebar"] .stFileUploader button[kind="secondary"] {
+    background-color: rgba(124,58,237,0.4) !important;
+    color: #e9d5ff !important;
+    border-color: #7c3aed !important;
+}
 section[data-testid="stSidebar"] .stSlider > div > div > div { background: #7c3aed !important; }
 section[data-testid="stSidebar"] h1,
 section[data-testid="stSidebar"] h2,

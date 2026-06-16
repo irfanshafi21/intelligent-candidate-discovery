@@ -241,6 +241,27 @@ section[data-testid="stSidebar"] .stFileUploader button[kind="secondary"] {
     color: #e9d5ff !important;
     border-color: #7c3aed !important;
 }
+section[data-testid="stSidebar"] .stFileUploader,
+section[data-testid="stSidebar"] .stFileUploader > div,
+section[data-testid="stSidebar"] .stFileUploader > div > div,
+section[data-testid="stSidebar"] .stFileUploader > div > div > div,
+section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"],
+section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] > div {
+    background-color: #2d1b69 !important;
+    background: #2d1b69 !important;
+    border-color: rgba(139,92,246,0.5) !important;
+    color: #e0e7ff !important;
+}
+section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] button {
+    background-color: rgba(124,58,237,0.5) !important;
+    color: #ffffff !important;
+    border: 1px solid #7c3aed !important;
+    border-radius: 6px !important;
+}
+section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] span,
+section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] small {
+    color: #c4b5fd !important;
+}
 section[data-testid="stSidebar"] .stSlider > div > div > div { background: #7c3aed !important; }
 section[data-testid="stSidebar"] h1,
 section[data-testid="stSidebar"] h2,
@@ -294,8 +315,13 @@ st.markdown("""
 st.sidebar.markdown("## 📋 Job Description")
 st.sidebar.markdown("Paste, type or upload any job description")
 
-job_description = st.sidebar.text_area(
-    "Type or paste job description here:",
+jd_file = st.sidebar.file_uploader("📄 Upload JD (.txt file)", type=["txt"])
+if jd_file:
+    job_description = jd_file.read().decode("utf-8")
+    st.sidebar.success("✅ Job description uploaded!")
+else:
+    job_description = st.sidebar.text_area(
+        "📝 Or type / paste here:",
     value="""We are looking for an AI/ML Engineer with strong Python skills.
 Required: machine learning, deep learning, TensorFlow, scikit-learn,
 natural language processing, data analysis, model deployment.

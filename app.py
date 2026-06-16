@@ -185,9 +185,21 @@ section[data-testid="stSidebar"] {
     background: linear-gradient(180deg, #1a0533 0%, #1e1b4b 100%) !important;
 }
 section[data-testid="stSidebar"] * { color: #e0e7ff !important; }
-section[data-testid="stSidebar"] textarea { color: #ffffff !important; background: rgba(255,255,255,0.08) !important; border: 1px solid rgba(139,92,246,0.4) !important; }
+section[data-testid="stSidebar"] textarea {
+    color: #ffffff !important;
+    background-color: #2d1b69 !important;
+    border: 1px solid rgba(139,92,246,0.6) !important;
+    caret-color: #ffffff !important;
+}
+section[data-testid="stSidebar"] .stTextArea textarea {
+    color: #ffffff !important;
+    background-color: #2d1b69 !important;
+}
 section[data-testid="stSidebar"] textarea::placeholder { color: #a5b4fc !important; }
-section[data-testid="stSidebar"] input { color: #ffffff !important; background: rgba(255,255,255,0.08) !important; }
+section[data-testid="stSidebar"] input { color: #ffffff !important; background-color: #2d1b69 !important; }
+section[data-testid="stSidebar"] .stTextArea > div > div {
+    background-color: #2d1b69 !important;
+}
 section[data-testid="stSidebar"] .stSlider > div > div > div { background: #7c3aed !important; }
 section[data-testid="stSidebar"] h1,
 section[data-testid="stSidebar"] h2,

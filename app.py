@@ -285,6 +285,44 @@ hr { border-color: #e5e7eb !important; margin: 1.5rem 0 !important; }
     border-radius: 8px !important;
     font-weight: 500 !important;
 }
+
+/* ── Sidebar uploader - force dark ── */
+section[data-testid="stSidebar"] [class*="uploadedFile"],
+section[data-testid="stSidebar"] [class*="fileUpload"],
+section[data-testid="stSidebar"] [class*="FileUpload"],
+section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"],
+section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] > div,
+section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] section,
+section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] label {
+    background: #1a0533 !important;
+    background-color: #1a0533 !important;
+    border: none !important;
+    color: #ffffff !important;
+}
+section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] button {
+    background: #7c3aed !important;
+    background-color: #7c3aed !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 8px !important;
+    width: 100% !important;
+    padding: 10px !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+}
+section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] button:hover {
+    background: #6d28d9 !important;
+    background-color: #6d28d9 !important;
+}
+section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] button * {
+    background: transparent !important;
+    color: #ffffff !important;
+}
+section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] small,
+section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] span {
+    color: #a78bfa !important;
+    background: transparent !important;
+}
 </style>
 """, unsafe_allow_html=True)
 

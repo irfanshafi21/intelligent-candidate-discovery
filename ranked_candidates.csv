@@ -1,0 +1,21 @@
+rank,name,job_title,experience_years,skill_match_score,activity_score,final_score
+1,Arjun Krishnan,ML Engineer,6,52.24,95,63.21
+2,Rohit Verma,AI Engineer,7,40.75,98,58.33
+3,Deepa Pillai,Cloud ML Engineer,5,18.33,87,35.82
+4,Karan Patel,Deep Learning Engineer,5,13.85,91,33.08
+5,Sanya Kapoor,MLOps Engineer,5,8.83,90,29.46
+6,Manoj Tiwari,AI Researcher,5,8.02,88,28.7
+7,Harish Babu,Data Engineer,6,3.59,82,27.86
+8,Divya Sharma,Data Scientist,4,10.76,88,27.76
+9,Ritu Agarwal,Data Scientist,4,10.03,86,27.05
+10,Pooja Das,NLP Engineer,4,7.92,89,25.87
+11,Vikram Singh,Cloud Engineer,6,0.0,85,25.64
+12,Ananya Bose,Data Analyst,5,5.19,75,25.42
+13,Sneha Reddy,Database Admin,5,4.04,72,24.32
+14,Arun Kumar,BI Analyst,5,1.98,76,23.27
+15,Lakshmi Menon,AutoML Engineer,4,3.78,83,22.38
+16,Rahul Mehta,Java Developer,4,0.0,80,19.43
+17,Meena Iyer,Security Engineer,4,0.0,74,18.83
+18,Priya Nair,Frontend Developer,3,0.0,78,16.37
+19,Nikhil Gupta,Blockchain Developer,3,0.0,71,15.67
+20,Suresh Nair,iOS Developer,3,0.0,70,15.57

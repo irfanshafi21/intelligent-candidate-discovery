@@ -18,14 +18,17 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700;800&display=swap');
 
 :root{
-    --primary:#6D28D9;
-    --primary2:#8B5CF6;
-    --pink:#EC4899;
-    --cyan:#06B6D4;
-    --ink:#0F172A;
+    --bg:#F8FAFC;
+    --primary:#0F172A;
+    --primary-soft:#1E293B;
+    --accent:#06B6D4;
+    --accent-soft:#E0F7FB;
+    --card:#FFFFFF;
+    --text:#111827;
     --muted:#64748B;
-    --card:rgba(255,255,255,.82);
-    --border:rgba(139,92,246,.16);
+    --border:#E2E8F0;
+    --success:#059669;
+    --warning:#D97706;
 }
 
 html, body, [class*="css"]{
@@ -37,41 +40,24 @@ html, body, [class*="css"]{
 }
 
 .stApp{
-    background:
-        radial-gradient(circle at 8% 8%, rgba(139,92,246,.23), transparent 32%),
-        radial-gradient(circle at 92% 2%, rgba(6,182,212,.20), transparent 30%),
-        radial-gradient(circle at 55% 95%, rgba(236,72,153,.10), transparent 34%),
-        linear-gradient(135deg,#F8FAFC 0%,#EEF2FF 48%,#FDF2F8 100%);
+    background:var(--bg);
 }
 
 .block-container{
-    padding:.7rem 1.2rem 1.4rem !important;
-    max-width:1500px !important;
+    padding:.75rem 1.15rem 1.3rem !important;
+    max-width:1480px !important;
 }
 
 .hero{
     position:relative;
     overflow:hidden;
-    border-radius:22px;
-    padding:1rem 1.45rem;
-    margin:.2rem 0 .75rem;
-    color:white;
-    background:linear-gradient(135deg,#0B1028 0%,#312E81 50%,#0891B2 100%);
-    border:1px solid rgba(255,255,255,.18);
-    box-shadow:0 22px 55px rgba(49,46,129,.25);
-}
-
-.hero:before{
-    content:"";
-    position:absolute;
-    right:7%;
-    top:-85px;
-    width:260px;
-    height:260px;
-    border-radius:50%;
-    background:linear-gradient(135deg,rgba(236,72,153,.62),rgba(6,182,212,.52));
-    filter:blur(18px);
-    opacity:.65;
+    border-radius:20px;
+    padding:1.05rem 1.35rem;
+    margin:.15rem 0 .7rem;
+    color:#FFFFFF;
+    background:var(--primary);
+    border:1px solid var(--primary-soft);
+    box-shadow:0 18px 42px rgba(15,23,42,.14);
 }
 
 .hero > *{
@@ -83,50 +69,47 @@ html, body, [class*="css"]{
     display:inline-flex;
     align-items:center;
     gap:7px;
-    background:rgba(255,255,255,.13);
-    border:1px solid rgba(255,255,255,.24);
-    color:#EDE9FE;
-    font-size:12px;
+    background:rgba(6,182,212,.16);
+    border:1px solid rgba(6,182,212,.32);
+    color:#CFFAFE;
+    font-size:11.5px;
     font-weight:800;
-    padding:6px 14px;
+    padding:5px 13px;
     border-radius:999px;
 }
 
 .hero h1{
     font-family:'Space Grotesk',sans-serif;
-    font-size:clamp(1.8rem,3.1vw,3rem);
+    font-size:clamp(1.65rem,2.7vw,2.7rem);
     line-height:1.05;
     font-weight:900;
-    margin:.55rem 0 .32rem;
-    letter-spacing:-1px;
-    background:linear-gradient(90deg,#FFFFFF,#DDD6FE,#A5F3FC);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+    margin:.5rem 0 .25rem;
+    letter-spacing:-.8px;
+    color:#FFFFFF;
 }
 
 .hero p{
-    color:#E0E7FF;
+    color:#CBD5E1;
     max-width:980px;
-    font-size:.98rem;
-    line-height:1.45;
+    font-size:.93rem;
+    line-height:1.4;
     margin:0;
 }
 
-.glass-card{
+.panel-card{
     background:var(--card);
     border:1px solid var(--border);
-    border-radius:22px;
-    padding:.85rem 1rem;
-    box-shadow:0 14px 36px rgba(79,70,229,.10);
-    backdrop-filter:blur(16px);
-    margin-bottom:.75rem;
+    border-radius:20px;
+    padding:.82rem .95rem;
+    box-shadow:0 12px 30px rgba(15,23,42,.06);
+    margin-bottom:.65rem;
 }
 
 .control-title{
     font-family:'Space Grotesk',sans-serif;
     font-weight:900;
     font-size:1rem;
-    color:var(--ink);
+    color:var(--primary);
     margin:0 0 .6rem;
 }
 
@@ -134,201 +117,235 @@ html, body, [class*="css"]{
     font-family:'Space Grotesk',sans-serif;
     font-weight:900;
     font-size:.88rem;
-    color:var(--ink);
-    margin:0 0 .32rem;
+    color:var(--primary);
+    margin:0 0 .35rem;
 }
 
 [data-testid="stTextArea"] textarea{
-    border-radius:18px !important;
-    border:1px solid rgba(139,92,246,.18) !important;
-    background:rgba(255,255,255,.88) !important;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 10px 22px rgba(15,23,42,.04) !important;
-    color:#111827 !important;
-    font-size:.88rem !important;
+    border-radius:16px !important;
+    border:1px solid var(--border) !important;
+    background:#FFFFFF !important;
+    box-shadow:inset 0 1px 2px rgba(15,23,42,.04) !important;
+    color:var(--text) !important;
+    font-size:.86rem !important;
+    line-height:1.35 !important;
+}
+
+[data-testid="stTextArea"] textarea:focus{
+    border-color:var(--accent) !important;
+    box-shadow:0 0 0 3px rgba(6,182,212,.12) !important;
 }
 
 .tag{
     display:inline-flex;
     align-items:center;
-    background:linear-gradient(135deg,rgba(109,40,217,.13),rgba(6,182,212,.13));
-    color:#4C1D95;
-    font-size:10.5px;
+    background:var(--accent-soft);
+    color:#0E7490;
+    font-size:10.3px;
     font-weight:800;
     padding:5px 9px;
     border-radius:999px;
     margin:3px;
-    border:1px solid rgba(139,92,246,.18);
-    box-shadow:0 8px 18px rgba(109,40,217,.07);
+    border:1px solid #BAE6FD;
 }
 
 .weight-mini{
-    background:rgba(255,255,255,.65);
-    border:1px solid rgba(139,92,246,.12);
-    border-radius:16px;
-    padding:.5rem .65rem;
-    margin-top:.15rem;
+    background:#F8FAFC;
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:.46rem .62rem;
+    margin-top:.08rem;
 }
 
 [data-testid="stSlider"]{
-    padding:.05rem 0 .1rem !important;
+    padding:.02rem 0 .06rem !important;
 }
 
 [data-testid="stSlider"] label{
-    font-size:.78rem !important;
-}
-
-[data-testid="stSlider"] div[data-baseweb="slider"]{
-    margin-top:.05rem !important;
-}
-
-.compact-help{
-    color:#64748B;
-    font-size:.78rem;
-    font-weight:700;
-    margin-top:.3rem;
-}
-
-.stSlider label, .stNumberInput label, .stFileUploader label{
-    font-weight:700 !important;
+    font-size:.76rem !important;
     color:#334155 !important;
-}
-
-.stButton > button{
-    background:linear-gradient(135deg,#6D28D9 0%,#EC4899 55%,#06B6D4 100%) !important;
-    color:white !important;
-    border:0 !important;
-    border-radius:18px !important;
-    font-weight:900 !important;
-    font-size:1rem !important;
-    padding:.85rem 1.5rem !important;
-    box-shadow:0 18px 40px rgba(109,40,217,.30) !important;
-    transition:all .2s ease !important;
-}
-
-.stButton > button:hover{
-    transform:translateY(-2px);
-    box-shadow:0 24px 55px rgba(236,72,153,.32) !important;
-}
-
-.stDownloadButton > button{
-    background:rgba(255,255,255,.92) !important;
-    color:#111827 !important;
-    border:1px solid rgba(139,92,246,.22) !important;
-    border-radius:16px !important;
     font-weight:800 !important;
 }
 
+[data-testid="stSlider"] div[data-baseweb="slider"]{
+    margin-top:0 !important;
+}
+
+.stSlider label, .stNumberInput label, .stFileUploader label{
+    font-weight:800 !important;
+    color:#334155 !important;
+}
+
+.upload-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:.82rem .95rem .9rem;
+    box-shadow:0 12px 30px rgba(15,23,42,.06);
+    margin-bottom:.65rem;
+}
+
 [data-testid="stFileUploader"] section{
-    border-radius:20px !important;
-    border:1.5px dashed rgba(139,92,246,.35) !important;
-    background:rgba(255,255,255,.72) !important;
-    box-shadow:0 14px 35px rgba(79,70,229,.08);
+    border-radius:17px !important;
+    border:1.5px dashed #94A3B8 !important;
+    background:#F8FAFC !important;
+    padding:.7rem !important;
+}
+
+[data-testid="stFileUploader"] section:hover{
+    border-color:var(--accent) !important;
+    background:#F0FDFA !important;
+}
+
+[data-testid="stFileUploader"] small{
+    color:var(--muted) !important;
+}
+
+.run-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:.72rem .95rem;
+    box-shadow:0 12px 30px rgba(15,23,42,.06);
+    margin-bottom:.75rem;
+}
+
+.stButton > button{
+    background:var(--primary) !important;
+    color:#FFFFFF !important;
+    border:1px solid var(--primary) !important;
+    border-radius:18px !important;
+    font-weight:900 !important;
+    font-size:1.05rem !important;
+    letter-spacing:.3px !important;
+    min-height:64px !important;
+    padding:.85rem 1.5rem !important;
+    box-shadow:0 16px 34px rgba(15,23,42,.18) !important;
+    transition:all .18s ease !important;
+}
+
+.stButton > button:hover{
+    background:#164E63 !important;
+    border-color:#164E63 !important;
+    transform:translateY(-1px);
+    box-shadow:0 20px 42px rgba(22,78,99,.22) !important;
+}
+
+.stDownloadButton > button{
+    background:#FFFFFF !important;
+    color:var(--primary) !important;
+    border:1px solid var(--border) !important;
+    border-radius:16px !important;
+    font-weight:850 !important;
+    min-height:48px !important;
+}
+
+.stDownloadButton > button:hover{
+    border-color:var(--accent) !important;
+    color:#0E7490 !important;
 }
 
 .section-title{
     font-family:'Space Grotesk',sans-serif;
-    font-size:1.05rem;
+    font-size:1.03rem;
     font-weight:900;
-    color:#111827;
-    margin:.05rem 0 .55rem;
+    color:var(--primary);
+    margin:.05rem 0 .52rem;
 }
 
 .metric-row{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:1rem;
-    margin:1.1rem 0;
+    gap:.85rem;
+    margin:.75rem 0 1rem;
 }
 
 .metric-card{
-    position:relative;
-    overflow:hidden;
-    background:rgba(255,255,255,.90);
-    border:1px solid rgba(139,92,246,.16);
-    border-radius:22px;
-    padding:1.2rem 1rem;
+    background:#FFFFFF;
+    border:1px solid var(--border);
+    border-top:4px solid var(--accent);
+    border-radius:18px;
+    padding:1rem .85rem;
     text-align:center;
-    box-shadow:0 18px 42px rgba(79,70,229,.12);
-}
-
-.metric-card:before{
-    content:"";
-    position:absolute;
-    inset:0 0 auto 0;
-    height:5px;
-    background:linear-gradient(90deg,var(--primary),var(--pink),var(--cyan));
+    box-shadow:0 12px 28px rgba(15,23,42,.06);
 }
 
 .metric-card .label{
-    font-size:11px;
+    font-size:10.5px;
     font-weight:900;
-    color:#6D28D9;
+    color:#0E7490;
     text-transform:uppercase;
-    letter-spacing:1px;
-    margin-bottom:8px;
+    letter-spacing:.85px;
+    margin-bottom:7px;
 }
 
 .metric-card .value{
     font-family:'Space Grotesk',sans-serif;
-    font-size:2rem;
+    font-size:1.85rem;
     font-weight:900;
-    color:#111827;
+    color:var(--primary);
     line-height:1;
 }
 
 .metric-card .sub{
-    font-size:12px;
-    color:#64748B;
+    font-size:11.5px;
+    color:var(--muted);
     margin-top:6px;
 }
 
 .candidate-card{
-    background:rgba(255,255,255,.94);
-    border:1px solid rgba(226,232,240,.95);
-    border-radius:20px;
-    padding:1rem 1.15rem;
-    margin-bottom:12px;
+    background:#FFFFFF;
+    border:1px solid var(--border);
+    border-radius:17px;
+    padding:.78rem .95rem;
+    margin-bottom:9px;
     display:flex;
     align-items:center;
-    gap:1.15rem;
-    box-shadow:0 14px 35px rgba(15,23,42,.08);
-    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    gap:1rem;
+    box-shadow:0 10px 24px rgba(15,23,42,.055);
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
 
 .candidate-card:hover{
-    transform:translateY(-3px);
-    box-shadow:0 22px 50px rgba(79,70,229,.18);
-    border-color:rgba(139,92,246,.35);
+    transform:translateY(-2px);
+    box-shadow:0 18px 36px rgba(15,23,42,.10);
+    border-color:#BAE6FD;
 }
 
 .rank-badge{
-    width:44px;
-    height:44px;
-    border-radius:15px;
+    width:40px;
+    height:40px;
+    border-radius:13px;
     display:flex;
     align-items:center;
     justify-content:center;
     font-weight:900;
-    font-size:15px;
+    font-size:14px;
     flex-shrink:0;
 }
 
-.rank-1{ background:linear-gradient(135deg,#FDE68A,#F59E0B); color:#fff; }
-.rank-2{ background:linear-gradient(135deg,#E5E7EB,#6B7280); color:#fff; }
-.rank-3{ background:linear-gradient(135deg,#FDBA74,#B45309); color:#fff; }
-.rank-other{ background:linear-gradient(135deg,#EEF2FF,#DDD6FE); color:#5B21B6; }
-.score-bar-bg{ background:#EEF2FF; border-radius:999px; height:10px; width:100%; overflow:hidden; }
-.score-bar-fill{ height:100%; border-radius:999px; background:linear-gradient(90deg,var(--primary),var(--pink),var(--cyan)); }
+.rank-1{ background:#F59E0B; color:#FFFFFF; }
+.rank-2{ background:#64748B; color:#FFFFFF; }
+.rank-3{ background:#B45309; color:#FFFFFF; }
+.rank-other{ background:#E0F7FB; color:#0E7490; }
+.score-bar-bg{ background:#E2E8F0; border-radius:999px; height:8px; width:100%; overflow:hidden; }
+.score-bar-fill{ height:100%; border-radius:999px; background:var(--accent); }
 hr{ display:none !important; }
 
-@media(max-width:1100px){
+[data-testid="stAlert"]{
+    border-radius:16px !important;
+    border:1px solid var(--border) !important;
+}
+
+@media(max-width:1120px){
     .metric-row{ grid-template-columns:repeat(2,1fr); }
 }
 
-@media(max-width:700px){
+@media(max-width:760px){
     .metric-row{ grid-template-columns:1fr; }
     .candidate-card{ align-items:flex-start; flex-direction:column; }
-    .hero{ padding:1.25rem; }
+    .hero{ padding:1rem; }
+    .block-container{ padding:.6rem .75rem 1.1rem !important; }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -342,7 +359,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ── Horizontal Control Section ────────────────────────────────────────────────
-st.markdown('<div class="glass-card">', unsafe_allow_html=True)
+st.markdown('<div class="panel-card">', unsafe_allow_html=True)
 st.markdown('<div class="section-title">⚙️ Recruiter Control Panel</div>', unsafe_allow_html=True)
 
 jd_col, key_col, weight_col, select_col = st.columns([2.05, 1.35, 2.35, .9], gap="medium")
@@ -395,9 +412,9 @@ with weight_col:
         st.markdown(f"""
         <div class='weight-mini'>
             <div style='display:flex;gap:4px;height:8px;border-radius:8px;overflow:hidden'>
-                <div style='width:{skill_weight}%;background:#6D28D9'></div>
+                <div style='width:{skill_weight}%;background:#0F172A'></div>
                 <div style='width:{exp_weight}%;background:#06B6D4'></div>
-                <div style='width:{act_weight}%;background:#10B981'></div>
+                <div style='width:{act_weight}%;background:#94A3B8'></div>
             </div>
             <div style='display:flex;gap:9px;margin-top:6px;font-size:10.5px;color:#475569;flex-wrap:wrap;font-weight:800'>
                 <span>Skill {skill_weight}%</span>
@@ -413,22 +430,19 @@ with select_col:
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-# ── Upload + Run Section ──────────────────────────────────────────────────────
-st.markdown('<div class="glass-card">', unsafe_allow_html=True)
-upload_col, run_col = st.columns([2.6, 1.15], gap="medium")
+# ── Full-width Upload + Run Sections ──────────────────────────────────────────
+st.markdown('<div class="upload-card">', unsafe_allow_html=True)
+st.markdown('<div class="small-title">📂 Upload Candidate CSV Files</div>', unsafe_allow_html=True)
+uploaded = st.file_uploader(
+    "Upload candidates CSV files (select multiple)",
+    type=["csv"],
+    accept_multiple_files=True,
+    label_visibility="collapsed"
+)
+st.markdown('</div>', unsafe_allow_html=True)
 
-with upload_col:
-    st.markdown('<div class="small-title">📂 Candidate Data</div>', unsafe_allow_html=True)
-    uploaded = st.file_uploader(
-        "Upload candidates CSV files (select multiple)",
-        type=["csv"],
-        accept_multiple_files=True
-    )
-
-with run_col:
-    st.markdown('<div class="small-title">🚀 Final Ranking</div>', unsafe_allow_html=True)
-    run = st.button("🚀 Run AI Ranking", use_container_width=True)
-
+st.markdown('<div class="run-card">', unsafe_allow_html=True)
+run = st.button("🚀 RUN AI RANKING", use_container_width=True)
 st.markdown('</div>', unsafe_allow_html=True)
 
 @st.cache_data
@@ -557,7 +571,7 @@ if run:
 
         st.success("✅ Ranking complete!")
 
-        st.markdown('<div class="glass-card">', unsafe_allow_html=True)
+        st.markdown('<div class="panel-card">', unsafe_allow_html=True)
         top1 = df_ranked.iloc[0]
         st.markdown(f"""
         <div class="metric-row">
@@ -596,18 +610,18 @@ if run:
             <div class="candidate-card">
                 <div class="rank-badge {badge_cls}">{rank_icon}</div>
                 <div style="flex:1">
-                    <div style="font-weight:600;color:#1e1b4b;font-size:15px">{row['name']}</div>
-                    <div style="color:#6b7280;font-size:12px;margin-top:2px">
+                    <div style="font-weight:600;color:#0F172A;font-size:15px">{row['name']}</div>
+                    <div style="color:#64748B;font-size:12px;margin-top:2px">
                         {row.get('job_title','')} · {row.get('experience_years','')} yrs · {row.get('education','')}
                     </div>
                 </div>
                 <div style="min-width:140px">
-                    <div style="font-size:11px;color:#7c3aed;margin-bottom:4px">Skill Match: {skill:.1f}%</div>
+                    <div style="font-size:11px;color:#0E7490;margin-bottom:4px">Skill Match: {skill:.1f}%</div>
                     <div class="score-bar-bg"><div class="score-bar-fill" style="width:{min(int(score),100)}%"></div></div>
                 </div>
                 <div style="text-align:right;min-width:70px">
-                    <div style="font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:700;color:#7c3aed">{score:.1f}</div>
-                    <div style="font-size:10px;color:#9ca3af">Final Score</div>
+                    <div style="font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:700;color:#0E7490">{score:.1f}</div>
+                    <div style="font-size:10px;color:#64748B">Final Score</div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -616,35 +630,38 @@ if run:
         c1, c2 = st.columns(2)
         with c1:
             fig1, ax1 = plt.subplots(figsize=(5.2, 2.9))
-            fig1.patch.set_facecolor('#faf9ff')
-            ax1.set_facecolor('#faf9ff')
+            fig1.patch.set_facecolor('#FFFFFF')
+            ax1.set_facecolor('#FFFFFF')
             top10 = df_ranked.head(10)
-            colors = ['#7c3aed' if i==0 else '#a78bfa' if i<3 else '#c4b5fd' for i in range(len(top10))]
-            bars = ax1.barh(top10['name'], top10['final_score'], color=colors, height=0.46)
-            ax1.set_xlabel('Final Score', color='#6b7280', fontsize=8)
-            ax1.set_title('Top 10 Candidates', color='#1e1b4b', fontsize=10, fontweight='bold', pad=6)
+            colors = ['#0F172A' if i==0 else '#06B6D4' if i<3 else '#CBD5E1' for i in range(len(top10))]
+            bars = ax1.barh(top10['name'], top10['final_score'], color=colors, height=0.42)
+            ax1.set_xlabel('Final Score', color='#64748B', fontsize=7.5)
+            ax1.set_title('Top 10 Candidates', color='#0F172A', fontsize=9.5, fontweight='bold', pad=5)
             ax1.invert_yaxis()
             ax1.set_xlim(0, 100)
-            ax1.tick_params(colors='#6b7280', labelsize=7)
+            ax1.tick_params(colors='#64748B', labelsize=6.8)
+            ax1.grid(axis='x', alpha=0.15, linewidth=0.7)
             for sp in ['top','right']: ax1.spines[sp].set_visible(False)
+            ax1.spines['left'].set_color('#E2E8F0')
+            ax1.spines['bottom'].set_color('#E2E8F0')
             for bar, val in zip(bars, top10['final_score']):
-                ax1.text(bar.get_width()+0.5, bar.get_y()+bar.get_height()/2, f'{val:.1f}', va='center', fontsize=7, color='#7c3aed')
+                ax1.text(bar.get_width()+0.5, bar.get_y()+bar.get_height()/2, f'{val:.1f}', va='center', fontsize=6.8, color='#0E7490')
             plt.tight_layout()
             st.pyplot(fig1, use_container_width=True)
 
         with c2:
             fig2, ax2 = plt.subplots(figsize=(5.2, 2.9))
-            fig2.patch.set_facecolor('#faf9ff')
-            ax2.set_facecolor('#faf9ff')
-            sc = ax2.scatter(df2['skill_match_score'], df2['experience_years'], c=df2['final_score'], cmap='RdPu', s=42, alpha=0.85, edgecolors='white', linewidths=0.35)
-            ax2.set_xlabel('Skill Match Score', color='#6b7280', fontsize=8)
-            ax2.set_ylabel('Experience (years)', color='#6b7280', fontsize=8)
-            ax2.set_title('Skill vs Experience', color='#1e1b4b', fontsize=10, fontweight='bold', pad=6)
-            ax2.tick_params(colors='#6b7280', labelsize=7)
+            fig2.patch.set_facecolor('#FFFFFF')
+            ax2.set_facecolor('#FFFFFF')
+            sc = ax2.scatter(df2['skill_match_score'], df2['experience_years'], color='#06B6D4', s=38, alpha=0.82, edgecolors='#0F172A', linewidths=0.25)
+            ax2.set_xlabel('Skill Match Score', color='#64748B', fontsize=7.5)
+            ax2.set_ylabel('Experience (years)', color='#64748B', fontsize=7.5)
+            ax2.set_title('Skill vs Experience', color='#0F172A', fontsize=9.5, fontweight='bold', pad=5)
+            ax2.tick_params(colors='#64748B', labelsize=6.8)
+            ax2.grid(alpha=0.15, linewidth=0.7)
             for sp in ['top','right']: ax2.spines[sp].set_visible(False)
-            cbar = plt.colorbar(sc, ax=ax2, label='Final Score', fraction=0.035, pad=0.02)
-            cbar.ax.tick_params(labelsize=7)
-            cbar.set_label('Final Score', fontsize=8)
+            ax2.spines['left'].set_color('#E2E8F0')
+            ax2.spines['bottom'].set_color('#E2E8F0')
             plt.tight_layout()
             st.pyplot(fig2, use_container_width=True)
 
@@ -654,7 +671,7 @@ if run:
         st.download_button("⬇️ Download Ranked Results CSV", data=csv, file_name="ranked_candidates.csv", mime="text/csv", use_container_width=True)
 
         st.markdown("""
-        <div style='text-align:center;padding:1.5rem 0 0.5rem;color:#9ca3af;font-size:12px'>
+        <div style='text-align:center;padding:1.5rem 0 0.5rem;color:#64748B;font-size:12px'>
             🤖 Intelligent Candidate Discovery · India Runs Hackathon 2026 · Built by Irfan Shafi
         </div>
         """, unsafe_allow_html=True)

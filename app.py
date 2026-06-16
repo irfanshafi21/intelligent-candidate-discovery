@@ -1,11 +1,12 @@
+import warnings
+warnings.filterwarnings('ignore')
 import streamlit as st
 import pandas as pd
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import matplotlib.pyplot as plt
-import warnings
-warnings.filterwarnings('ignore')
+import matplotlib.patches as mpatches
 
 # ── Page config ──────────────────────────────────────────────
 st.set_page_config(
@@ -20,10 +21,16 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
-html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
+/* ── Base ── */
+html, body, [class*="css"] {
+    font-family: 'Inter', sans-serif;
+}
+
+/* ── Hide default streamlit elements ── */
 #MainMenu, footer, header { visibility: hidden; }
 .block-container { padding: 0 2rem 2rem 2rem !important; }
 
+/* ── Hero header ── */
 .hero {
     background: linear-gradient(135deg, #1a0533 0%, #2d1b69 50%, #0f3460 100%);
     border-radius: 16px;
@@ -63,8 +70,14 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
     margin: 0 0 0.5rem 0;
     line-height: 1.2;
 }
-.hero p { color: #a5b4fc; font-size: 1rem; margin: 0; font-weight: 400; }
+.hero p {
+    color: #a5b4fc;
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 400;
+}
 
+/* ── Section headers ── */
 .section-title {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 1.1rem;
@@ -76,6 +89,7 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
     gap: 8px;
 }
 
+/* ── Metric cards ── */
 .metric-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -104,8 +118,13 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
     color: #1e1b4b;
     line-height: 1;
 }
-.metric-card .sub { font-size: 11px; color: #6d28d9; margin-top: 4px; }
+.metric-card .sub {
+    font-size: 11px;
+    color: #6d28d9;
+    margin-top: 4px;
+}
 
+/* ── Candidate table rows ── */
 .candidate-card {
     background: #ffffff;
     border: 1px solid #e5e7eb;
@@ -134,6 +153,7 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
 .rank-3 { background: linear-gradient(135deg, #cd7c2e, #b45309); color: #fff; }
 .rank-other { background: #f3f4f6; color: #6b7280; }
 
+/* ── Score bar ── */
 .score-bar-bg {
     background: #f3f4f6;
     border-radius: 20px;
@@ -147,6 +167,7 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
     background: linear-gradient(90deg, #7c3aed, #a855f7);
 }
 
+/* ── Keyword tags ── */
 .tag {
     display: inline-block;
     background: #ede9fe;
@@ -158,15 +179,18 @@ html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
     margin: 2px;
 }
 
+/* ── Sidebar ── */
 section[data-testid="stSidebar"] {
     background: linear-gradient(180deg, #1a0533 0%, #1e1b4b 100%) !important;
 }
 section[data-testid="stSidebar"] * { color: #e0e7ff !important; }
+section[data-testid="stSidebar"] .stSlider > div > div > div { background: #7c3aed !important; }
 section[data-testid="stSidebar"] h1,
 section[data-testid="stSidebar"] h2,
 section[data-testid="stSidebar"] h3 { color: #ffffff !important; }
 section[data-testid="stSidebar"] label { color: #c4b5fd !important; }
 
+/* ── Run button ── */
 .stButton > button {
     background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%) !important;
     color: white !important;
@@ -183,8 +207,13 @@ section[data-testid="stSidebar"] label { color: #c4b5fd !important; }
     box-shadow: 0 6px 20px rgba(124,58,237,0.5) !important;
 }
 
+/* ── Info / success boxes ── */
 .stAlert { border-radius: 10px !important; }
+
+/* ── Divider ── */
 hr { border-color: #e5e7eb !important; margin: 1.5rem 0 !important; }
+
+/* ── Download button ── */
 .stDownloadButton > button {
     background: #f3f4f6 !important;
     color: #1e1b4b !important;
@@ -224,6 +253,7 @@ Minimum 3 years experience. Strong problem solving skills required.""",
         height=180
     )
 
+# Keyword tags
 if job_description:
     stop_words = {'and','or','the','a','an','is','are','we','for','with','in',
                   'of','to','be','experience','skills','required','preferred',
@@ -246,6 +276,7 @@ if total != 100:
     st.sidebar.error(f"⚠️ Weights = {total}% · Must be 100%")
 else:
     st.sidebar.success("✅ Weights = 100%")
+    # Visual weight breakdown
     st.sidebar.markdown(f"""
     <div style='background:rgba(255,255,255,0.08);border-radius:8px;padding:10px;margin-top:8px'>
         <div style='display:flex;gap:4px;height:10px;border-radius:6px;overflow:hidden'>
@@ -263,9 +294,6 @@ else:
 
 st.sidebar.markdown("---")
 top_n = st.sidebar.slider("👥 Show Top N Candidates", 3, 20, 10)
-
-# ── Required columns ──────────────────────────────────────────
-REQUIRED_COLS = {'name', 'skills', 'experience_years', 'activity_score'}
 
 # ── Candidate Data ─────────────────────────────────────────────
 st.markdown('<div class="section-title">📂 Candidate Data</div>', unsafe_allow_html=True)
@@ -381,54 +409,12 @@ def get_default_data():
     }
     return pd.DataFrame(data)
 
-# ── FIX: Validate uploaded CSV columns before using ───────────
-df = None
-using_default = False
-
 if uploaded:
-    try:
-        df_uploaded = pd.read_csv(uploaded)
-        # Normalize column names: strip whitespace, lowercase
-        df_uploaded.columns = df_uploaded.columns.str.strip().str.lower()
-
-        missing_cols = REQUIRED_COLS - set(df_uploaded.columns)
-        if missing_cols:
-            st.error(
-                f"❌ Your CSV is missing required columns: **{', '.join(sorted(missing_cols))}**\n\n"
-                f"Required columns: `name`, `skills`, `experience_years`, `activity_score`\n\n"
-                f"Please download the CSV template above and use it as a guide."
-            )
-            df = None
-        else:
-            # Fill optional columns with defaults if absent
-            if 'job_title' not in df_uploaded.columns:
-                df_uploaded['job_title'] = 'Not specified'
-            if 'education' not in df_uploaded.columns:
-                df_uploaded['education'] = 'Not specified'
-
-            # Ensure numeric types for key columns
-            df_uploaded['experience_years'] = pd.to_numeric(
-                df_uploaded['experience_years'], errors='coerce'
-            ).fillna(0)
-            df_uploaded['activity_score'] = pd.to_numeric(
-                df_uploaded['activity_score'], errors='coerce'
-            ).fillna(50)
-
-            # Fill any NaN in skills/name with empty string
-            df_uploaded['skills'] = df_uploaded['skills'].fillna('')
-            df_uploaded['name']   = df_uploaded['name'].fillna('Unknown')
-
-            df = df_uploaded
-            st.success(f"✅ {len(df)} candidates loaded from your file!")
-    except Exception as e:
-        st.error(f"❌ Could not read CSV file: {e}")
-        df = None
-
-if df is None:
+    df = pd.read_csv(uploaded)
+    st.success(f"✅ {len(df)} candidates loaded from your file!")
+else:
     df = get_default_data()
-    using_default = True
-    if not uploaded:
-        st.info(f"ℹ️ Using default dataset — {len(df)} candidates ready.")
+    st.info(f"ℹ️ Using default dataset — {len(df)} candidates ready.")
 
 st.markdown("---")
 
@@ -440,35 +426,24 @@ if run:
         st.error("❌ Scoring weights must add up to 100% before running.")
     elif not job_description.strip():
         st.error("❌ Please enter a job description.")
-    elif df is None or df.empty:
-        st.error("❌ No valid candidate data available. Please upload a valid CSV or use the default dataset.")
     else:
         with st.spinner("🤖 Analyzing candidates..."):
-            # Safe TF-IDF on skills column
-            skills_list = df['skills'].fillna('').astype(str).tolist()
-
             vectorizer = TfidfVectorizer(stop_words='english')
-            all_text = [job_description] + skills_list
+            all_text = [job_description] + list(df['skills'])
             tfidf_matrix = vectorizer.fit_transform(all_text)
             similarity_scores = cosine_similarity(
                 tfidf_matrix[0:1], tfidf_matrix[1:]
             ).flatten()
 
-            df2 = df.copy().reset_index(drop=True)
+            df2 = df.copy()
             df2['skill_match_score'] = similarity_scores * 100
-
-            max_exp = df2['experience_years'].max()
-            df2['exp_score'] = (
-                (df2['experience_years'] / max_exp * 100) if max_exp > 0
-                else 0
-            )
-
+            df2['exp_score'] = (df2['experience_years'] / df2['experience_years'].max()) * 100
             df2['final_score'] = (
                 df2['skill_match_score'] * (skill_weight / 100) +
                 df2['exp_score']         * (exp_weight  / 100) +
                 df2['activity_score']    * (act_weight  / 100)
             )
-            df2['rank'] = df2['final_score'].rank(ascending=False, method='first').astype(int)
+            df2['rank'] = df2['final_score'].rank(ascending=False).astype(int)
             df_ranked = df2.sort_values('rank').reset_index(drop=True)
 
         st.success("✅ Ranking complete!")
@@ -504,10 +479,9 @@ if run:
         """, unsafe_allow_html=True)
 
         # ── Ranked Candidate Cards ────────────────────────────
-        top_n_actual = min(top_n, len(df_ranked))
-        st.markdown(f'<div class="section-title">🏆 Top {top_n_actual} Shortlisted Candidates</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="section-title">🏆 Top {top_n} Shortlisted Candidates</div>', unsafe_allow_html=True)
 
-        for i, row in df_ranked.head(top_n_actual).iterrows():
+        for i, row in df_ranked.head(top_n).iterrows():
             rank = int(row['rank'])
             if rank == 1:
                 badge_cls = "rank-1"
@@ -532,9 +506,9 @@ if run:
                 <div style="flex:1">
                     <div style="font-weight:600;color:#1e1b4b;font-size:15px">{row['name']}</div>
                     <div style="color:#6b7280;font-size:12px;margin-top:2px">
-                        {row.get('job_title','—')} &nbsp;·&nbsp;
-                        {row.get('experience_years',0)} yrs &nbsp;·&nbsp;
-                        {row.get('education','—')}
+                        {row.get('job_title','')} &nbsp;·&nbsp;
+                        {row.get('experience_years','')} yrs &nbsp;·&nbsp;
+                        {row.get('education','')}
                     </div>
                 </div>
                 <div style="min-width:140px">

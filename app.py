@@ -377,7 +377,7 @@ top_n = st.sidebar.slider("👥 Show Top N Candidates", 3, 20, 10)
 # ── Candidate Data ─────────────────────────────────────────────
 st.markdown('<div class="section-title">📂 Candidate Data</div>', unsafe_allow_html=True)
 
-uploaded = st.file_uploader("Upload your own candidates CSV (optional)", type=["csv"])
+uploaded = st.file_uploader("Upload candidates CSV files (you can select multiple)", type=["csv"], accept_multiple_files=True)
 
 @st.cache_data
 def get_default_data():
@@ -470,13 +470,16 @@ def get_default_data():
     return pd.DataFrame(data)
 
 if uploaded:
-    df_upload = pd.read_csv(uploaded)
+    dfs = []
+    for file in uploaded:
+        dfs.append(pd.read_csv(file))
+    df_upload = pd.concat(dfs, ignore_index=True)
     if len(df_upload) < 5:
-        st.warning(f"⚠️ Your CSV only has {len(df_upload)} candidates. Using default 50-candidate dataset for better results.")
+        st.warning(f"⚠️ Only {len(df_upload)} candidates found. Using default 50-candidate dataset.")
         df = get_default_data()
     else:
         df = df_upload
-        st.success(f"✅ {len(df)} candidates loaded from your file!")
+        st.success(f"✅ {len(df)} candidates loaded from {len(uploaded)} file(s)!")
 else:
     df = get_default_data()
 

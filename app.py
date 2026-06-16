@@ -30,6 +30,11 @@ html, body, [class*="css"] {
 #MainMenu, footer, header { visibility: hidden; }
 .block-container { padding: 0 2rem 2rem 2rem !important; }
 
+/* ── Hide sidebar close button so it can never be closed ── */
+[data-testid="baseButton-headerNoPadding"] { display: none !important; }
+button[kind="headerNoPadding"] { display: none !important; }
+[data-testid="collapsedControl"] { display: none !important; }
+
 /* ── Always show sidebar toggle button ── */
 [data-testid="collapsedControl"] {
     display: block !important;

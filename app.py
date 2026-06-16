@@ -6,6 +6,7 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import matplotlib.pyplot as plt
+import html
 
 st.set_page_config(
     page_title="AI Recruiter | India Runs Hackathon",
@@ -312,6 +313,74 @@ html, body, [class*="css"]{
     border-color:#BAE6FD;
 }
 
+.recommend-card{
+    background:#F8FAFC;
+    border:1px solid #BAE6FD;
+    border-left:5px solid var(--accent);
+    border-radius:18px;
+    padding:1rem 1.1rem;
+    margin:.25rem 0 1rem;
+    box-shadow:0 12px 28px rgba(15,23,42,.055);
+}
+
+.recommend-kicker{
+    font-size:10.5px;
+    font-weight:900;
+    color:#0E7490;
+    text-transform:uppercase;
+    letter-spacing:.8px;
+    margin-bottom:6px;
+}
+
+.recommend-title{
+    font-family:'Space Grotesk',sans-serif;
+    color:var(--primary);
+    font-size:1.22rem;
+    font-weight:900;
+    margin-bottom:4px;
+}
+
+.recommend-body{
+    color:#475569;
+    font-size:.88rem;
+    line-height:1.45;
+    font-weight:650;
+}
+
+.why-line{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:5px;
+    margin-top:7px;
+}
+
+.why-label{
+    color:#0F172A;
+    font-size:10.5px;
+    font-weight:900;
+}
+
+.why-chip{
+    background:#E0F7FB;
+    color:#0E7490;
+    border:1px solid #BAE6FD;
+    border-radius:999px;
+    padding:3px 7px;
+    font-size:10px;
+    font-weight:850;
+}
+
+.why-pill{
+    background:#F1F5F9;
+    color:#334155;
+    border:1px solid #E2E8F0;
+    border-radius:999px;
+    padding:3px 7px;
+    font-size:10px;
+    font-weight:800;
+}
+
 .rank-badge{
     width:40px;
     height:40px;
@@ -547,6 +616,60 @@ if uploaded:
 else:
     df = get_default_data()
 
+
+def pretty_keyword(term):
+    term = str(term).strip()
+    upper_terms = {'ai','ml','nlp','llm','gpt','bert','cnn','sql','aws','gcp','api','rest','ui','ux','etl','mlops','automl','xgboost','opencv','faiss'}
+    if term.lower() in upper_terms:
+        return term.upper()
+    if term.lower() == 'tensorflow':
+        return 'TensorFlow'
+    if term.lower() == 'scikit-learn':
+        return 'scikit-learn'
+    return term.title()
+
+
+def get_candidate_reason_parts(row, job_keywords):
+    skills_text = str(row.get('skills', '')).lower()
+    matched_terms = []
+    for kw in job_keywords:
+        clean_kw = str(kw).strip().lower()
+        if clean_kw and clean_kw in skills_text and clean_kw not in matched_terms:
+            matched_terms.append(clean_kw)
+        if len(matched_terms) >= 5:
+            break
+
+    if not matched_terms:
+        fallback_terms = []
+        for term in str(row.get('skills', '')).split():
+            clean_term = term.strip('.,()').lower()
+            if len(clean_term) > 3 and clean_term not in fallback_terms:
+                fallback_terms.append(clean_term)
+            if len(fallback_terms) >= 4:
+                break
+        matched_terms = fallback_terms
+
+    try:
+        activity_value = int(row.get('activity_score', 0))
+    except Exception:
+        activity_value = row.get('activity_score', 0)
+
+    exp_reason = f"{row.get('experience_years', '')} yrs exp"
+    act_reason = f"Activity {activity_value}/100"
+    return matched_terms, exp_reason, act_reason
+
+
+def make_reason_chips(matched_terms, exp_reason, act_reason):
+    skill_chips = ''.join(
+        f'<span class="why-chip">{html.escape(pretty_keyword(term))}</span>'
+        for term in matched_terms[:5]
+    )
+    return (
+        f'{skill_chips}'
+        f'<span class="why-pill">{html.escape(str(exp_reason))}</span>'
+        f'<span class="why-pill">{html.escape(str(act_reason))}</span>'
+    )
+
 if run:
     if total != 100:
         st.error("❌ Weights must add up to 100%")
@@ -568,6 +691,7 @@ if run:
             )
             df2['rank'] = df2['final_score'].rank(ascending=False).astype(int)
             df_ranked = df2.sort_values('rank').reset_index(drop=True)
+            explanation_keywords = keywords if 'keywords' in locals() else []
 
         st.success("✅ Ranking complete!")
 
@@ -577,8 +701,8 @@ if run:
         <div class="metric-row">
             <div class="metric-card">
                 <div class="label">👑 Top Candidate</div>
-                <div class="value" style="font-size:1.1rem">{top1['name']}</div>
-                <div class="sub">{top1.get('job_title','')}</div>
+                <div class="value" style="font-size:1.1rem">{html.escape(str(top1['name']))}</div>
+                <div class="sub">{html.escape(str(top1.get('job_title','')))}</div>
             </div>
             <div class="metric-card">
                 <div class="label">🎯 Top Score</div>
@@ -598,6 +722,21 @@ if run:
         </div>
         """, unsafe_allow_html=True)
 
+
+        top1_terms, top1_exp_reason, top1_act_reason = get_candidate_reason_parts(top1, explanation_keywords)
+        top1_terms_text = ', '.join(pretty_keyword(term) for term in top1_terms[:4]) if top1_terms else 'relevant role skills'
+        recommendation_reason = (
+            f"Highest final score ({top1['final_score']:.1f}/100), matched {top1_terms_text}, "
+            f"{top1.get('experience_years', '')} years experience, and {top1_act_reason.lower()}."
+        )
+        st.markdown(f"""
+        <div class="recommend-card">
+            <div class="recommend-kicker">Recruiter Recommendation</div>
+            <div class="recommend-title">Recommended Hire: {html.escape(str(top1['name']))}</div>
+            <div class="recommend-body">{html.escape(recommendation_reason)}</div>
+        </div>
+        """, unsafe_allow_html=True)
+
         st.markdown(f'<div class="section-title">🏆 Top {top_n} Candidates</div>', unsafe_allow_html=True)
 
         for i, row in df_ranked.head(top_n).iterrows():
@@ -606,14 +745,17 @@ if run:
             rank_icon = "🥇" if rank==1 else "🥈" if rank==2 else "🥉" if rank==3 else str(rank)
             score = row['final_score']
             skill = row['skill_match_score']
+            matched_terms, exp_reason, act_reason = get_candidate_reason_parts(row, explanation_keywords)
+            reason_html = make_reason_chips(matched_terms, exp_reason, act_reason)
             st.markdown(f"""
             <div class="candidate-card">
                 <div class="rank-badge {badge_cls}">{rank_icon}</div>
                 <div style="flex:1">
-                    <div style="font-weight:600;color:#0F172A;font-size:15px">{row['name']}</div>
+                    <div style="font-weight:600;color:#0F172A;font-size:15px">{html.escape(str(row['name']))}</div>
                     <div style="color:#64748B;font-size:12px;margin-top:2px">
-                        {row.get('job_title','')} · {row.get('experience_years','')} yrs · {row.get('education','')}
+                        {html.escape(str(row.get('job_title','')))} · {html.escape(str(row.get('experience_years','')))} yrs · {html.escape(str(row.get('education','')))}
                     </div>
+                    <div class="why-line"><span class="why-label">Why ranked high:</span> {reason_html}</div>
                 </div>
                 <div style="min-width:140px">
                     <div style="font-size:11px;color:#0E7490;margin-bottom:4px">Skill Match: {skill:.1f}%</div>

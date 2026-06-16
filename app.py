@@ -286,43 +286,41 @@ hr { border-color: #e5e7eb !important; margin: 1.5rem 0 !important; }
     font-weight: 500 !important;
 }
 
-/* ── Sidebar uploader - force dark ── */
-section[data-testid="stSidebar"] [class*="uploadedFile"],
-section[data-testid="stSidebar"] [class*="fileUpload"],
-section[data-testid="stSidebar"] [class*="FileUpload"],
-section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"],
-section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] > div,
-section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] section,
-section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] label {
-    background: #1a0533 !important;
-    background-color: #1a0533 !important;
+/* Hide white box - show only purple upload button */
+section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] {
+    background: transparent !important;
     border: none !important;
-    color: #ffffff !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+}
+section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] > div {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+}
+section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] small {
+    display: none !important;
 }
 section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] button {
     background: #7c3aed !important;
-    background-color: #7c3aed !important;
     color: #ffffff !important;
     border: none !important;
     border-radius: 8px !important;
     width: 100% !important;
-    padding: 10px !important;
+    padding: 10px 16px !important;
     font-weight: 600 !important;
     font-size: 14px !important;
 }
 section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] button:hover {
     background: #6d28d9 !important;
-    background-color: #6d28d9 !important;
 }
-section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] button * {
+section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] button > div,
+section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] button span,
+section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] button p {
     background: transparent !important;
     color: #ffffff !important;
 }
-section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] small,
-section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] span {
-    color: #a78bfa !important;
-    background: transparent !important;
-}
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -349,9 +347,7 @@ Minimum 3 years experience. Strong problem solving skills required.""",
     height=200
 )
 
-# Upload JD as txt below text area
-st.sidebar.markdown('<p style="color:#c4b5fd;font-size:13px;margin-top:8px;margin-bottom:4px;">📄 Or upload a .txt file:</p>', unsafe_allow_html=True)
-jd_file = st.sidebar.file_uploader("", type=["txt"], label_visibility="collapsed")
+jd_file = st.sidebar.file_uploader("📄 Or upload a .txt file", type=["txt"], label_visibility="visible")
 if jd_file:
     job_description = jd_file.read().decode("utf-8")
     st.sidebar.success("✅ JD uploaded!")

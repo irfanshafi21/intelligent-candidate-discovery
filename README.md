@@ -5,7 +5,7 @@
 ### **India Runs Hackathon 2026 — Track 01: Data & AI Challenge**
 
 [![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Streamlit-FF4B4B?style=for-the-badge)](https://intelligent-candidate-discovery-ey8bkkwuov7b5g7gmafk7x.streamlit.app)
-[![Demo Video](https://img.shields.io/badge/🎥_Demo_Video-YouTube-FF0000?style=for-the-badge)](https://youtu.be/3vAlT1Oe7FM)
+[![Demo Video](https://img.shields.io/badge/🎥_Demo_Video-YouTube-FF0000?style=for-the-badge)](https://youtu.be/RBYdjJrNFyY)
 [![Colab](https://img.shields.io/badge/📓_Open-Google_Colab-F9AB00?style=for-the-badge)](https://colab.research.google.com/drive/1p6pRJsb7AZ3lAqxFGtQ4rhTzefDwyCBL?usp=sharing)
 [![GitHub](https://img.shields.io/badge/💻_GitHub-irfanshafi21-181717?style=for-the-badge)](https://github.com/irfanshafi21)
 

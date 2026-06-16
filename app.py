@@ -258,15 +258,23 @@ section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] {
     border-radius: 8px !important;
     padding: 8px !important;
 }
-section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] button {
+section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] button,
+section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] button *,
+section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] button > div,
+section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] button span {
     background-color: #7c3aed !important;
+    background: #7c3aed !important;
     color: #ffffff !important;
     border: none !important;
     border-radius: 6px !important;
     font-weight: 600 !important;
+    box-shadow: none !important;
+    outline: none !important;
 }
-section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] button:hover {
+section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] button:hover,
+section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] button:hover * {
     background-color: #6d28d9 !important;
+    background: #6d28d9 !important;
 }
 section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] span {
     color: #c4b5fd !important;

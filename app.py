@@ -252,7 +252,7 @@ section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] * {
     border-color: #7c3aed !important;
 }
 section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] {
-    border: 1px solid #7c3aed !important;
+    border: none !important;
     border-radius: 8px !important;
     padding: 8px !important;
 }

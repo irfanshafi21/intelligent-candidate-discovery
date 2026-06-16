@@ -241,26 +241,36 @@ section[data-testid="stSidebar"] .stFileUploader button[kind="secondary"] {
     color: #e9d5ff !important;
     border-color: #7c3aed !important;
 }
+/* Nuclear override for sidebar file uploader */
+section[data-testid="stSidebar"] .stFileUploader *,
 section[data-testid="stSidebar"] .stFileUploader,
-section[data-testid="stSidebar"] .stFileUploader > div,
-section[data-testid="stSidebar"] .stFileUploader > div > div,
-section[data-testid="stSidebar"] .stFileUploader > div > div > div,
 section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"],
-section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] > div {
-    background-color: #2d1b69 !important;
-    background: #2d1b69 !important;
-    border-color: rgba(139,92,246,0.5) !important;
-    color: #e0e7ff !important;
+section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] * {
+    background-color: #1a0533 !important;
+    background: #1a0533 !important;
+    color: #ffffff !important;
+    border-color: #7c3aed !important;
+}
+section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] {
+    border: 1px solid #7c3aed !important;
+    border-radius: 8px !important;
+    padding: 8px !important;
 }
 section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] button {
-    background-color: rgba(124,58,237,0.5) !important;
+    background-color: #7c3aed !important;
     color: #ffffff !important;
-    border: 1px solid #7c3aed !important;
+    border: none !important;
     border-radius: 6px !important;
+    font-weight: 600 !important;
 }
-section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] span,
-section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] small {
+section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] button:hover {
+    background-color: #6d28d9 !important;
+}
+section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] span {
     color: #c4b5fd !important;
+}
+section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] small {
+    color: #a78bfa !important;
 }
 section[data-testid="stSidebar"] .stSlider > div > div > div { background: #7c3aed !important; }
 section[data-testid="stSidebar"] h1,

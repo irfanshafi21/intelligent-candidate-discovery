@@ -753,35 +753,8 @@ def create_ranked_pdf_report(df_ranked, top_n, recommendation_reason, explanatio
         pdf.savefig(fig, bbox_inches='tight')
         plt.close(fig)
 
-        # Page 2: Compact charts
-        fig2, (ax1, ax2) = plt.subplots(1, 2, figsize=(11.69, 8.27))
-        fig2.patch.set_facecolor('white')
-        top10 = df_ranked.head(10)
-        colors = ['#0F172A' if i == 0 else '#06B6D4' if i < 3 else '#CBD5E1' for i in range(len(top10))]
-        bars = ax1.barh(top10['name'], top10['final_score'], color=colors, height=0.42)
-        ax1.set_title('Top 10 Candidates', color='#0F172A', fontsize=11, fontweight='bold')
-        ax1.set_xlabel('Final Score', color='#64748B', fontsize=8)
-        ax1.invert_yaxis()
-        ax1.set_xlim(0, 100)
-        ax1.tick_params(colors='#64748B', labelsize=7.5)
-        ax1.grid(axis='x', alpha=0.18, linewidth=0.7)
-        for sp in ['top', 'right']:
-            ax1.spines[sp].set_visible(False)
-        for bar, val in zip(bars, top10['final_score']):
-            ax1.text(bar.get_width() + 0.6, bar.get_y() + bar.get_height() / 2, f'{val:.1f}', va='center', fontsize=7, color='#0E7490')
-
-        ax2.scatter(df_ranked['skill_match_score'], df_ranked['experience_years'], color='#06B6D4', s=32, alpha=0.82, edgecolors='#0F172A', linewidths=0.25)
-        ax2.set_title('Skill vs Experience', color='#0F172A', fontsize=11, fontweight='bold')
-        ax2.set_xlabel('Skill Match Score', color='#64748B', fontsize=8)
-        ax2.set_ylabel('Experience (years)', color='#64748B', fontsize=8)
-        ax2.tick_params(colors='#64748B', labelsize=7.5)
-        ax2.grid(alpha=0.18, linewidth=0.7)
-        for sp in ['top', 'right']:
-            ax2.spines[sp].set_visible(False)
-
-        plt.tight_layout(pad=2.0)
-        pdf.savefig(fig2, bbox_inches='tight')
-        plt.close(fig2)
+        # PDF intentionally stops after Page 1.
+        # Charts remain visible inside the Streamlit app, but are not added to the downloaded PDF.
 
     buffer.seek(0)
     return buffer.getvalue()

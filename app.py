@@ -241,41 +241,7 @@ section[data-testid="stSidebar"] .stFileUploader button[kind="secondary"] {
     color: #e9d5ff !important;
     border-color: #7c3aed !important;
 }
-/* Nuclear override for sidebar file uploader */
-section[data-testid="stSidebar"] .stFileUploader *,
-section[data-testid="stSidebar"] .stFileUploader,
-section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"],
-section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] * {
-    background-color: #1a0533 !important;
-    background: #1a0533 !important;
-    color: #ffffff !important;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-}
-section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] {
-    border: none !important;
-    border-radius: 8px !important;
-    padding: 8px !important;
-}
-section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] button,
-section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] button *,
-section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] button > div,
-section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] button span {
-    background-color: #7c3aed !important;
-    background: #7c3aed !important;
-    color: #ffffff !important;
-    border: none !important;
-    border-radius: 6px !important;
-    font-weight: 600 !important;
-    box-shadow: none !important;
-    outline: none !important;
-}
-section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] button:hover,
-section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] button:hover * {
-    background-color: #6d28d9 !important;
-    background: #6d28d9 !important;
-}
+
 section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] span {
     color: #c4b5fd !important;
 }
@@ -335,20 +301,22 @@ st.markdown("""
 st.sidebar.markdown("## 📋 Job Description")
 st.sidebar.markdown("Paste, type or upload any job description")
 
-jd_file = st.sidebar.file_uploader("📄 Upload JD (.txt file)", type=["txt"])
-if jd_file:
-    job_description = jd_file.read().decode("utf-8")
-    st.sidebar.success("✅ Job description uploaded!")
-else:
-    job_description = st.sidebar.text_area(
-        "📝 Or type / paste here:",
+job_description = st.sidebar.text_area(
+    "📝 Type or paste job description here:",
     value="""We are looking for an AI/ML Engineer with strong Python skills.
 Required: machine learning, deep learning, TensorFlow, scikit-learn,
 natural language processing, data analysis, model deployment.
 Experience with neural networks, transformers, and LLM is preferred.
 Minimum 3 years experience. Strong problem solving skills required.""",
-    height=220
+    height=200
 )
+
+# Upload JD as txt below text area
+st.sidebar.markdown('<p style="color:#c4b5fd;font-size:13px;margin-top:8px;margin-bottom:4px;">📄 Or upload a .txt file:</p>', unsafe_allow_html=True)
+jd_file = st.sidebar.file_uploader("", type=["txt"], label_visibility="collapsed")
+if jd_file:
+    job_description = jd_file.read().decode("utf-8")
+    st.sidebar.success("✅ JD uploaded!")
 
 # Keyword tags
 if job_description:

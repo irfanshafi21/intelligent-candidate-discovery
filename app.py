@@ -294,21 +294,15 @@ st.markdown("""
 st.sidebar.markdown("## 📋 Job Description")
 st.sidebar.markdown("Paste, type or upload any job description")
 
-jd_file = st.sidebar.file_uploader("Upload JD (.txt)", type=["txt"])
-
-if jd_file:
-    job_description = jd_file.read().decode("utf-8")
-    st.sidebar.success("✅ Job description uploaded!")
-else:
-    job_description = st.sidebar.text_area(
-        "Or type / paste here:",
-        value="""We are looking for an AI/ML Engineer with strong Python skills.
+job_description = st.sidebar.text_area(
+    "Type or paste job description here:",
+    value="""We are looking for an AI/ML Engineer with strong Python skills.
 Required: machine learning, deep learning, TensorFlow, scikit-learn,
 natural language processing, data analysis, model deployment.
 Experience with neural networks, transformers, and LLM is preferred.
 Minimum 3 years experience. Strong problem solving skills required.""",
-        height=180
-    )
+    height=220
+)
 
 # Keyword tags
 if job_description:

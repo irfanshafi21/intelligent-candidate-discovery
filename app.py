@@ -301,8 +301,9 @@ section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] > div {
 section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] small {
     display: none !important;
 }
-section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] button {
-    background: #7c3aed !important;
+section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] button,
+section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] button * {
+    background: #4c1d95 !important;
     color: #ffffff !important;
     border: none !important;
     border-radius: 8px !important;
@@ -311,14 +312,10 @@ section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] button 
     font-weight: 600 !important;
     font-size: 14px !important;
 }
-section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] button:hover {
-    background: #6d28d9 !important;
-}
-section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] button > div,
-section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] button span,
-section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] button p {
+section[data-testid="stSidebar"] div[data-testid="stFileUploadDropzone"] small {
+    color: #c4b5fd !important;
+    display: block !important;
     background: transparent !important;
-    color: #ffffff !important;
 }
 
 </style>

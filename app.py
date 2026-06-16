@@ -39,7 +39,7 @@ html, body, [class*="css"] { font-family:'Inter',sans-serif; }
         radial-gradient(circle at top right, rgba(6,182,212,.22), transparent 28%),
         linear-gradient(135deg,#F8FAFC 0%,#EEF2FF 45%,#FDF2F8 100%);
 }
-.block-container{ padding:1.2rem 1.8rem 2rem !important; max-width:1400px !important; }
+.block-container{ padding:1.2rem 1.8rem 2rem !important; max-width:1500px !important; }
 
 /* Premium glass hero */
 .hero{
@@ -132,10 +132,7 @@ html, body, [class*="css"] { font-family:'Inter',sans-serif; }
     margin:1.15rem 0 .8rem;
     display:flex; align-items:center; gap:10px;
 }
-.section-title:after{
-    content:""; flex:1; height:1px;
-    background:linear-gradient(90deg,rgba(139,92,246,.45),transparent);
-}
+/* Section underline removed for cleaner UI */
 
 /* Metrics */
 .metric-row{
@@ -238,6 +235,43 @@ hr{ border-color:rgba(148,163,184,.24) !important; margin:1.25rem 0 !important; 
     box-shadow:0 14px 35px rgba(79,70,229,.08);
 }
 
+
+/* Sidebar product panel */
+section[data-testid="stSidebar"]{
+    background:
+        radial-gradient(circle at top left,rgba(139,92,246,.35),transparent 35%),
+        linear-gradient(180deg,#0B1028,#17113D 52%,#0F172A) !important;
+    border-right:1px solid rgba(255,255,255,.10);
+}
+section[data-testid="stSidebar"] > div{ padding:1.2rem 1rem 2rem !important; }
+section[data-testid="stSidebar"] h3,
+section[data-testid="stSidebar"] label,
+section[data-testid="stSidebar"] p,
+section[data-testid="stSidebar"] span{ color:#F8FAFC !important; }
+.sidebar-brand{
+    display:flex; align-items:center; gap:12px;
+    padding:1rem; border-radius:22px;
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.16);
+    box-shadow:0 18px 40px rgba(0,0,0,.20);
+    margin-bottom:1.2rem;
+}
+.brand-icon{ width:44px; height:44px; border-radius:16px; display:grid; place-items:center; background:linear-gradient(135deg,#8B5CF6,#EC4899,#06B6D4); font-size:1.3rem; }
+.brand-title{ font-family:'Space Grotesk',sans-serif; font-weight:900; color:#fff; font-size:1.05rem; }
+.brand-sub{ color:#CBD5E1; font-size:.72rem; margin-top:2px; }
+.dashboard-strip{
+    display:flex; justify-content:space-between; align-items:center; gap:1rem;
+    background:rgba(255,255,255,.82);
+    border:1px solid rgba(139,92,246,.15);
+    border-radius:22px;
+    padding:1rem 1.2rem;
+    box-shadow:0 18px 42px rgba(79,70,229,.10);
+    margin:.2rem 0 1.2rem;
+}
+.dashboard-strip b{ color:#111827; }
+.dashboard-strip span{ color:#6B7280; font-size:.9rem; }
+[data-testid="stFileUploader"]{ margin-bottom:1rem; }
+
 @media(max-width:900px){
     .metric-row{ grid-template-columns:repeat(2,1fr); }
     .candidate-card{ align-items:flex-start; flex-direction:column; }
@@ -256,20 +290,26 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ── Two column layout: controls left, main right ──────────────
-left, right = st.columns([1, 2.5])
-
-with left:
-    st.markdown('<div class="control-box">', unsafe_allow_html=True)
+# ── Premium Sidebar Controls ───────────────────────────────────
+with st.sidebar:
+    st.markdown("""
+    <div class="sidebar-brand">
+        <div class="brand-icon">🤖</div>
+        <div>
+            <div class="brand-title">AI Recruiter</div>
+            <div class="brand-sub">Smart candidate ranking panel</div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     st.markdown('<h3>📋 Job Description</h3>', unsafe_allow_html=True)
 
     job_description = st.text_area(
         "Paste or type any job description:",
         value="""We are looking for an AI/ML Engineer with strong Python skills.
-Required: machine learning, deep learning, TensorFlow, scikit-learn,
-natural language processing, data analysis, model deployment.
-Experience with neural networks, transformers, and LLM is preferred.
-Minimum 3 years experience. Strong problem solving skills required.""",
+    Required: machine learning, deep learning, TensorFlow, scikit-learn,
+    natural language processing, data analysis, model deployment.
+    Experience with neural networks, transformers, and LLM is preferred.
+    Minimum 3 years experience. Strong problem solving skills required.""",
         height=180,
         label_visibility="collapsed"
     )
@@ -316,241 +356,247 @@ Minimum 3 years experience. Strong problem solving skills required.""",
     top_n = st.slider("👥 Top N Candidates", 3, 20, 10)
     st.markdown('</div>', unsafe_allow_html=True)
 
-# ── Right column: data + results ──────────────────────────────
-with right:
-    st.markdown('<div class="section-title">📂 Candidate Data</div>', unsafe_allow_html=True)
+# ── Main Dashboard ─────────────────────────────────────────────
+st.markdown("""
+<div class="dashboard-strip">
+    <div><b>Upload → Rank → Analyze → Export</b></div>
+    <span>Designed for a clean hackathon demo with no empty layout gaps.</span>
+</div>
+""", unsafe_allow_html=True)
 
-    uploaded = st.file_uploader(
-        "Upload candidates CSV files (select multiple)",
-        type=["csv"],
-        accept_multiple_files=True
-    )
+st.markdown('<div class="section-title">📂 Candidate Data</div>', unsafe_allow_html=True)
 
-    @st.cache_data
-    def get_default_data():
-        np.random.seed(42)
-        data = {
-            'candidate_id': range(1, 51),
-            'name': [f'Candidate_{i}' for i in range(1, 51)],
-            'skills': [
-                'Python machine learning deep learning TensorFlow data analysis',
-                'Java Spring Boot REST API microservices Docker',
-                'Python data science pandas numpy scikit-learn visualization',
-                'JavaScript React Node.js HTML CSS frontend development',
-                'Python AI NLP transformer BERT GPT language models',
-                'SQL database MySQL PostgreSQL data warehousing ETL',
-                'Python TensorFlow keras neural networks computer vision',
-                'C++ algorithms data structures competitive programming',
-                'Python scikit-learn random forest XGBoost feature engineering',
-                'AWS cloud computing DevOps CI/CD Jenkins Kubernetes',
-                'Python NLP text classification sentiment analysis spacy',
-                'R statistics data analysis regression modeling visualization',
-                'Python deep learning CNN image recognition OpenCV',
-                'JavaScript TypeScript Angular frontend UI UX design',
-                'Python reinforcement learning OpenAI gym reward optimization',
-                'Tableau Power BI data visualization business intelligence',
-                'Python time series forecasting ARIMA LSTM prediction',
-                'Java Android mobile development Kotlin Firebase',
-                'Python recommendation system collaborative filtering',
-                'Cybersecurity ethical hacking penetration testing network',
-                'Python pandas data cleaning wrangling EDA exploratory',
-                'Machine learning model deployment Flask FastAPI REST',
-                'Python graph neural networks knowledge graphs embeddings',
-                'Blockchain Solidity smart contracts Web3 cryptocurrency',
-                'Python AutoML hyperparameter tuning model optimization',
-                'Data engineering Apache Spark Kafka Hadoop big data',
-                'Python GANs generative adversarial networks image synthesis',
-                'iOS Swift mobile development Xcode Apple development',
-                'Python anomaly detection fraud detection outlier analysis',
-                'Natural language processing question answering chatbot LLM',
-                'Python ensemble methods bagging boosting stacking models',
-                'UI UX design Figma Adobe XD prototyping user research',
-                'Python transfer learning pretrained models fine-tuning BERT',
-                'Robotics ROS automation embedded systems IoT sensors',
-                'Python multimodal AI vision language models CLIP DALL-E',
-                'Data science statistics hypothesis testing A/B testing',
-                'Python object detection YOLO real-time video processing',
-                'Game development Unity C# 3D modeling game design',
-                'Python causal inference econometrics experimental design',
-                'Search engine Elasticsearch Solr information retrieval ranking',
-                'Python vector databases FAISS Pinecone semantic search',
-                'Agile project management Scrum product management roadmap',
-                'Python MLOps model monitoring Weights Biases MLflow',
-                'Network engineering TCP/IP routing switching firewall',
-                'Python speech recognition audio processing whisper NLP',
-                'Business analytics Excel VBA financial modeling forecasting',
-                'Python federated learning privacy preserving distributed ML',
-                'Cloud ML GCP Vertex AI Azure ML SageMaker deployment',
-                'Python knowledge distillation model compression edge AI',
-                'Full stack Python Django React PostgreSQL REST API deployment'
-            ],
-            'experience_years': [5,3,4,2,6,7,5,2,4,6,3,5,4,2,3,6,5,2,4,3,
-                                 4,5,6,2,3,7,4,2,5,6,3,2,5,4,3,6,4,2,5,7,
-                                 4,3,5,2,4,6,3,5,4,6],
-            'job_title': [
-                'ML Engineer','Java Developer','Data Scientist','Frontend Dev',
-                'AI Engineer','Database Admin','Deep Learning Engineer','Software Dev',
-                'ML Engineer','Cloud Engineer','NLP Engineer','Data Analyst',
-                'Computer Vision Engineer','Frontend Dev','RL Engineer','BI Analyst',
-                'Data Scientist','Mobile Dev','ML Engineer','Security Engineer',
-                'Data Analyst','ML Engineer','AI Researcher','Blockchain Dev',
-                'AutoML Engineer','Data Engineer','AI Researcher','iOS Dev',
-                'Fraud Detection Engineer','NLP Engineer','ML Engineer','UI Designer',
-                'NLP Engineer','Robotics Engineer','Multimodal AI Engineer',
-                'Data Scientist','Computer Vision Engineer','Game Dev','Data Scientist',
-                'Search Engineer','ML Engineer','Product Manager','MLOps Engineer',
-                'Network Engineer','Speech Engineer','Business Analyst','ML Researcher',
-                'Cloud ML Engineer','ML Engineer','Full Stack Developer'
-            ],
-            'activity_score': np.random.randint(60, 100, 50).tolist(),
-            'education': ['B.Tech CS','MCA','M.Tech AI','B.Tech IT','PhD AI',
-                          'B.Tech CS','M.Tech ML','B.Tech CS','M.Tech DS','B.Tech CS',
-                          'M.Tech NLP','MSc Stats','M.Tech AI','B.Tech IT','PhD ML',
-                          'MBA Analytics','M.Tech DS','B.Tech IT','M.Tech CS','B.Tech CS',
-                          'B.Tech CS','M.Tech CS','PhD AI','B.Tech CS','M.Tech AI',
-                          'M.Tech DE','PhD AI','B.Tech IT','M.Tech CS','PhD NLP',
-                          'M.Tech ML','B.Des','PhD NLP','B.Tech Robotics','PhD AI',
-                          'MSc Stats','M.Tech CS','B.Tech CS','PhD Stats','M.Tech CS',
-                          'M.Tech AI','MBA','M.Tech CS','B.Tech CS','M.Tech CS',
-                          'MBA','PhD ML','M.Tech CS','M.Tech AI','B.Tech CS']
-        }
-        return pd.DataFrame(data)
+uploaded = st.file_uploader(
+    "Upload candidates CSV files (select multiple)",
+    type=["csv"],
+    accept_multiple_files=True
+)
 
-    if uploaded:
-        dfs = [pd.read_csv(f) for f in uploaded]
-        df_upload = pd.concat(dfs, ignore_index=True)
-        if len(df_upload) < 5:
-            st.warning(f"⚠️ Only {len(df_upload)} candidates found. Using default dataset.")
-            df = get_default_data()
-        else:
-            df = df_upload
-            st.success(f"✅ {len(df)} candidates loaded from {len(uploaded)} file(s)!")
-    else:
+@st.cache_data
+def get_default_data():
+    np.random.seed(42)
+    data = {
+        'candidate_id': range(1, 51),
+        'name': [f'Candidate_{i}' for i in range(1, 51)],
+        'skills': [
+            'Python machine learning deep learning TensorFlow data analysis',
+            'Java Spring Boot REST API microservices Docker',
+            'Python data science pandas numpy scikit-learn visualization',
+            'JavaScript React Node.js HTML CSS frontend development',
+            'Python AI NLP transformer BERT GPT language models',
+            'SQL database MySQL PostgreSQL data warehousing ETL',
+            'Python TensorFlow keras neural networks computer vision',
+            'C++ algorithms data structures competitive programming',
+            'Python scikit-learn random forest XGBoost feature engineering',
+            'AWS cloud computing DevOps CI/CD Jenkins Kubernetes',
+            'Python NLP text classification sentiment analysis spacy',
+            'R statistics data analysis regression modeling visualization',
+            'Python deep learning CNN image recognition OpenCV',
+            'JavaScript TypeScript Angular frontend UI UX design',
+            'Python reinforcement learning OpenAI gym reward optimization',
+            'Tableau Power BI data visualization business intelligence',
+            'Python time series forecasting ARIMA LSTM prediction',
+            'Java Android mobile development Kotlin Firebase',
+            'Python recommendation system collaborative filtering',
+            'Cybersecurity ethical hacking penetration testing network',
+            'Python pandas data cleaning wrangling EDA exploratory',
+            'Machine learning model deployment Flask FastAPI REST',
+            'Python graph neural networks knowledge graphs embeddings',
+            'Blockchain Solidity smart contracts Web3 cryptocurrency',
+            'Python AutoML hyperparameter tuning model optimization',
+            'Data engineering Apache Spark Kafka Hadoop big data',
+            'Python GANs generative adversarial networks image synthesis',
+            'iOS Swift mobile development Xcode Apple development',
+            'Python anomaly detection fraud detection outlier analysis',
+            'Natural language processing question answering chatbot LLM',
+            'Python ensemble methods bagging boosting stacking models',
+            'UI UX design Figma Adobe XD prototyping user research',
+            'Python transfer learning pretrained models fine-tuning BERT',
+            'Robotics ROS automation embedded systems IoT sensors',
+            'Python multimodal AI vision language models CLIP DALL-E',
+            'Data science statistics hypothesis testing A/B testing',
+            'Python object detection YOLO real-time video processing',
+            'Game development Unity C# 3D modeling game design',
+            'Python causal inference econometrics experimental design',
+            'Search engine Elasticsearch Solr information retrieval ranking',
+            'Python vector databases FAISS Pinecone semantic search',
+            'Agile project management Scrum product management roadmap',
+            'Python MLOps model monitoring Weights Biases MLflow',
+            'Network engineering TCP/IP routing switching firewall',
+            'Python speech recognition audio processing whisper NLP',
+            'Business analytics Excel VBA financial modeling forecasting',
+            'Python federated learning privacy preserving distributed ML',
+            'Cloud ML GCP Vertex AI Azure ML SageMaker deployment',
+            'Python knowledge distillation model compression edge AI',
+            'Full stack Python Django React PostgreSQL REST API deployment'
+        ],
+        'experience_years': [5,3,4,2,6,7,5,2,4,6,3,5,4,2,3,6,5,2,4,3,
+                             4,5,6,2,3,7,4,2,5,6,3,2,5,4,3,6,4,2,5,7,
+                             4,3,5,2,4,6,3,5,4,6],
+        'job_title': [
+            'ML Engineer','Java Developer','Data Scientist','Frontend Dev',
+            'AI Engineer','Database Admin','Deep Learning Engineer','Software Dev',
+            'ML Engineer','Cloud Engineer','NLP Engineer','Data Analyst',
+            'Computer Vision Engineer','Frontend Dev','RL Engineer','BI Analyst',
+            'Data Scientist','Mobile Dev','ML Engineer','Security Engineer',
+            'Data Analyst','ML Engineer','AI Researcher','Blockchain Dev',
+            'AutoML Engineer','Data Engineer','AI Researcher','iOS Dev',
+            'Fraud Detection Engineer','NLP Engineer','ML Engineer','UI Designer',
+            'NLP Engineer','Robotics Engineer','Multimodal AI Engineer',
+            'Data Scientist','Computer Vision Engineer','Game Dev','Data Scientist',
+            'Search Engineer','ML Engineer','Product Manager','MLOps Engineer',
+            'Network Engineer','Speech Engineer','Business Analyst','ML Researcher',
+            'Cloud ML Engineer','ML Engineer','Full Stack Developer'
+        ],
+        'activity_score': np.random.randint(60, 100, 50).tolist(),
+        'education': ['B.Tech CS','MCA','M.Tech AI','B.Tech IT','PhD AI',
+                      'B.Tech CS','M.Tech ML','B.Tech CS','M.Tech DS','B.Tech CS',
+                      'M.Tech NLP','MSc Stats','M.Tech AI','B.Tech IT','PhD ML',
+                      'MBA Analytics','M.Tech DS','B.Tech IT','M.Tech CS','B.Tech CS',
+                      'B.Tech CS','M.Tech CS','PhD AI','B.Tech CS','M.Tech AI',
+                      'M.Tech DE','PhD AI','B.Tech IT','M.Tech CS','PhD NLP',
+                      'M.Tech ML','B.Des','PhD NLP','B.Tech Robotics','PhD AI',
+                      'MSc Stats','M.Tech CS','B.Tech CS','PhD Stats','M.Tech CS',
+                      'M.Tech AI','MBA','M.Tech CS','B.Tech CS','M.Tech CS',
+                      'MBA','PhD ML','M.Tech CS','M.Tech AI','B.Tech CS']
+    }
+    return pd.DataFrame(data)
+
+if uploaded:
+    dfs = [pd.read_csv(f) for f in uploaded]
+    df_upload = pd.concat(dfs, ignore_index=True)
+    if len(df_upload) < 5:
+        st.warning(f"⚠️ Only {len(df_upload)} candidates found. Using default dataset.")
         df = get_default_data()
-        st.info(f"ℹ️ Using default dataset — {len(df)} candidates ready.")
+    else:
+        df = df_upload
+        st.success(f"✅ {len(df)} candidates loaded from {len(uploaded)} file(s)!")
+else:
+    df = get_default_data()
+    st.info(f"ℹ️ Using default dataset — {len(df)} candidates ready.")
 
-    st.markdown("---")
-    run = st.button("🚀 Run AI Ranking", use_container_width=True)
+st.write("")
+run = st.button("🚀 Run AI Ranking", use_container_width=True)
 
-    if run:
-        if total != 100:
-            st.error("❌ Weights must add up to 100%")
-        elif not job_description.strip():
-            st.error("❌ Please enter a job description")
-        else:
-            with st.spinner("🤖 Analyzing candidates..."):
-                vectorizer = TfidfVectorizer(stop_words='english')
-                all_text = [job_description] + list(df['skills'])
-                tfidf_matrix = vectorizer.fit_transform(all_text)
-                similarity_scores = cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:]).flatten()
-                df2 = df.copy()
-                df2['skill_match_score'] = similarity_scores * 100
-                df2['exp_score'] = (df2['experience_years'] / df2['experience_years'].max()) * 100
-                df2['final_score'] = (
-                    df2['skill_match_score'] * (skill_weight / 100) +
-                    df2['exp_score']         * (exp_weight  / 100) +
-                    df2['activity_score']    * (act_weight  / 100)
-                )
-                df2['rank'] = df2['final_score'].rank(ascending=False).astype(int)
-                df_ranked = df2.sort_values('rank').reset_index(drop=True)
+if run:
+    if total != 100:
+        st.error("❌ Weights must add up to 100%")
+    elif not job_description.strip():
+        st.error("❌ Please enter a job description")
+    else:
+        with st.spinner("🤖 Analyzing candidates..."):
+            vectorizer = TfidfVectorizer(stop_words='english')
+            all_text = [job_description] + list(df['skills'])
+            tfidf_matrix = vectorizer.fit_transform(all_text)
+            similarity_scores = cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:]).flatten()
+            df2 = df.copy()
+            df2['skill_match_score'] = similarity_scores * 100
+            df2['exp_score'] = (df2['experience_years'] / df2['experience_years'].max()) * 100
+            df2['final_score'] = (
+                df2['skill_match_score'] * (skill_weight / 100) +
+                df2['exp_score']         * (exp_weight  / 100) +
+                df2['activity_score']    * (act_weight  / 100)
+            )
+            df2['rank'] = df2['final_score'].rank(ascending=False).astype(int)
+            df_ranked = df2.sort_values('rank').reset_index(drop=True)
 
-            st.success("✅ Ranking complete!")
+        st.success("✅ Ranking complete!")
 
-            top1 = df_ranked.iloc[0]
+        top1 = df_ranked.iloc[0]
+        st.markdown(f"""
+        <div class="metric-row">
+            <div class="metric-card">
+                <div class="label">👑 Top Candidate</div>
+                <div class="value" style="font-size:1.1rem">{top1['name']}</div>
+                <div class="sub">{top1.get('job_title','')}</div>
+            </div>
+            <div class="metric-card">
+                <div class="label">🎯 Top Score</div>
+                <div class="value">{df_ranked['final_score'].max():.1f}</div>
+                <div class="sub">out of 100</div>
+            </div>
+            <div class="metric-card">
+                <div class="label">📊 Total</div>
+                <div class="value">{len(df2)}</div>
+                <div class="sub">candidates analyzed</div>
+            </div>
+            <div class="metric-card">
+                <div class="label">📈 Avg Score</div>
+                <div class="value">{df_ranked['final_score'].mean():.1f}</div>
+                <div class="sub">across all</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown(f'<div class="section-title">🏆 Top {top_n} Candidates</div>', unsafe_allow_html=True)
+
+        for i, row in df_ranked.head(top_n).iterrows():
+            rank = int(row['rank'])
+            badge_cls = "rank-1" if rank==1 else "rank-2" if rank==2 else "rank-3" if rank==3 else "rank-other"
+            rank_icon = "🥇" if rank==1 else "🥈" if rank==2 else "🥉" if rank==3 else str(rank)
+            score = row['final_score']
+            skill = row['skill_match_score']
             st.markdown(f"""
-            <div class="metric-row">
-                <div class="metric-card">
-                    <div class="label">👑 Top Candidate</div>
-                    <div class="value" style="font-size:1.1rem">{top1['name']}</div>
-                    <div class="sub">{top1.get('job_title','')}</div>
+            <div class="candidate-card">
+                <div class="rank-badge {badge_cls}">{rank_icon}</div>
+                <div style="flex:1">
+                    <div style="font-weight:600;color:#1e1b4b;font-size:15px">{row['name']}</div>
+                    <div style="color:#6b7280;font-size:12px;margin-top:2px">
+                        {row.get('job_title','')} · {row.get('experience_years','')} yrs · {row.get('education','')}
+                    </div>
                 </div>
-                <div class="metric-card">
-                    <div class="label">🎯 Top Score</div>
-                    <div class="value">{df_ranked['final_score'].max():.1f}</div>
-                    <div class="sub">out of 100</div>
+                <div style="min-width:140px">
+                    <div style="font-size:11px;color:#7c3aed;margin-bottom:4px">Skill Match: {skill:.1f}%</div>
+                    <div class="score-bar-bg"><div class="score-bar-fill" style="width:{min(int(score),100)}%"></div></div>
                 </div>
-                <div class="metric-card">
-                    <div class="label">📊 Total</div>
-                    <div class="value">{len(df2)}</div>
-                    <div class="sub">candidates analyzed</div>
-                </div>
-                <div class="metric-card">
-                    <div class="label">📈 Avg Score</div>
-                    <div class="value">{df_ranked['final_score'].mean():.1f}</div>
-                    <div class="sub">across all</div>
+                <div style="text-align:right;min-width:70px">
+                    <div style="font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:700;color:#7c3aed">{score:.1f}</div>
+                    <div style="font-size:10px;color:#9ca3af">Final Score</div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
 
-            st.markdown(f'<div class="section-title">🏆 Top {top_n} Candidates</div>', unsafe_allow_html=True)
+        st.write("")
+        c1, c2 = st.columns(2)
+        with c1:
+            fig1, ax1 = plt.subplots(figsize=(6, 4))
+            fig1.patch.set_facecolor('#faf9ff')
+            ax1.set_facecolor('#faf9ff')
+            top10 = df_ranked.head(10)
+            colors = ['#7c3aed' if i==0 else '#a78bfa' if i<3 else '#c4b5fd' for i in range(len(top10))]
+            bars = ax1.barh(top10['name'], top10['final_score'], color=colors, height=0.6)
+            ax1.set_xlabel('Final Score', color='#6b7280', fontsize=10)
+            ax1.set_title('Top 10 Candidates', color='#1e1b4b', fontsize=12, fontweight='bold')
+            ax1.invert_yaxis()
+            ax1.set_xlim(0, 100)
+            ax1.tick_params(colors='#6b7280', labelsize=9)
+            for sp in ['top','right']: ax1.spines[sp].set_visible(False)
+            for bar, val in zip(bars, top10['final_score']):
+                ax1.text(bar.get_width()+0.5, bar.get_y()+bar.get_height()/2, f'{val:.1f}', va='center', fontsize=8, color='#7c3aed')
+            plt.tight_layout()
+            st.pyplot(fig1)
 
-            for i, row in df_ranked.head(top_n).iterrows():
-                rank = int(row['rank'])
-                badge_cls = "rank-1" if rank==1 else "rank-2" if rank==2 else "rank-3" if rank==3 else "rank-other"
-                rank_icon = "🥇" if rank==1 else "🥈" if rank==2 else "🥉" if rank==3 else str(rank)
-                score = row['final_score']
-                skill = row['skill_match_score']
-                st.markdown(f"""
-                <div class="candidate-card">
-                    <div class="rank-badge {badge_cls}">{rank_icon}</div>
-                    <div style="flex:1">
-                        <div style="font-weight:600;color:#1e1b4b;font-size:15px">{row['name']}</div>
-                        <div style="color:#6b7280;font-size:12px;margin-top:2px">
-                            {row.get('job_title','')} · {row.get('experience_years','')} yrs · {row.get('education','')}
-                        </div>
-                    </div>
-                    <div style="min-width:140px">
-                        <div style="font-size:11px;color:#7c3aed;margin-bottom:4px">Skill Match: {skill:.1f}%</div>
-                        <div class="score-bar-bg"><div class="score-bar-fill" style="width:{min(int(score),100)}%"></div></div>
-                    </div>
-                    <div style="text-align:right;min-width:70px">
-                        <div style="font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:700;color:#7c3aed">{score:.1f}</div>
-                        <div style="font-size:10px;color:#9ca3af">Final Score</div>
-                    </div>
-                </div>
-                """, unsafe_allow_html=True)
+        with c2:
+            fig2, ax2 = plt.subplots(figsize=(6, 4))
+            fig2.patch.set_facecolor('#faf9ff')
+            ax2.set_facecolor('#faf9ff')
+            sc = ax2.scatter(df2['skill_match_score'], df2['experience_years'], c=df2['final_score'], cmap='RdPu', s=80, alpha=0.85, edgecolors='white', linewidths=0.5)
+            ax2.set_xlabel('Skill Match Score', color='#6b7280', fontsize=10)
+            ax2.set_ylabel('Experience (years)', color='#6b7280', fontsize=10)
+            ax2.set_title('Skill vs Experience', color='#1e1b4b', fontsize=12, fontweight='bold')
+            ax2.tick_params(colors='#6b7280', labelsize=9)
+            for sp in ['top','right']: ax2.spines[sp].set_visible(False)
+            plt.colorbar(sc, ax=ax2, label='Final Score')
+            plt.tight_layout()
+            st.pyplot(fig2)
 
-            st.markdown("---")
-            c1, c2 = st.columns(2)
-            with c1:
-                fig1, ax1 = plt.subplots(figsize=(6, 4))
-                fig1.patch.set_facecolor('#faf9ff')
-                ax1.set_facecolor('#faf9ff')
-                top10 = df_ranked.head(10)
-                colors = ['#7c3aed' if i==0 else '#a78bfa' if i<3 else '#c4b5fd' for i in range(len(top10))]
-                bars = ax1.barh(top10['name'], top10['final_score'], color=colors, height=0.6)
-                ax1.set_xlabel('Final Score', color='#6b7280', fontsize=10)
-                ax1.set_title('Top 10 Candidates', color='#1e1b4b', fontsize=12, fontweight='bold')
-                ax1.invert_yaxis()
-                ax1.set_xlim(0, 100)
-                ax1.tick_params(colors='#6b7280', labelsize=9)
-                for sp in ['top','right']: ax1.spines[sp].set_visible(False)
-                for bar, val in zip(bars, top10['final_score']):
-                    ax1.text(bar.get_width()+0.5, bar.get_y()+bar.get_height()/2, f'{val:.1f}', va='center', fontsize=8, color='#7c3aed')
-                plt.tight_layout()
-                st.pyplot(fig1)
+        st.write("")
+        out_cols = [c for c in ['rank','name','job_title','experience_years','skill_match_score','activity_score','final_score'] if c in df_ranked.columns]
+        csv = df_ranked[out_cols].round(2).to_csv(index=False).encode('utf-8')
+        st.download_button("⬇️ Download Ranked Results CSV", data=csv, file_name="ranked_candidates.csv", mime="text/csv", use_container_width=True)
 
-            with c2:
-                fig2, ax2 = plt.subplots(figsize=(6, 4))
-                fig2.patch.set_facecolor('#faf9ff')
-                ax2.set_facecolor('#faf9ff')
-                sc = ax2.scatter(df2['skill_match_score'], df2['experience_years'], c=df2['final_score'], cmap='RdPu', s=80, alpha=0.85, edgecolors='white', linewidths=0.5)
-                ax2.set_xlabel('Skill Match Score', color='#6b7280', fontsize=10)
-                ax2.set_ylabel('Experience (years)', color='#6b7280', fontsize=10)
-                ax2.set_title('Skill vs Experience', color='#1e1b4b', fontsize=12, fontweight='bold')
-                ax2.tick_params(colors='#6b7280', labelsize=9)
-                for sp in ['top','right']: ax2.spines[sp].set_visible(False)
-                plt.colorbar(sc, ax=ax2, label='Final Score')
-                plt.tight_layout()
-                st.pyplot(fig2)
-
-            st.markdown("---")
-            out_cols = [c for c in ['rank','name','job_title','experience_years','skill_match_score','activity_score','final_score'] if c in df_ranked.columns]
-            csv = df_ranked[out_cols].round(2).to_csv(index=False).encode('utf-8')
-            st.download_button("⬇️ Download Ranked Results CSV", data=csv, file_name="ranked_candidates.csv", mime="text/csv", use_container_width=True)
-
-            st.markdown("""
-            <div style='text-align:center;padding:1.5rem 0 0.5rem;color:#9ca3af;font-size:12px'>
-                🤖 Intelligent Candidate Discovery · India Runs Hackathon 2026 · Built by Irfan Shafi
-            </div>
-            """, unsafe_allow_html=True)
+        st.markdown("""
+        <div style='text-align:center;padding:1.5rem 0 0.5rem;color:#9ca3af;font-size:12px'>
+            🤖 Intelligent Candidate Discovery · India Runs Hackathon 2026 · Built by Irfan Shafi
+        </div>
+        """, unsafe_allow_html=True)

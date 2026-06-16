@@ -1,0 +1,11 @@
+name,skills,experience_years,job_title,activity_score,education
+Arjun Krishnan,Python machine learning deep learning TensorFlow scikit-learn natural language processing data analysis model deployment neural networks transformers LLM BERT GPT,6,ML Engineer,95,M.Tech AI
+Priya Nair,JavaScript React Node.js HTML CSS frontend development UI UX,3,Frontend Developer,78,B.Tech IT
+Rahul Mehta,Java Spring Boot REST API microservices Docker Kubernetes,4,Java Developer,80,B.Tech CS
+Sneha Reddy,SQL MySQL PostgreSQL data warehousing ETL data pipeline,5,Database Admin,72,MCA
+Vikram Singh,AWS cloud computing DevOps CI/CD Jenkins Kubernetes terraform,6,Cloud Engineer,85,B.Tech CS
+Divya Sharma,Python data science pandas numpy scikit-learn visualization matplotlib,4,Data Scientist,88,M.Tech DS
+Karan Patel,Python TensorFlow keras deep learning CNN image recognition OpenCV,5,Deep Learning Engineer,91,M.Tech AI
+Meena Iyer,Cybersecurity ethical hacking penetration testing network firewall,4,Security Engineer,74,B.Tech CS
+Arun Kumar,Tableau Power BI data visualization business intelligence reporting,5,BI Analyst,76,MBA Analytics
+Pooja Das,Python NLP text classification sentiment analysis spacy BERT transformers,4,NLP Engineer,89,M.Tech NLP

@@ -1,0 +1,11 @@
+name,skills,experience_years,job_title,activity_score,education
+Rohit Verma,Python machine learning scikit-learn TensorFlow deep learning neural networks model deployment data analysis NLP transformers LLM BERT GPT feature engineering,7,AI Engineer,98,PhD AI
+Ananya Bose,R statistics data analysis regression modeling visualization hypothesis testing,5,Data Analyst,75,MSc Stats
+Suresh Nair,iOS Swift mobile development Xcode Apple Firebase,3,iOS Developer,70,B.Tech IT
+Lakshmi Menon,Python AutoML hyperparameter tuning model optimization XGBoost random forest,4,AutoML Engineer,83,M.Tech CS
+Nikhil Gupta,Blockchain Solidity smart contracts Web3 cryptocurrency decentralized,3,Blockchain Developer,71,B.Tech CS
+Sanya Kapoor,Python MLOps model monitoring Weights Biases MLflow model deployment pipeline,5,MLOps Engineer,90,M.Tech CS
+Harish Babu,Data engineering Apache Spark Kafka Hadoop big data pipeline ETL,6,Data Engineer,82,M.Tech DE
+Ritu Agarwal,Python time series forecasting ARIMA LSTM prediction deep learning,4,Data Scientist,86,M.Tech DS
+Manoj Tiwari,Python graph neural networks knowledge graphs embeddings vector databases,5,AI Researcher,88,PhD AI
+Deepa Pillai,Cloud ML GCP Vertex AI Azure ML SageMaker model deployment Python,5,Cloud ML Engineer,87,M.Tech CS

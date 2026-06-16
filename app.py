@@ -249,7 +249,9 @@ section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] * {
     background-color: #1a0533 !important;
     background: #1a0533 !important;
     color: #ffffff !important;
-    border-color: #7c3aed !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
 }
 section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] {
     border: none !important;

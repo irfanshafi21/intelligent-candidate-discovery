@@ -11,6 +11,9 @@ from matplotlib.backends.backend_pdf import PdfPages
 from io import BytesIO
 import html
 
+# 1 GB upload limit for Streamlit file uploaders (value is in MB)
+UPLOAD_LIMIT_MB = 1024
+
 st.set_page_config(
     page_title="AI Recruiter | India Runs Hackathon",
     page_icon="🤖",
@@ -723,6 +726,7 @@ st.markdown('</div>', unsafe_allow_html=True)
 # ── Upload Section (clean single-card layout, supports JSONL + CSV) ───────────
 st.markdown('<div class="upload-card">', unsafe_allow_html=True)
 st.markdown('<div class="small-title">📂 Upload Candidate Data</div>', unsafe_allow_html=True)
+st.caption(f"Upload limit: {UPLOAD_LIMIT_MB} MB (1 GB) per file")
 
 up_col1, up_col2 = st.columns(2, gap="medium")
 with up_col1:
@@ -730,6 +734,7 @@ with up_col1:
     jsonl_file = st.file_uploader(
         "Upload candidates.jsonl",
         type=["jsonl", "json"],
+        max_upload_size=UPLOAD_LIMIT_MB,
         label_visibility="collapsed"
     )
 with up_col2:
@@ -738,6 +743,7 @@ with up_col2:
         "Upload candidate CSV files",
         type=["csv"],
         accept_multiple_files=True,
+        max_upload_size=UPLOAD_LIMIT_MB,
         label_visibility="collapsed"
     )
 

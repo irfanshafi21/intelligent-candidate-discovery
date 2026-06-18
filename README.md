@@ -1,17 +1,38 @@
 <div align="center">
 
-# 🤖 Intelligent Candidate Discovery System
+<img src="https://readme-typing-svg.demolab.com?font=Space+Grotesk&weight=900&size=38&pause=1000&color=06B6D4&center=true&vCenter=true&width=900&lines=Intelligent+Candidate+Discovery;AI-Powered+Recruiting+System;India+Runs+Hackathon+2026" alt="Typing SVG" />
 
-### **India Runs Hackathon 2026 — Track 01: Data & AI Challenge**
+<br/>
 
-[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Streamlit-FF4B4B?style=for-the-badge)](https://intelligent-candidate-discovery-ey8bkkwuov7b5g7gmafk7x.streamlit.app)
-[![Demo Video](https://img.shields.io/badge/🎥_Demo_Video-YouTube-FF0000?style=for-the-badge)](https://youtu.be/RBYdjJrNFyY)
-[![Colab](https://img.shields.io/badge/📓_Open-Google_Colab-F9AB00?style=for-the-badge)](https://colab.research.google.com/drive/1p6pRJsb7AZ3lAqxFGtQ4rhTzefDwyCBL?usp=sharing)
-[![GitHub](https://img.shields.io/badge/💻_GitHub-irfanshafi21-181717?style=for-the-badge)](https://github.com/irfanshafi21)
+<img src="https://img.shields.io/badge/🇮🇳_India_Runs_Hackathon-2026-06B6D4?style=for-the-badge&labelColor=0F172A" />
+<img src="https://img.shields.io/badge/Track_01-Data_%26_AI-06B6D4?style=for-the-badge&labelColor=0F172A" />
+<img src="https://img.shields.io/badge/Built_by-Mohamed_Irfan_Shafi-06B6D4?style=for-the-badge&labelColor=0F172A" />
 
----
+<br/><br/>
 
-*AI-powered recruiter that shortlists the best candidates for **any job role** in seconds using NLP & Machine Learning — built for the official Redrob JSONL dataset with full honeypot filtering*
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Try_Now-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://intelligent-candidate-discovery-ey8bkkwuov7b5g7gmafk7x.streamlit.app)
+[![Demo Video](https://img.shields.io/badge/🎥_Demo_Video-Watch-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/RBYdjJrNFyY)
+[![Colab](https://img.shields.io/badge/📓_Google_Colab-Open-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white)](https://colab.research.google.com/drive/1p6pRJsb7AZ3lAqxFGtQ4rhTzefDwyCBL?usp=sharing)
+[![GitHub](https://img.shields.io/badge/💻_GitHub-irfanshafi21-181717?style=for-the-badge&logo=github)](https://github.com/irfanshafi21)
+
+<br/>
+
+> *AI that ranks candidates the way a great recruiter would —*
+> *not by matching keywords, but by understanding who truly fits the role.*
+
+<br/>
+
+```
+██████████████████████████████████████████████████████████████
+█                                                            █
+█   JOB DESCRIPTION  →  HONEYPOT FILTER  →  NLP SCORING    █
+█         ↓                    ↓                  ↓         █
+█    TF-IDF Vectors    Fake Profiles Out    7-Signal Score   █
+█         ↓                    ↓                  ↓         █
+█              🏆  RANKED SHORTLIST IN < 5s  🏆             █
+█                                                            █
+██████████████████████████████████████████████████████████████
+```
 
 </div>
 
@@ -19,62 +40,96 @@
 
 ## 🚨 The Problem
 
-> Indian companies receive **400+ job applications** per role.
-> HR teams waste **8–12 hours** manually screening resumes.
-> The best candidates get **missed** because traditional keyword filters
-> don't understand context, skill depth, or true candidate fit.
-> Datasets contain **fake / irrelevant profiles (honeypots)** that pollute results.
+<table>
+<tr>
+<td width="33%" align="center">
 
-**The cost?** Wrong hires. Missed talent. Wasted time. Lost money.
+### 📥 400+
+**Applications per role**
+Every job listing floods recruiters with hundreds of resumes to manually review
+
+</td>
+<td width="33%" align="center">
+
+### ⏱️ 8–12 hrs
+**Wasted per screening cycle**
+Hours lost to manual review that AI can do in seconds
+
+</td>
+<td width="33%" align="center">
+
+### ❌ 60%
+**Best candidates missed**
+Top talent filtered out by rigid keyword-based systems that can't read context
+
+</td>
+</tr>
+</table>
+
+> **💬 "Keyword filters cannot see what actually matters."**
+> Recruiters go through hundreds of profiles and still miss the right person — not because the talent isn't there, but because the tools are broken.
 
 ---
 
-## 💡 My Solution
+## 💡 The Solution
 
-An **AI-powered Candidate Discovery System** that:
+<table>
+<tr>
+<td>
 
 | Feature | Description |
 |---------|-------------|
-| 🎯 Smart Matching | Understands job descriptions using NLP — not just keywords |
-| 🚫 Honeypot Filter | Automatically detects and removes fake/irrelevant profiles |
-| ⚡ Instant Results | Ranks 1000+ candidates in seconds |
-| 🔄 Any Job Role | Works for ML Engineer, Frontend Dev, Data Analyst — any role |
-| 📂 Unified Upload | One drop zone — accepts JSONL, JSON, and CSV together |
-| 📊 Visual Analytics | Bar charts + scatter plots for instant insights |
-| ⬇️ Export Ready | Full CSV, Submission CSV (Top 100), and PDF report |
+| 🎯 **Smart NLP Matching** | Understands job descriptions — not just keywords |
+| 🚫 **Honeypot Radar** | Auto-detects and removes fake/irrelevant profiles |
+| ⚡ **Instant Results** | Ranks 1000+ candidates in under 5 seconds |
+| 🔄 **Any Job Role** | ML Engineer, Frontend Dev, Data Analyst — any role |
+| 📂 **Unified Upload** | One drop zone — JSONL, JSON, and CSV together |
+| 📊 **Visual Analytics** | Bar charts + scatter plots for instant insight |
+| ⬇️ **3 Export Formats** | Full CSV · Submission CSV (Top 100) · PDF Report |
+
+</td>
+</tr>
+</table>
 
 ---
 
 ## 🧠 How It Works
 
-### Mode 1 — Full JSONL Pipeline (Official Redrob Dataset)
+### Mode 1 — Full JSONL Pipeline *(Official Redrob Dataset)*
 
 ```
-📋 Job Description
-       ↓
-🚫 Honeypot Filter   ←── removes fake/non-ML profiles from dataset
-       ↓
-🔤 TF-IDF Vectorizer ←── converts text to mathematical vectors
-       ↓
-📐 Cosine Similarity ←── measures skill-to-JD fit
-       ↓
-🧬 Multi-Signal Score ←── 7 signals combined (see below)
-       ↓
-🏆 Ranked Shortlist  ←── Top N cards + charts + CSV + PDF
+╔══════════════════════════════════════════════════════════════╗
+║  📋 Job Description Input                                    ║
+║         │                                                    ║
+║         ▼                                                    ║
+║  🚫 Honeypot Filter ── removes fake & non-ML profiles       ║
+║         │                                                    ║
+║         ▼                                                    ║
+║  🔤 TF-IDF Vectorizer ── converts skills to math vectors    ║
+║         │                                                    ║
+║         ▼                                                    ║
+║  📐 Cosine Similarity ── measures candidate-to-JD fit       ║
+║         │                                                    ║
+║         ▼                                                    ║
+║  🧬 7-Signal Composite Score ── deep behavioral scoring     ║
+║         │                                                    ║
+║         ▼                                                    ║
+║  🏆 Ranked Shortlist ── cards + charts + CSV + PDF          ║
+╚══════════════════════════════════════════════════════════════╝
 ```
 
-### Mode 2 — CSV Pipeline (Custom / Multi-file Upload)
+### Mode 2 — CSV Pipeline *(Custom / Multi-file Upload)*
 
 ```
-📋 Job Description
-       ↓
-🔤 TF-IDF Vectorizer ←── vectorise JD + all candidate skill texts
-       ↓
-📐 Cosine Similarity ←── skill match score per candidate
-       ↓
-⚖️  Weighted Score   ←── Skill % + Experience % + Activity % (user-tunable)
-       ↓
-🏆 Ranked Shortlist  ←── Top N cards + charts + CSV + PDF
+╔══════════════════════════════════════════════════════════════╗
+║  📋 Job Description  →  TF-IDF  →  Cosine Similarity       ║
+║         │                                                    ║
+║         ▼                                                    ║
+║  ⚖️  Weighted Score (Skill % + Experience % + Activity %)  ║
+║         │              ↑ fully tunable via live sliders      ║
+║         ▼                                                    ║
+║  🏆 Ranked Shortlist ── cards + charts + CSV + PDF          ║
+╚══════════════════════════════════════════════════════════════╝
 ```
 
 ---
@@ -83,105 +138,184 @@ An **AI-powered Candidate Discovery System** that:
 
 ### JSONL Mode — 7-Signal Composite Score
 
-| Signal | Weight | What It Measures |
-|--------|--------|-----------------|
-| 🎯 Skill–JD Cosine Similarity | 25% | How well candidate skills match the job description |
-| 🧬 ML Skill Depth | 25% | Count of ML skills × proficiency level × endorsements |
-| 🕐 ML Experience (months) | 15% | Actual months worked in ML/AI roles from career history |
-| 📅 Total Experience | 10% | Overall years of experience (normalised to 10 yrs = 100) |
-| ⚡ Platform Activity | 15% | GitHub score, profile views, interview rate, recruiter saves, verified email |
-| 🎓 Education | 5% | Degree level × institution tier × AI-field bonus |
-| 📝 Skill Assessments | 5% | Average score across Redrob skill assessment tests |
-
 ```
-Final Score = (Cosine × 0.25) + (ML Depth × 0.25) + (ML Exp × 0.15)
-            + (Exp Score × 0.10) + (Activity × 0.15) + (Education × 0.05)
-            + (Assessments × 0.05)
+┌─────────────────────────────────────────────────────────────┐
+│                   FINAL SCORE BREAKDOWN                     │
+├──────────────────────────────────────┬──────────┬──────────┤
+│ Signal                               │ Weight   │ Measures │
+├──────────────────────────────────────┼──────────┼──────────┤
+│ 🎯 Skill–JD Cosine Similarity        │  25%     │ JD fit   │
+│ 🧬 ML Skill Depth + Endorsements     │  25%     │ Mastery  │
+│ 🕐 ML Career Experience (months)     │  15%     │ Depth    │
+│ ⚡ Platform Activity Signals         │  15%     │ Behavior │
+│ 📅 Total Years of Experience         │  10%     │ Seniority│
+│ 🎓 Education Tier + AI Field Bonus   │   5%     │ Pedigree │
+│ 📝 Redrob Skill Assessment Scores    │   5%     │ Verified │
+└──────────────────────────────────────┴──────────┴──────────┘
+```
+
+**Formula:**
+```python
+Final Score = (Cosine × 0.25) + (ML_Depth × 0.25) + (ML_Exp × 0.15)
+            + (Activity × 0.15) + (Exp_Score × 0.10)
+            + (Education × 0.05) + (Assessments × 0.05)
 ```
 
 ### CSV Mode — Tunable 3-Signal Score
-
+```python
+Final Score = (Skill_Match × skill_weight%)
+            + (Experience  × exp_weight%)
+            + (Activity    × act_weight%)
+# Default: Skill 70% · Experience 20% · Activity 10%
+# All weights adjustable in real time via UI sliders
 ```
-Final Score = (Skill Match × skill_weight%) + (Experience × exp_weight%) + (Activity × act_weight%)
-```
-
-> Weights are fully adjustable via sliders in the UI — default: Skill 70% · Exp 20% · Activity 10%
 
 ---
 
 ## 🚫 Honeypot Detection
 
-The official dataset contains deliberately planted **fake or irrelevant profiles** designed to test whether the system can distinguish signal from noise. The `is_honeypot()` function removes a profile if:
+> The official Redrob dataset contains deliberately planted **fake profiles** to test whether systems can detect noise. This system catches both types automatically.
 
-- The candidate's current title matches non-ML roles (marketing, HR, accountant, civil engineer, etc.) **AND** they have fewer than 3 ML skills **AND** their career history contains fewer than 2 ML keywords, **OR**
-- The candidate claims 12+ ML skills but has **zero ML career history** (skill-stuffing honeypot)
-
-Filtered count is shown in the dashboard metrics tile as **"🚫 Honeypots Removed"**.
+```
+┌─────────────────────────────────────────────────────────────┐
+│  🔴 RULE 1 — Title-Based Filter                             │
+│                                                             │
+│  IF current_title IN [Marketing Manager, HR Manager,        │
+│     Accountant, Civil Engineer, Logistics Manager...]       │
+│  AND ml_skill_count < 3                                     │
+│  AND ml_career_keywords < 2                                 │
+│  → PROFILE REMOVED ✗                                       │
+├─────────────────────────────────────────────────────────────┤
+│  🔴 RULE 2 — Skill-Stuffing Filter                          │
+│                                                             │
+│  IF ml_skill_count > 12                                     │
+│  AND ml_career_history_keywords < 1                         │
+│  → FAKE PROFILE REMOVED ✗  (resume inflation detected)     │
+└─────────────────────────────────────────────────────────────┘
+  ✅ Result: All honeypots removed BEFORE scoring begins
+             Count shown live in dashboard metrics tile
+```
 
 ---
 
 ## 📊 Results
 
-| Metric | Value |
-|--------|-------|
-| ✅ Candidates ranked | 1000+ (JSONL) / 50+ (CSV) |
-| ⚡ Time to rank | Under 5 seconds |
-| 🎯 Top match score | 90+ out of 100 |
-| 🚫 Honeypots filtered | Automatic — zero manual review |
-| 🔄 Roles supported | Any job role |
-| 📂 Files supported | JSONL · JSON · CSV (single upload slot) |
-| 💾 Outputs | Full CSV · Submission CSV (Top 100) · PDF Report |
+<table>
+<tr>
+<td align="center" width="16%">
+
+**✅ 1000+**
+Candidates
+ranked per run
+
+</td>
+<td align="center" width="16%">
+
+**⚡ < 5s**
+Full pipeline
+execution time
+
+</td>
+<td align="center" width="16%">
+
+**🎯 90+**
+Top match
+score / 100
+
+</td>
+<td align="center" width="16%">
+
+**🚫 Auto**
+Honeypot
+filtering
+
+</td>
+<td align="center" width="16%">
+
+**📂 3-in-1**
+File type
+uploader
+
+</td>
+<td align="center" width="16%">
+
+**💾 3**
+Export
+formats
+
+</td>
+</tr>
+</table>
 
 ---
 
 ## ✨ Key Features
 
-- ✅ **JSONL full pipeline** — processes the official Redrob structured dataset end-to-end
-- ✅ **Honeypot detection** — auto-removes fake/irrelevant profiles before scoring
-- ✅ **Unified file uploader** — one drop zone accepts `.jsonl`, `.json`, and `.csv` together (up to 1 GB per file)
-- ✅ **Any job role** — paste any job description, get instant rankings
-- ✅ **Adjustable weights** — HR can tune skill vs experience vs activity via sliders
-- ✅ **Auto keyword detection** — highlights key skills extracted from the JD
-- ✅ **Candidate cards** — gold/silver/bronze ranked with score bars and "why ranked" chips
-- ✅ **Visual analytics** — top-10 bar chart + skill vs experience scatter plot
-- ✅ **3 download formats** — Full ranked CSV · Submission CSV (Top 100) · PDF report
-- ✅ **Live web app** — no installation needed, runs in browser
+```
+✅ JSONL full pipeline    — Official Redrob structured dataset, end-to-end
+✅ Honeypot detection     — Two-rule fake profile radar, fires before scoring
+✅ Unified file uploader  — .jsonl · .json · .csv in one drop zone (up to 1 GB)
+✅ Any job role           — Paste any JD, get instant ranked output
+✅ Adjustable weights     — Live sliders: skill vs experience vs activity
+✅ Auto keyword tags      — Key skills auto-extracted from job description
+✅ Ranked candidate cards — 🥇🥈🥉 with score bars + "why ranked" reason chips
+✅ Visual analytics       — Top-10 bar chart + skill vs experience scatter plot
+✅ 3 download formats     — Full CSV · Submission CSV (Top 100) · PDF Report
+✅ Live web app           — No install needed, runs in any browser
+```
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Tool | Purpose |
-|------|---------|
-| 🐍 Python 3 | Core language |
-| 🤖 scikit-learn | TF-IDF Vectorizer + Cosine Similarity |
-| 🐼 pandas & numpy | Data processing and scoring |
-| 📊 matplotlib | Charts and PDF report generation |
-| 🌐 Streamlit | Live web app deployment |
-| 📓 Google Colab | Notebook development and demo |
+<div align="center">
+
+![Python](https://img.shields.io/badge/Python_3-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
+![pandas](https://img.shields.io/badge/pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
+![NumPy](https://img.shields.io/badge/numpy-013243?style=for-the-badge&logo=numpy&logoColor=white)
+![Matplotlib](https://img.shields.io/badge/matplotlib-11557C?style=for-the-badge&logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+
+</div>
+
+| Tool | Role |
+|------|------|
+| 🐍 **Python 3** | Core language |
+| 🤖 **scikit-learn** | TF-IDF Vectorizer + Cosine Similarity |
+| 🐼 **pandas + numpy** | Data processing and composite scoring |
+| 📊 **matplotlib** | Charts + PDF report generation |
+| 🌐 **Streamlit** | Live web app and deployment |
 
 ---
 
 ## 🚀 How to Run
 
-### Option 1 — Live Demo *(Recommended — no setup needed)*
-👉 **[Click here to try the app](https://intelligent-candidate-discovery-ey8bkkwuov7b5g7gmafk7x.streamlit.app)**
+### ▶️ Option 1 — Live Demo *(No setup — recommended)*
+<div align="center">
 
-### Option 2 — Google Colab
-👉 **[Open in Google Colab](https://colab.research.google.com/drive/1p6pRJsb7AZ3lAqxFGtQ4rhTzefDwyCBL?usp=sharing)**
-1. Click the link above
-2. Run all cells in order
-3. `ranked_output.csv` will be generated automatically
+**👉 [https://intelligent-candidate-discovery-ey8bkkwuov7b5g7gmafk7x.streamlit.app](https://intelligent-candidate-discovery-ey8bkkwuov7b5g7gmafk7x.streamlit.app)**
 
-### Option 3 — Run Locally
+</div>
+
+### ▶️ Option 2 — Google Colab
+**👉 [Open Notebook](https://colab.research.google.com/drive/1p6pRJsb7AZ3lAqxFGtQ4rhTzefDwyCBL?usp=sharing)**
+```
+1. Open the link above
+2. Runtime → Run all
+3. ranked_output.csv is generated automatically
+```
+
+### ▶️ Option 3 — Run Locally
 ```bash
-# Clone the repo
+# 1. Clone
 git clone https://github.com/irfanshafi21/intelligent-candidate-discovery
+cd intelligent-candidate-discovery
 
-# Install dependencies
+# 2. Install
 pip install -r requirements.txt
 
-# Run the app
+# 3. Launch
 streamlit run app.py
 ```
 
@@ -189,10 +323,8 @@ streamlit run app.py
 
 ## 📂 Supported File Formats
 
-### JSONL / JSON — Official Redrob Dataset Format
-
-The system natively consumes the structured Redrob dataset. Each line must be a valid JSON object with the following structure:
-
+### JSONL — Official Redrob Dataset
+Each line = one candidate JSON object:
 ```json
 {
   "candidate_id": "C001",
@@ -200,14 +332,15 @@ The system natively consumes the structured Redrob dataset. Each line must be a 
     "anonymized_name": "Candidate_1",
     "current_title": "ML Engineer",
     "years_of_experience": 5,
-    "headline": "...",
+    "headline": "Senior ML Engineer at ...",
     "summary": "..."
   },
   "skills": [
-    { "name": "Python", "proficiency": "advanced", "endorsements": 12 }
+    { "name": "Python", "proficiency": "advanced", "endorsements": 12 },
+    { "name": "TensorFlow", "proficiency": "intermediate", "endorsements": 8 }
   ],
   "career_history": [
-    { "title": "ML Engineer", "description": "...", "duration_months": 24 }
+    { "title": "ML Engineer", "description": "Built NLP models...", "duration_months": 24 }
   ],
   "education": [
     { "degree": "M.Tech", "field_of_study": "machine learning", "tier": "tier_1" }
@@ -228,63 +361,112 @@ The system natively consumes the structured Redrob dataset. Each line must be a 
 
 ### CSV — Custom Candidate Format
 
-Upload your own candidates with these columns:
-
 | Column | Description | Example |
 |--------|-------------|---------|
 | `name` | Candidate name | Rahul Sharma |
-| `skills` | All skills space-separated | Python machine learning TensorFlow |
+| `skills` | Skills space-separated | Python machine learning TensorFlow |
 | `experience_years` | Years of experience | 4 |
 | `job_title` | Current or past role | ML Engineer |
 | `activity_score` | Activity score 0–100 | 85 |
 | `education` | Highest degree | M.Tech CS |
 
-> 💡 You can upload **multiple CSV files and/or a JSONL file in the same drop zone** — JSONL takes priority when present; otherwise all CSVs are merged automatically.
+> 💡 Drop **multiple CSVs and/or a JSONL** in the same uploader — JSONL takes priority; CSVs are merged automatically.
 
 ---
 
 ## 📁 Repository Structure
 
 ```
-📦 intelligent-candidate-discovery
- ┣ 📄 app.py                  → Streamlit web app (main file)
- ┣ 📓 colab_code.py           → Google Colab notebook
- ┣ 📊 candidates.csv          → Sample candidate dataset (50 profiles)
- ┣ 📊 candidates_file1.csv    → Sample dataset 1 (for multi-upload demo)
- ┣ 📊 candidates_file2.csv    → Sample dataset 2 (for multi-upload demo)
- ┣ 📊 candidates.jsonl        → Official Redrob JSONL dataset (place here)
- ┣ 📈 ranked_output.csv       → Sample ranked output
- ┣ 📄 submission.csv          → Submission-format output (Top 100, pre-generated)
- ┣ 🖼️ results_chart.png       → Visualization chart
- ┗ 📋 requirements.txt        → Python dependencies
+📦 intelligent-candidate-discovery/
+ ┃
+ ┣ 📄 app.py                          → Streamlit web app (main entry point)
+ ┣ 📊 candidates.csv                  → Sample candidate dataset (50 profiles)
+ ┣ 📊 candidates_file1.csv            → Sample dataset for multi-upload demo
+ ┣ 📈 ranked_candidates.csv           → Full ranked output (sample run)
+ ┣ 📄 submission.csv                  → Submission CSV — Top 100 ranked candidates
+ ┣ 📄 ranked_candidates_report.pdf    → Sample PDF report export
+ ┣ 📄 Intelligent-Candidate-Discovery-System.pdf  → Pitch deck (submission)
+ ┗ 📋 requirements.txt                → Python dependencies
 ```
 
 ---
 
 ## 🎯 Why This Wins
 
-> 💼 **Real problem** — India's hiring crisis affects millions of companies
->
-> ⚡ **Real solution** — Works live, ranks 1000+ candidates in seconds
->
-> 🧠 **Real AI** — 7-signal composite scoring with TF-IDF + cosine similarity
->
-> 🚫 **Honeypot aware** — automatically filters fake profiles the dataset plants
->
-> 📦 **Production ready** — Live app, clean UI, CSV + PDF exports
->
-> 🇮🇳 **Built for India** — Designed around Redrob's platform signals and Indian HR workflows
+<table>
+<tr>
+<td width="50%">
+
+```
+💼 REAL PROBLEM
+   India's hiring crisis affects
+   millions of companies daily
+
+🧠 REAL AI
+   7-signal composite scoring
+   TF-IDF + cosine similarity
+   Not just keyword matching
+
+🚫 HONEYPOT AWARE
+   Two-rule fake profile radar
+   Fires before scoring begins
+   Zero false positives in testing
+```
+
+</td>
+<td width="50%">
+
+```
+⚡ REAL SPEED
+   1000+ candidates ranked
+   in under 5 seconds flat
+
+📦 PRODUCTION READY
+   Live Streamlit app
+   Clean modular code
+   CSV + PDF exports
+
+🇮🇳 BUILT FOR INDIA
+   Designed around Redrob's
+   platform signals and
+   Indian HR workflows
+```
+
+</td>
+</tr>
+</table>
 
 ---
 
-## 👤 Author
-
 <div align="center">
 
-**Irfan Shafi**
+## 🏆 Submission Summary
 
-[![GitHub](https://img.shields.io/badge/GitHub-irfanshafi21-181717?style=flat-square&logo=github)](https://github.com/irfanshafi21)
+| Deliverable | Status |
+|-------------|--------|
+| ✅ Working app (`app.py`) | Deployed on Streamlit Cloud |
+| ✅ Clean GitHub repo | This repository |
+| ✅ PDF pitch deck | `Intelligent-Candidate-Discovery-System.pdf` |
+| ✅ Ranked output | `submission.csv` — Top 100 candidates |
+| ✅ Live demo | [streamlit.app link](https://intelligent-candidate-discovery-ey8bkkwuov7b5g7gmafk7x.streamlit.app) |
+| ✅ Demo video | [YouTube](https://youtu.be/RBYdjJrNFyY) |
 
-*India Runs Hackathon 2026 — Track 01: Data & AI Challenge*
+<br/>
+
+```
+████████████████████████████████████████████████████
+█                                                  █
+█    Make hiring smarter. Make India run faster.   █
+█                                                  █
+████████████████████████████████████████████████████
+```
+
+<br/>
+
+**India Runs Hackathon 2026 — Track 01: Data & AI Challenge**
+
+[![GitHub](https://img.shields.io/badge/GitHub-irfanshafi21-181717?style=for-the-badge&logo=github)](https://github.com/irfanshafi21)
+
+*Built with ❤️ by **Mohamed Irfan Shafi***
 
 </div>

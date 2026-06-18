@@ -216,15 +216,6 @@ html, body, [class*="css"]{
     color:var(--muted) !important;
 }
 
-.upload-progress-card{margin-top:.55rem;background:#FFFFFF;border:1px solid var(--border);border-radius:16px;padding:.62rem .7rem;display:flex;align-items:center;gap:.75rem;box-shadow:0 8px 20px rgba(15,23,42,.045)}
-.upload-circle{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--accent) calc(var(--p)*1%),#E2E8F0 0);position:relative;flex-shrink:0}
-.upload-circle::before{content:"";position:absolute;width:38px;height:38px;border-radius:50%;background:#FFFFFF}
-.upload-circle span{position:relative;z-index:1;font-size:10.5px;font-weight:900;color:var(--primary)}
-.upload-status-title{font-size:12px;font-weight:900;color:var(--primary);line-height:1.2}
-.upload-status-sub{font-size:11px;font-weight:800;color:#0E7490;margin-top:2px}
-.upload-status-caption{font-size:10.5px;color:var(--muted);margin-top:2px}
-
-
 .run-card{
     background:var(--card);
     border:1px solid var(--border);
@@ -659,45 +650,6 @@ def create_ranked_pdf_report(df_ranked, top_n, recommendation_reason, explanatio
     buffer.seek(0)
     return buffer.getvalue()
 
-
-def format_file_size(size_bytes):
-    try:
-        size_bytes = float(size_bytes)
-    except Exception:
-        return ""
-    if size_bytes >= 1024 * 1024:
-        return f"{size_bytes/(1024*1024):.1f} MB"
-    if size_bytes >= 1024:
-        return f"{size_bytes/1024:.1f} KB"
-    return f"{size_bytes:.0f} B"
-
-def render_circle_status(title, percent, subtitle, caption=""):
-    percent = max(0, min(100, int(percent)))
-    html_block = f"""
-    <div class="upload-progress-card">
-        <div class="upload-circle" style="--p:{percent}"><span>{percent}%</span></div>
-        <div>
-            <div class="upload-status-title">{html.escape(str(title))}</div>
-            <div class="upload-status-sub">{html.escape(str(subtitle))}</div>
-            <div class="upload-status-caption">{html.escape(str(caption))}</div>
-        </div>
-    </div>
-    """
-    st.markdown(html_block, unsafe_allow_html=True)
-
-def render_upload_circle(title, uploaded):
-    if uploaded:
-        if isinstance(uploaded, list):
-            total_size = sum(getattr(f, 'size', 0) for f in uploaded)
-            subtitle = f"100% uploaded · {len(uploaded)} file(s)"
-            caption = format_file_size(total_size)
-        else:
-            subtitle = "100% uploaded"
-            caption = f"{getattr(uploaded, 'name', 'Uploaded file')} · {format_file_size(getattr(uploaded, 'size', 0))}"
-        render_circle_status(title, 100, subtitle, caption)
-    else:
-        render_circle_status(title, 0, "Waiting for file", "Select or drag and drop your file")
-
 # ── Horizontal Control Section ────────────────────────────────────────────────
 st.markdown('<div class="panel-card">', unsafe_allow_html=True)
 st.markdown('<div class="section-title">⚙️ Recruiter Control Panel</div>', unsafe_allow_html=True)
@@ -771,31 +723,26 @@ with select_col:
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-# ── Upload Section (clean single-card layout, supports JSONL + CSV) ───────────
+# ── Upload Section (single unified slot — JSONL, JSON, CSV all accepted) ──────
 st.markdown('<div class="upload-card">', unsafe_allow_html=True)
 st.markdown('<div class="small-title">📂 Upload Candidate Data</div>', unsafe_allow_html=True)
-st.caption(f"Upload limit: {UPLOAD_LIMIT_MB} MB (1 GB) per file")
+st.caption(f"Accepts .jsonl · .json · .csv — select one or more files · Upload limit: {UPLOAD_LIMIT_MB} MB (1 GB) per file")
 
-up_col1, up_col2 = st.columns(2, gap="medium")
-with up_col1:
-    st.markdown('<div class="mini-label">JSONL DATASET (FULL)</div>', unsafe_allow_html=True)
-    jsonl_file = st.file_uploader(
-        "Upload candidates.jsonl",
-        type=["jsonl", "json"],
-        max_upload_size=UPLOAD_LIMIT_MB,
-        label_visibility="collapsed"
-    )
-    render_upload_circle("JSONL DATASET", jsonl_file)
-with up_col2:
-    st.markdown('<div class="mini-label">CSV FILES (SELECT MULTIPLE)</div>', unsafe_allow_html=True)
-    csv_files = st.file_uploader(
-        "Upload candidate CSV files",
-        type=["csv"],
-        accept_multiple_files=True,
-        max_upload_size=UPLOAD_LIMIT_MB,
-        label_visibility="collapsed"
-    )
-    render_upload_circle("CSV FILES", csv_files)
+st.markdown('<div class="mini-label">CANDIDATE FILES (JSONL / JSON / CSV — SELECT ANY COMBINATION)</div>', unsafe_allow_html=True)
+uploaded_files = st.file_uploader(
+    "Upload candidate files",
+    type=["jsonl", "json", "csv"],
+    accept_multiple_files=True,
+    max_upload_size=UPLOAD_LIMIT_MB,
+    label_visibility="collapsed"
+)
+
+# Split uploads by extension so downstream logic stays identical
+jsonl_file = next(
+    (f for f in (uploaded_files or []) if f.name.lower().endswith(('.jsonl', '.json'))),
+    None
+)
+csv_files = [f for f in (uploaded_files or []) if f.name.lower().endswith('.csv')]
 
 st.markdown('</div>', unsafe_allow_html=True)
 
@@ -905,9 +852,6 @@ if run:
         df = None
         df_ranked = None
         honeypots = 0
-        progress_status = st.empty()
-        with progress_status.container():
-            render_circle_status("AI Ranking Progress", 5, "Preparing analysis", "Starting candidate processing...")
 
         with st.spinner("🤖 Analyzing candidates..."):
 
@@ -917,30 +861,20 @@ if run:
                 content = jsonl_file.read().decode('utf-8')
                 candidates = [json.loads(line) for line in content.strip().split('\n') if line.strip()]
                 st.info(f"📂 Loaded {len(candidates):,} candidates from JSONL file")
-                with progress_status.container():
-                    render_circle_status("AI Ranking Progress", 20, "Dataset loaded", f"{len(candidates):,} candidates found")
 
                 vectorizer = TfidfVectorizer(stop_words='english', max_features=8000)
                 vectorizer.fit([job_description])
                 jd_vec = vectorizer.transform([job_description])
 
                 results = []
-                total_candidates = len(candidates)
-                update_every = max(1, total_candidates // 25)
-                for idx, c in enumerate(candidates, start=1):
+                for c in candidates:
                     if is_honeypot(c):
                         honeypots += 1
-                    else:
-                        results.append(score_jsonl_candidate(c, jd_vec, vectorizer))
-                    if idx == total_candidates or idx % update_every == 0:
-                        pct = 20 + int((idx / max(total_candidates, 1)) * 75)
-                        with progress_status.container():
-                            render_circle_status("AI Ranking Progress", pct, "Scoring candidates", f"{idx:,}/{total_candidates:,} processed")
+                        continue
+                    results.append(score_jsonl_candidate(c, jd_vec, vectorizer))
 
                 df_ranked = pd.DataFrame(results).sort_values('final_score', ascending=False).reset_index(drop=True)
                 df_ranked['rank'] = df_ranked.index + 1
-                with progress_status.container():
-                    render_circle_status("AI Ranking Progress", 100, "Ranking complete", "Results are ready")
 
             # ── CSV mode ─────────────────────────────────────────────────
             else:
@@ -970,8 +904,6 @@ if run:
                 )
                 df2['rank'] = df2['final_score'].rank(ascending=False).astype(int)
                 df_ranked = df2.sort_values('rank').reset_index(drop=True)
-                with progress_status.container():
-                    render_circle_status("AI Ranking Progress", 100, "Ranking complete", "Results are ready")
 
         st.success(
             f"✅ Ranking complete! {len(df_ranked):,} candidates scored" +

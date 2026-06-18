@@ -470,8 +470,9 @@ degree_map = {'ph.d':100,'phd':100,'m.tech':85,'m.sc':80,'mca':75,'b.tech':60,'b
 ai_fields = ['artificial intelligence','machine learning','computer science','data science','deep learning','statistics']
 
 def is_honeypot(c):
-    title = c['profile'].get('current_title','').lower()
-    skills = [s['name'].lower() for s in c.get('skills',[])]
+    p = safe_get_profile(c)
+    title = p.get('current_title','').lower()
+    skills = [str(s.get('name','')).lower() for s in safe_list(c.get('skills',[])) if isinstance(s, dict)]
     skill_text = ' '.join(skills)
     career_text = ' '.join([(j.get('description','')+' '+j.get('title','')).lower() for j in c.get('career_history',[])])
     is_non_ml = any(f in title for f in HONEYPOT_TITLES)
@@ -484,15 +485,15 @@ def is_honeypot(c):
     return False
 
 def score_jsonl_candidate(c, jd_vec, vectorizer):
-    p = c['profile']; sig = c.get('redrob_signals',{}); skills = c.get('skills',[]); career = c.get('career_history',[]); edu = c.get('education',[])
-    skill_text = ' '.join([s['name'] for s in skills]+[p.get('headline',''),p.get('summary','')])
+    p = safe_get_profile(c); sig = c.get('redrob_signals',{}) if isinstance(c.get('redrob_signals',{}), dict) else {}; skills = safe_list(c.get('skills',[])); career = safe_list(c.get('career_history',[])); edu = safe_list(c.get('education',[]))
+    skill_text = ' '.join([str(s.get('name','')) for s in skills if isinstance(s, dict)] + [str(p.get('headline','')), str(p.get('summary',''))])
     try:
         cv = vectorizer.transform([skill_text])
         ss = cosine_similarity(jd_vec, cv).flatten()[0]*100
     except: ss = 0
     ml_cnt=0; ml_prof=0
     for s in skills:
-        if s['name'].lower() in ML_SKILLS:
+        if isinstance(s, dict) and str(s.get('name','')).lower() in ML_SKILLS:
             ml_cnt+=1; ml_prof+=proficiency_map.get(s.get('proficiency','beginner'),1); ml_prof+=min(s.get('endorsements',0)/20,2)
     ml_depth=min(ml_cnt*5+ml_prof*2,100)
     ml_months=sum(j.get('duration_months',0) for j in career if any(kw in (j.get('description','')+' '+j.get('title','')).lower() for kw in ['machine learning','ml ','ai ','deep learning','nlp','data science','python','neural']))
@@ -504,14 +505,14 @@ def score_jsonl_candidate(c, jd_vec, vectorizer):
     asm=sig.get('skill_assessment_scores',{})
     assess=np.mean(list(asm.values())) if asm else 0
     final=ss*0.25+ml_depth*0.25+ml_exp*0.15+exp_s*0.10+act*0.15+edu_s*0.05+assess*0.05
-    top_skills=[s['name'] for s in skills if s['name'].lower() in ML_SKILLS][:4]
+    top_skills=[str(s.get('name','')) for s in skills if isinstance(s, dict) and str(s.get('name','')).lower() in ML_SKILLS][:4]
     skill_str=', '.join(top_skills) if top_skills else 'technical skills'
     strength="Strong" if final>=70 else "Good" if final>=50 else "Moderate"
     reasoning=f"{strength} ML/AI candidate with {p.get('years_of_experience',0):.1f} yrs as {p.get('current_title','')}; key skills: {skill_str}. ML depth {ml_depth:.0f}/100, assessment {assess:.0f}/100."
     return {
-        'candidate_id':c['candidate_id'],'name':p.get('anonymized_name',''),
+        'candidate_id':c.get('candidate_id',''),'name':p.get('anonymized_name',''),
         'job_title':p.get('current_title',''),'experience_years':p.get('years_of_experience',0),
-        'skills':' '.join([s['name'] for s in skills]),
+        'skills':' '.join([str(s.get('name','')) for s in skills if isinstance(s, dict)]),
         'education':edu[0].get('degree','') if edu else '',
         'skill_match_score':round(ss,2),'ml_depth':round(ml_depth,2),
         'activity_score':round(act,2),'final_score':round(final,2),'reasoning':reasoning
@@ -841,6 +842,71 @@ def get_default_data():
     }
     return pd.DataFrame(data)
 
+
+# ── Robust candidate file readers ─────────────────────────────────────────────
+def _normalize_candidate_records(data):
+    """Return a list of candidate dicts from JSON data."""
+    if isinstance(data, list):
+        return [x for x in data if isinstance(x, dict)]
+    if isinstance(data, dict):
+        for key in ("candidates", "data", "records", "items"):
+            if isinstance(data.get(key), list):
+                return [x for x in data[key] if isinstance(x, dict)]
+        return [data]
+    return []
+
+def iter_jsonl_candidates(uploaded_file):
+    """Stream JSONL safely: one JSON object per line. Skips bad/empty lines."""
+    uploaded_file.seek(0)
+    bad_lines = []
+
+    for line_no, raw_line in enumerate(uploaded_file, start=1):
+        if isinstance(raw_line, bytes):
+            line = raw_line.decode("utf-8", errors="ignore").strip()
+        else:
+            line = str(raw_line).strip()
+
+        if not line:
+            continue
+
+        try:
+            item = json.loads(line)
+            if isinstance(item, dict):
+                yield item
+            elif isinstance(item, list):
+                for obj in item:
+                    if isinstance(obj, dict):
+                        yield obj
+        except json.JSONDecodeError as e:
+            bad_lines.append((line_no, str(e)))
+
+        if len(bad_lines) >= 25:
+            # Keep only first few errors to avoid memory usage on huge files
+            continue
+
+    st.session_state["json_bad_lines"] = bad_lines[:25]
+
+def load_json_candidates(uploaded_file):
+    """Load normal JSON safely: supports list, dict, or {'candidates': [...]}."""
+    uploaded_file.seek(0)
+    try:
+        raw = uploaded_file.read()
+        if isinstance(raw, bytes):
+            raw = raw.decode("utf-8", errors="ignore")
+        data = json.loads(raw)
+        return _normalize_candidate_records(data), []
+    except json.JSONDecodeError as e:
+        return [], [("json_file", str(e))]
+    except Exception as e:
+        return [], [("json_file", str(e))]
+
+def safe_get_profile(c):
+    p = c.get("profile", {})
+    return p if isinstance(p, dict) else {}
+
+def safe_list(value):
+    return value if isinstance(value, list) else []
+
 # ── Run Logic ───────────────────────────────────────────────────────────────
 if run:
     if total != 100:
@@ -857,21 +923,57 @@ if run:
 
             # ── JSONL mode ───────────────────────────────────────────────
             if jsonl_file:
-                mode = "jsonl"
-                content = jsonl_file.read().decode('utf-8')
-                candidates = [json.loads(line) for line in content.strip().split('\n') if line.strip()]
-                st.info(f"📂 Loaded {len(candidates):,} candidates from JSONL file")
+                mode = "jsonl" if jsonl_file.name.lower().endswith(".jsonl") else "json"
 
                 vectorizer = TfidfVectorizer(stop_words='english', max_features=8000)
                 vectorizer.fit([job_description])
                 jd_vec = vectorizer.transform([job_description])
 
                 results = []
-                for c in candidates:
-                    if is_honeypot(c):
-                        honeypots += 1
-                        continue
-                    results.append(score_jsonl_candidate(c, jd_vec, vectorizer))
+                loaded_count = 0
+                error_list = []
+
+                progress_bar = st.progress(0)
+                status_box = st.empty()
+                file_size = getattr(jsonl_file, "size", 0) or 0
+
+                if mode == "jsonl":
+                    candidate_iter = iter_jsonl_candidates(jsonl_file)
+                else:
+                    json_candidates, error_list = load_json_candidates(jsonl_file)
+                    candidate_iter = iter(json_candidates)
+
+                for c in candidate_iter:
+                    loaded_count += 1
+
+                    try:
+                        if is_honeypot(c):
+                            honeypots += 1
+                            continue
+                        results.append(score_jsonl_candidate(c, jd_vec, vectorizer))
+                    except Exception as e:
+                        if len(error_list) < 25:
+                            error_list.append((loaded_count, str(e)))
+
+                    if loaded_count % 1000 == 0:
+                        if mode == "jsonl" and file_size:
+                            progress_bar.progress(min(jsonl_file.tell() / file_size, 1.0))
+                        status_box.info(f"📂 Processed {loaded_count:,} candidates...")
+
+                if mode == "jsonl" and file_size:
+                    progress_bar.progress(1.0)
+
+                bad_jsonl_lines = st.session_state.get("json_bad_lines", [])
+                if bad_jsonl_lines:
+                    st.warning(f"⚠️ Skipped {len(bad_jsonl_lines)} invalid JSONL line(s). First errors: {bad_jsonl_lines[:3]}")
+                if error_list:
+                    st.warning(f"⚠️ Skipped {len(error_list)} candidate record(s) with missing/invalid fields. First errors: {error_list[:3]}")
+
+                if not results:
+                    st.error("❌ No valid candidates found in the uploaded file. Please check JSON/JSONL format.")
+                    st.stop()
+
+                st.info(f"📂 Loaded {loaded_count:,} candidates from {mode.upper()} file")
 
                 df_ranked = pd.DataFrame(results).sort_values('final_score', ascending=False).reset_index(drop=True)
                 df_ranked['rank'] = df_ranked.index + 1

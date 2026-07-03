@@ -749,7 +749,7 @@ st.markdown('</div>', unsafe_allow_html=True)
 
 # ── Full-width Run Section ─────────────────────────────────────────────────────
 st.markdown('<div class="run-card">', unsafe_allow_html=True)
-run = st.button("🚀 RUN AI RANKING", use_container_width=True)
+run = st.button("🚀 RUN AI RANKING", width="stretch")
 st.markdown('</div>', unsafe_allow_html=True)
 
 @st.cache_data
@@ -1113,7 +1113,7 @@ if run:
             for bar, val in zip(bars, top10['final_score']):
                 ax1.text(bar.get_width()+0.5, bar.get_y()+bar.get_height()/2, f'{val:.1f}', va='center', fontsize=6.8, color='#0E7490')
             plt.tight_layout()
-            st.pyplot(fig1, use_container_width=True)
+            st.pyplot(fig1, width="stretch")
 
         with c2:
             fig2, ax2 = plt.subplots(figsize=(5.2, 2.9))
@@ -1129,7 +1129,7 @@ if run:
             ax2.spines['left'].set_color('#E2E8F0')
             ax2.spines['bottom'].set_color('#E2E8F0')
             plt.tight_layout()
-            st.pyplot(fig2, use_container_width=True)
+            st.pyplot(fig2, width="stretch")
 
         st.write("")
         out_cols = [c for c in ['rank','candidate_id','name','job_title','experience_years','skill_match_score','activity_score','final_score','reasoning'] if c in df_ranked.columns]
@@ -1155,7 +1155,7 @@ if run:
                 data=csv_out,
                 file_name="full_ranked_candidates.csv",
                 mime="text/csv",
-                use_container_width=True
+                width="stretch"
             )
         with dl2:
             st.download_button(
@@ -1163,7 +1163,7 @@ if run:
                 data=sub_out,
                 file_name="submission.csv",
                 mime="text/csv",
-                use_container_width=True
+                width="stretch"
             )
         with dl3:
             st.download_button(
@@ -1171,7 +1171,7 @@ if run:
                 data=pdf_report,
                 file_name="ranked_candidates_report.pdf",
                 mime="application/pdf",
-                use_container_width=True
+                width="stretch"
             )
 
         st.markdown("""

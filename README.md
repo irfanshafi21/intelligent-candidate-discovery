@@ -282,6 +282,6 @@ intelligent-candidate-discovery/
 
 <img src="https://capsule-render.vercel.app/api?type=slice&color=0:1a1a2e,100:16213e&height=100&section=footer" width="100%"/>
 
-<sub>Made with ❤️ by Mohamed Irfan Shafi</sub>
+<sub>Made with by Mohamed Irfan Shafi</sub>
 
 </div>

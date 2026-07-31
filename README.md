@@ -1,40 +1,89 @@
 # 🎯 Intelligent Candidate Discovery (ICD) Platform
 
+<div align="center">
+
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.35+-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![Groq](https://img.shields.io/badge/Groq-LLM-F55036?style=for-the-badge&logo=groq&logoColor=white)
+![Gemini](https://img.shields.io/badge/Gemini-Fallback_LLM-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-Database-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
+![License](https://img.shields.io/badge/License-Portfolio_Use-00668A?style=for-the-badge)
+
+</div>
+
 **AI-powered resume screening, ATS scoring, and candidate ranking system.**
 
 Upload resumes, paste a job description, and get an AI-ranked shortlist with match scores, ATS analysis, skill gaps, recruiter-style summaries, auto-generated interview questions, and exportable reports — all from a single Streamlit dashboard.
 
 Built by **Shafi (Irfan Shafi)** — 2nd-year AI & ML student, Kongu Engineering College — as a portfolio project demonstrating applied LLM integration, structured data extraction, and full-stack app design.
 
+<div align="center">
+
+`Resume Parsing` • `ATS Scoring` • `Candidate Ranking` • `Interview Prep` • `AI Chat Assistant` • `CSV / Excel / PDF Exports`
+
+</div>
+
 ---
 
 ## 📑 Table of Contents
 
-1. [Overview](#-overview)
-2. [Problem It Solves](#-problem-it-solves)
-3. [Who It's For](#-who-its-for)
-4. [Core Features](#-core-features)
-5. [Tech Stack](#-tech-stack)
-6. [System Architecture](#-system-architecture)
-7. [End-to-End Workflow](#-end-to-end-workflow)
-8. [AI Layer — Models, Providers & Prompts](#-ai-layer--models-providers--prompts)
-9. [Is This Machine Learning?](#-is-this-machine-learning)
-10. [Resume Text Extraction & OCR](#-resume-text-extraction--ocr)
-11. [ATS Scoring Logic](#-ats-scoring-logic)
-12. [Candidate Matching & Ranking](#-candidate-matching--ranking)
-13. [Database Layer (Supabase)](#-database-layer-supabase)
-14. [File-by-File Breakdown](#-file-by-file-breakdown)
-15. [Application Pages](#-application-pages)
-16. [Reports & Exports](#-reports--exports)
-17. [Security Notes](#-security-notes)
-18. [Error Handling & Reliability](#-error-handling--reliability)
-19. [Setup Guide](#-setup-guide)
-20. [Deployment Guide](#-deployment-guide)
-21. [Environment Variables](#-environment-variables)
-22. [Known Limitations](#-known-limitations)
-23. [Future Scope](#-future-scope)
-24. [Project Structure](#-project-structure)
-25. [Author](#-author)
+<table>
+<tr>
+<td valign="top" width="33%">
+
+### 🧭 Get Started
+- [Overview](#-overview)
+- [Problem It Solves](#-problem-it-solves)
+- [Who It's For](#-who-its-for)
+- [Core Features](#-core-features)
+- [Tech Stack](#-tech-stack)
+- [🎨 Design & Visual Identity](#-design--visual-identity)
+
+### 🏗 How It Works
+- [System Architecture](#-system-architecture)
+- [End-to-End Workflow](#-end-to-end-workflow)
+- [AI Layer — Models, Providers & Prompts](#-ai-layer--models-providers--prompts)
+- [Is This Machine Learning?](#-is-this-machine-learning)
+
+</td>
+<td valign="top" width="33%">
+
+### 🔍 Core Logic
+- [Resume Text Extraction & OCR](#-resume-text-extraction--ocr)
+- [ATS Scoring Logic](#-ats-scoring-logic)
+- [Candidate Matching & Ranking](#-candidate-matching--ranking)
+- [Database Layer (Supabase)](#-database-layer-supabase)
+- [File-by-File Breakdown](#-file-by-file-breakdown)
+- [Application Pages](#-application-pages)
+- [Reports & Exports](#-reports--exports)
+
+### 🔐 Trust & Reliability
+- [Security Notes](#-security-notes)
+- [Error Handling & Reliability](#-error-handling--reliability)
+- [Known Limitations](#-known-limitations)
+
+</td>
+<td valign="top" width="33%">
+
+### 🚀 Run It Yourself
+- [Setup Guide](#-setup-guide)
+- [Deployment Guide](#-deployment-guide)
+- [Environment Variables](#-environment-variables)
+- [Testing Checklist (Manual QA)](#-testing-checklist-manual-qa)
+
+### 📚 Reference
+- [Design Decisions & Trade-offs](#-design-decisions--trade-offs)
+- [Frequently Asked Questions](#-frequently-asked-questions)
+- [Future Scope](#-future-scope)
+- [Project Structure](#-project-structure)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Acknowledgements](#-acknowledgements)
+- [Author](#-author)
+
+</td>
+</tr>
+</table>
 
 ---
 
@@ -118,6 +167,50 @@ This project solves that by:
 | **Charts** | `Plotly` | Interactive analytics visualizations inside Streamlit |
 | **Excel export** | `pandas` + `openpyxl` | DataFrame → `.xlsx` |
 | **PDF report generation** | `reportlab` | Programmatic PDF report building (tables, styles, paragraphs) |
+
+---
+
+## 🎨 Design & Visual Identity
+
+The dashboard uses a custom "Sky" design system — a calm, professional blue palette layered over Streamlit's default theme via injected CSS in `app.py`. Typography pairs **Plus Jakarta Sans** (headings — bold, geometric) with **Inter** (body text — highly legible at small sizes), both loaded from Google Fonts.
+
+### Color Palette
+
+| Swatch | Token | Hex | Used For |
+|---|---|---|---|
+| ![#00668A](https://placehold.co/60x24/00668A/00668A.png) | `--primary` | `#00668A` | Primary buttons, active tab, links, section labels |
+| ![#004965](https://placehold.co/60x24/004965/004965.png) | `--primary-dark` | `#004965` | Headings, hover states, high-emphasis text |
+| ![#39B8FD](https://placehold.co/60x24/39B8FD/39B8FD.png) | `--secondary-container` | `#39B8FD` | Sidebar accent line, highlight badges |
+| ![#E0F2FE](https://placehold.co/60x24/E0F2FE/E0F2FE.png) | `--secondary` | `#E0F2FE` | Pill backgrounds, chips, soft highlight cards |
+| ![#0B1C30](https://placehold.co/60x24/0B1C30/0B1C30.png) | `--text` | `#0B1C30` | Primary body text (light mode) |
+| ![#3E484F](https://placehold.co/60x24/3E484F/3E484F.png) | `--text-secondary` | `#3E484F` | Secondary/muted text, captions |
+| ![#BDC8D1](https://placehold.co/60x24/BDC8D1/BDC8D1.png) | `--border` | `#BDC8D1` | Card borders, dividers, input outlines |
+| ![#1E293B](https://placehold.co/60x24/1E293B/1E293B.png) | Sidebar background | `#1E293B` | Dark navy sidebar, contrasts with light content area |
+| ![#38BDF8](https://placehold.co/60x24/38BDF8/38BDF8.png) | Sidebar accent | `#38BDF8` | Sidebar branding text, active nav item, connection status |
+
+Score-driven UI elements (match score chips, ATS verdicts) additionally use a semantic **green / amber / red** scale layered on top of the base palette, so a recruiter can gauge candidate quality at a glance without reading every number:
+
+| Verdict | Meaning |
+|---|---|
+| 🟢 Green | Strong match (High ATS compatibility / high overall score) |
+| 🟡 Amber | Partial match — worth a manual look |
+| 🔴 Red | Weak match / low ATS compatibility |
+
+### Typography
+
+| Role | Font | Weight |
+|---|---|---|
+| Headings, candidate names, hero title | Plus Jakarta Sans | 700–800 (Bold / Extrabold) |
+| Body text, tables, form inputs | Inter | 400–600 (Regular–Semibold) |
+| Sidebar labels / eyebrow text | Inter | 700–800, uppercase, letter-spaced |
+
+### UI Principles Applied
+
+- **Left-border cards** — content cards use a 4px `--primary` left border instead of a full outline, giving structure without visual heaviness
+- **Soft containers over hard boxes** — pill-shaped skill tags and score chips use `--secondary` backgrounds with `--primary-dark` text, rather than harsh borders
+- **Dark sidebar / light canvas contrast** — the navy sidebar (`#1E293B`) anchors navigation and status, while the main content area stays light and high-contrast for reading dense candidate data
+- **Consistent iconography** — every page and section uses a single leading emoji as a lightweight visual anchor (📤 Upload, 📊 Dashboard, 🗣️ Interview Prep, etc.) instead of custom icon assets
+- **Full light/dark mode** — a dedicated dark-mode stylesheet override (see `app.py`, toggled from Settings) remaps text/background/border tokens without duplicating component logic
 
 ---
 

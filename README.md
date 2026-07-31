@@ -674,17 +674,6 @@ All four can be set either in `.streamlit/secrets.toml` (local/Streamlit Cloud) 
 
 ---
 
-## ⚠️ Known Limitations
-
-- OCR accuracy depends heavily on scan/photo quality — low-resolution or skewed images may extract poorly or fail the 20-character minimum check.
-- Free-tier LLM rate limits can add latency during heavy bulk-upload sessions, even with automatic retry/fallback.
-- No multi-user authentication — intended for single-recruiter or small-team use, not a multi-tenant SaaS product.
-- Scoring quality is bounded by the underlying LLM's reasoning — it is not a certified or legally validated hiring tool and should support, not replace, human judgment.
-- Without Supabase configured, all data is lost when the browser session ends.
-- No dedicated `.sql` schema file is bundled in this repo; tables must be created manually based on the fields `db.py` expects.
-
----
-
 ## 🔮 Future Scope
 
 - Bundle an official `supabase_schema.sql` migration file with Row-Level Security policies

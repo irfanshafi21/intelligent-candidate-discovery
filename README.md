@@ -1,678 +1,638 @@
-# 🚀 Intelligent Candidate Discovery
-### AI-Powered Resume Screening, Candidate Ranking & Fraud Detection
+<div align="center">
 
-> **Finding the right candidate shouldn't mean manually reading hundreds of resumes.**
->
-> **Intelligent Candidate Discovery** is an AI-powered recruitment assistant that automatically understands job requirements, analyzes resumes, detects suspicious/fake profiles, and ranks the most relevant candidates using multiple intelligent signals.
+# 🚀 INTELLIGENT CANDIDATE DISCOVERY
 
----
+### 🧠 AI-Powered Recruitment • Smart Matching • Fraud Detection
 
-## 🏆 Why This Project?
+<p>
+<b>From hundreds of resumes to the right candidates — intelligently.</b>
+</p>
 
-Traditional recruitment can involve:
+<p>
+<img src="https://img.shields.io/badge/AI-Powered-7C3AED?style=for-the-badge&logo=openai&logoColor=white">
+<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white">
+<img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white">
+<img src="https://img.shields.io/badge/Machine%20Learning-00A67E?style=for-the-badge">
+</p>
 
-- 📄 Hundreds or thousands of resumes
-- ⏳ Hours of manual screening
-- 🎯 Difficulty identifying the best-fit candidates
-- ⚠️ Fake, incomplete, or suspicious resumes
-- 📊 Inconsistent candidate evaluation
-- 👥 Human bias during initial screening
+<p>
+<img src="https://img.shields.io/github/stars/irfanshafi21/intelligent-candidate-discovery?style=flat-square">
+<img src="https://img.shields.io/github/forks/irfanshafi21/intelligent-candidate-discovery?style=flat-square">
+<img src="https://img.shields.io/github/license/irfanshafi21/intelligent-candidate-discovery?style=flat-square">
+</p>
 
-### Our Solution
+<br>
 
-**Intelligent Candidate Discovery** transforms this process into an AI-assisted workflow.
+### 🏆 HACKATHON PROJECT
 
-Instead of simply searching for keywords, our system evaluates candidates based on **semantic relevance, skills, experience, education, job requirements, and profile reliability**.
+**AI Recruitment Intelligence Platform**
 
----
+[🚀 View Repository](https://github.com/irfanshafi21/intelligent-candidate-discovery)
 
-# 💡 What Makes It Different?
-
-### 🔍 1. Intelligent Resume Matching
-
-The system compares the **Job Description (JD)** with candidate resumes and identifies how closely each candidate matches the required role.
-
-It uses:
-
-**TF-IDF + Cosine Similarity**
-
-to calculate the textual similarity between the job requirements and candidate profiles.
+</div>
 
 ---
 
-### 🧠 2. Multi-Signal Candidate Scoring
+<div align="center">
 
-Candidate ranking is not based on a single similarity score.
+## 🎯 THE PROBLEM
 
-The system combines multiple signals to produce a more meaningful candidate score.
+</div>
+
+Recruiters often face a massive number of resumes for a single job opening.
+
+<table>
+<tr>
+<td align="center">📄<br><b>Hundreds of Resumes</b><br>Manual screening takes time</td>
+<td align="center">⏳<br><b>Time Consuming</b><br>Recruiters spend hours filtering</td>
+<td align="center">⚠️<br><b>Low-Quality Profiles</b><br>Suspicious or irrelevant resumes</td>
+<td align="center">🎯<br><b>Finding the Right Fit</b><br>Keyword matching isn't enough</td>
+</tr>
+</table>
+
+<br>
+
+<div align="center">
+
+## 💡 OUR SOLUTION
+
+</div>
+
+> **Intelligent Candidate Discovery** is an AI-assisted recruitment platform that analyzes job descriptions and candidate resumes, calculates relevance, detects suspicious profiles, and automatically ranks the most suitable candidates.
+
+### 🔥 Instead of asking:
+
+**"Does this resume contain the right keywords?"**
+
+### 🧠 We ask:
+
+**"How relevant is this candidate to this specific job?"**
+
+---
+
+<div align="center">
+
+## ⚡ HOW IT WORKS
 
 ```text
-Job Description
-       │
-       ▼
-┌──────────────────────┐
-│ Resume Processing    │
-└──────────┬───────────┘
-           ▼
-┌──────────────────────┐
-│ Skill Matching       │
-└──────────┬───────────┘
-           ▼
-┌──────────────────────┐
-│ Experience Analysis  │
-└──────────┬───────────┘
-           ▼
-┌──────────────────────┐
-│ Education Relevance  │
-└──────────┬───────────┘
-           ▼
-┌──────────────────────┐
-│ Semantic Similarity  │
-└──────────┬───────────┘
-           ▼
-┌──────────────────────┐
-│ Reliability Check    │
-└──────────┬───────────┘
-           ▼
-┌──────────────────────┐
-│ Candidate Score      │
-└──────────┬───────────┘
-           ▼
-      🏆 Ranking
+        📋 JOB DESCRIPTION
+                │
+                ▼
+        ┌─────────────────┐
+        │  Text Processing│
+        └────────┬────────┘
+                 │
+                 ▼
+        📄 CANDIDATE RESUMES
+                 │
+                 ▼
+        ┌─────────────────┐
+        │ Feature Extract │
+        └────────┬────────┘
+                 │
+       ┌─────────┼─────────┐
+       ▼         ▼         ▼
+    🛠️ Skills  🎓 Edu.  💼 Experience
+       │         │         │
+       └─────────┼─────────┘
+                 ▼
+        ┌─────────────────┐
+        │ TF-IDF Analysis │
+        └────────┬────────┘
+                 ▼
+        ┌─────────────────┐
+        │ Cosine Similarity│
+        └────────┬────────┘
+                 ▼
+        ┌─────────────────┐
+        │ Multi-Signal    │
+        │ Scoring Engine  │
+        └────────┬────────┘
+                 ▼
+        🛡️ PROFILE CHECK
+                 │
+                 ▼
+        🏆 FINAL RANKING
 ```
+
+</div>
 
 ---
 
-# 🛡️ 3. Honeypot / Suspicious Profile Detection
+<div align="center">
 
-Recruitment systems can be affected by low-quality or suspicious candidate profiles.
+## 🌟 KEY FEATURES
 
-Our system introduces an additional **profile reliability layer** to identify potentially suspicious candidates.
+</div>
 
-Instead of blindly ranking every profile, the system considers whether the candidate should be trusted.
+<table>
+<tr>
+<td width="50%">
+
+### 🔍 Smart Resume Matching
+
+Automatically compares resumes against the job description using:
+
+- TF-IDF
+- Cosine Similarity
+- Skill relevance
+- Experience relevance
+- Education relevance
+
+</td>
+
+<td width="50%">
+
+### 🧠 Intelligent Ranking
+
+Candidates are ranked using multiple signals rather than a single keyword score.
+
+**Result:** Better candidate prioritization.
+
+</td>
+</tr>
+
+<tr>
+<td width="50%">
+
+### 🛡️ Suspicious Profile Detection
+
+Identifies potentially suspicious or low-quality candidate profiles and flags them for human review.
+
+</td>
+
+<td width="50%">
+
+### 📊 Recruiter Dashboard
+
+A clean Streamlit interface provides:
+
+- Candidate ranking
+- Match scores
+- Profile analysis
+- Candidate comparison
+- Reports
+
+</td>
+</tr>
+
+<tr>
+<td width="50%">
+
+### 📄 Automated Reports
+
+Generate recruitment reports and export candidate results for further analysis.
+
+</td>
+
+<td width="50%">
+
+### ⚡ Fast Screening
+
+Transform a large candidate pool into a prioritized shortlist quickly.
+
+</td>
+</tr>
+</table>
+
+---
+
+<div align="center">
+
+## 🧮 MULTI-SIGNAL SCORING
+
+### Candidate ranking is based on multiple factors
+
+</div>
+
+```text
+                 ┌─────────────────────┐
+                 │   CANDIDATE PROFILE  │
+                 └──────────┬──────────┘
+                            │
+          ┌─────────────────┼─────────────────┐
+          ▼                 ▼                 ▼
+     🛠️ SKILLS         💼 EXPERIENCE      🎓 EDUCATION
+          │                 │                 │
+          └─────────────────┼─────────────────┘
+                            ▼
+                  📊 JD SIMILARITY
+                            │
+                            ▼
+                  🛡️ PROFILE QUALITY
+                            │
+                            ▼
+                 ┌────────────────────┐
+                 │   FINAL SCORE     │
+                 └─────────┬──────────┘
+                           ▼
+                    🏆 RANKING
+```
 
 ### Example
 
+| Rank | Candidate | Match | Profile |
+|:---:|---|:---:|:---:|
+| 🥇 | Candidate A | **92%** | 🟢 Strong |
+| 🥈 | Candidate B | **87%** | 🟢 Strong |
+| 🥉 | Candidate C | **82%** | 🟢 Good |
+| 4 | Candidate D | **65%** | 🟡 Review |
+| 5 | Candidate E | **42%** | 🔴 Low |
+
+---
+
+<div align="center">
+
+## 🛡️ TRUST LAYER
+
+### Don't just rank candidates. Identify profiles that need attention.
+
+</div>
+
 ```text
-Candidate A
-Skill Match      → High
-Experience       → High
-JD Similarity    → High
-Profile Quality  → High
-
-       ↓
-
-🏆 HIGH CONFIDENCE CANDIDATE
+Candidate
+    │
+    ▼
+┌──────────────────────┐
+│ Relevance Analysis   │
+└──────────┬───────────┘
+           ▼
+┌──────────────────────┐
+│ Profile Quality      │
+└──────────┬───────────┘
+           ▼
+     ┌─────┴─────┐
+     │           │
+     ▼           ▼
+  🟢 Reliable  ⚠️ Suspicious
+     │           │
+     ▼           ▼
+  Ranking     Human Review
 ```
 
-Compared with:
+> ⚠️ Suspicious profiles are **flagged for review**, not automatically rejected.
+
+---
+
+<div align="center">
+
+## 🏗️ SYSTEM ARCHITECTURE
+
+</div>
 
 ```text
-Candidate B
-Skill Match      → High
-JD Similarity    → High
-Profile Quality  → Suspicious
-
-       ↓
-
-⚠️ FLAG FOR REVIEW
-```
-
-This adds an important **trust and safety layer** to automated recruitment.
-
----
-
-# ⚡ 4. Automated Candidate Ranking
-
-Recruiters don't need to manually compare every candidate.
-
-The system automatically produces a ranked list:
-
-| Rank | Candidate | Match | Status |
-|------|-----------|-------|--------|
-| 🥇 1 | Candidate A | 92% | ⭐ Strong Match |
-| 🥈 2 | Candidate B | 87% | ⭐ Strong Match |
-| 🥉 3 | Candidate C | 79% | ✅ Good Match |
-| 4 | Candidate D | 65% | ⚠️ Review |
-| 5 | Candidate E | 42% | ❌ Low Match |
-
-This allows recruiters to focus their time on the **most relevant candidates first**.
-
----
-
-# 🎯 Core Features
-
-### 👨‍💼 Recruiter Features
-
-- 📋 Enter or upload Job Description
-- 📂 Process candidate resumes
-- 🔎 Automatically match candidates
-- 🧠 AI-assisted candidate ranking
-- 📊 Multi-factor candidate scoring
-- 🛡️ Suspicious profile detection
-- 🏆 Top candidate identification
-- 📈 Candidate comparison
-- 📄 Generate reports
-- 📥 Export results as CSV
-- 📑 Generate PDF reports
-
----
-
-# 🧠 AI / ML Pipeline
-
-The system follows a complete candidate-discovery pipeline:
-
-```text
-                ┌─────────────────┐
-                │  Job Description│
-                └────────┬────────┘
-                         │
-                         ▼
-                ┌─────────────────┐
-                │ Text Processing │
-                └────────┬────────┘
-                         │
-                         ▼
-             ┌───────────────────────┐
-             │ Candidate Resume Data │
-             └───────────┬───────────┘
-                         │
-                         ▼
-               ┌──────────────────┐
-               │ Feature Extraction│
-               └─────────┬────────┘
-                         │
-              ┌──────────┼──────────┐
-              ▼          ▼          ▼
-          Skills     Experience   Education
-              │          │          │
-              └──────────┼──────────┘
-                         ▼
-              ┌────────────────────┐
-              │ TF-IDF Vectorization│
-              └──────────┬─────────┘
-                         ▼
-              ┌────────────────────┐
-              │ Cosine Similarity  │
-              └──────────┬─────────┘
-                         ▼
-              ┌────────────────────┐
-              │ Multi-Signal Score │
-              └──────────┬─────────┘
-                         ▼
-              ┌────────────────────┐
-              │ Reliability Check  │
-              └──────────┬─────────┘
-                         ▼
-                 🏆 FINAL RANKING
+┌─────────────────────────────────────────────┐
+│                  RECRUITER                  │
+└──────────────────────┬──────────────────────┘
+                       ▼
+┌─────────────────────────────────────────────┐
+│               STREAMLIT UI                  │
+└──────────────────────┬──────────────────────┘
+                       ▼
+        ┌────────────────────────────┐
+        │ Job Description + Resumes  │
+        └──────────────┬─────────────┘
+                       ▼
+        ┌────────────────────────────┐
+        │     TEXT PROCESSING        │
+        └──────────────┬─────────────┘
+                       ▼
+       ┌───────────────┼───────────────┐
+       ▼               ▼               ▼
+   🛠️ Skills       💼 Experience     🎓 Education
+       │               │               │
+       └───────────────┼───────────────┘
+                       ▼
+             🧠 ML SIMILARITY ENGINE
+                       │
+                       ▼
+             📊 SCORING ENGINE
+                       │
+                       ▼
+             🛡️ TRUST ANALYSIS
+                       │
+                       ▼
+             🏆 CANDIDATE RANKING
+                       │
+                       ▼
+              📄 REPORT GENERATION
 ```
 
 ---
 
-# 🧮 Candidate Scoring
+<div align="center">
 
-The final candidate ranking considers multiple dimensions instead of relying only on keyword matching.
+## 🛠️ TECHNOLOGY STACK
 
-Conceptually:
+</div>
 
-```text
-Final Score
-     │
-     ├── Job Description Similarity
-     ├── Skill Relevance
-     ├── Experience Relevance
-     ├── Education Relevance
-     └── Profile Reliability
-```
+<table align="center">
+<tr>
+<td align="center">🐍<br><b>Python</b></td>
+<td align="center">🎈<br><b>Streamlit</b></td>
+<td align="center">🤖<br><b>Scikit-learn</b></td>
+<td align="center">📊<br><b>Pandas</b></td>
+<td align="center">🔢<br><b>NumPy</b></td>
+</tr>
+</table>
 
-This produces a more comprehensive candidate evaluation.
-
-> **The goal is not just to find candidates who mention the right keywords — it is to prioritize candidates whose overall profile is relevant to the role.**
-
----
-
-# 🖥️ Application Workflow
-
-### Step 1 — Enter Job Description
-
-Recruiter provides the requirements for the position.
+### AI / ML
 
 ```text
-Example:
-
-Role: Full Stack Developer
-
-Required Skills:
-Python
-React
-Node.js
-SQL
-REST APIs
-Git
-```
-
-### Step 2 — Upload / Load Candidate Data
-
-The system processes the available candidate resumes.
-
-### Step 3 — AI Analysis
-
-The system analyzes:
-
-- Skills
-- Experience
-- Education
-- Resume content
-- Job-description similarity
-- Profile quality
-
-### Step 4 — Candidate Ranking
-
-Candidates are automatically ranked according to their calculated scores.
-
-### Step 5 — Recruiter Decision
-
-Recruiters can focus on the strongest candidates instead of manually reviewing every profile.
-
-### Step 6 — Generate Report
-
-The system can export candidate results for further recruitment workflows.
-
----
-
-# 🏗️ System Architecture
-
-```text
-                    ┌───────────────────┐
-                    │     Recruiter     │
-                    └─────────┬─────────┘
-                              │
-                              ▼
-                    ┌───────────────────┐
-                    │ Streamlit UI      │
-                    └─────────┬─────────┘
-                              │
-                              ▼
-                    ┌───────────────────┐
-                    │ Resume / JD Input │
-                    └─────────┬─────────┘
-                              │
-                              ▼
-                  ┌─────────────────────────┐
-                  │ Text Processing Pipeline │
-                  └────────────┬────────────┘
-                               │
-              ┌────────────────┼────────────────┐
-              ▼                ▼                ▼
-        Skill Analysis   Similarity Model   Profile Check
-              │                │                │
-              └────────────────┼────────────────┘
-                               ▼
-                    ┌───────────────────┐
-                    │ Scoring Engine    │
-                    └─────────┬─────────┘
-                              ▼
-                    ┌───────────────────┐
-                    │ Candidate Ranking │
-                    └─────────┬─────────┘
-                              ▼
-                    ┌───────────────────┐
-                    │ Reports / Export  │
-                    └───────────────────┘
+TF-IDF
+   ↓
+Text Vectorization
+   ↓
+Cosine Similarity
+   ↓
+Candidate Relevance
+   ↓
+Multi-Signal Scoring
+   ↓
+Candidate Ranking
 ```
 
 ---
 
-# 🛠️ Technology Stack
+<div align="center">
 
-| Technology | Purpose |
-|------------|---------|
-| 🐍 Python | Core development |
-| 🎈 Streamlit | Interactive web application |
-| 🤖 Scikit-learn | Machine learning & similarity |
-| 📊 Pandas | Data processing |
-| 🔢 NumPy | Numerical operations |
-| 📄 PDF Tools | Report generation |
-| 📁 CSV | Candidate dataset & export |
-| 🧠 TF-IDF | Text representation |
-| 📐 Cosine Similarity | Candidate-JD matching |
+## 📂 PROJECT STRUCTURE
 
----
-
-# 📂 Project Structure
+</div>
 
 ```text
 intelligent-candidate-discovery/
 │
-├── app.py
-├── requirements.txt
-├── README.md
+├── 📄 app.py
+├── 📄 requirements.txt
+├── 📄 README.md
 │
-├── data/
+├── 📁 data/
 │   └── candidate datasets
 │
-├── models/
-│   └── ML / scoring components
+├── 📁 models/
+│   └── scoring / ML components
 │
-├── reports/
+├── 📁 reports/
 │   └── generated reports
 │
-└── assets/
+└── 📁 assets/
     └── application resources
 ```
 
-> The exact folder structure may vary depending on the current version of the project.
-
 ---
 
-# 🚀 Getting Started
+<div align="center">
 
-## 1️⃣ Clone the Repository
+## 🚀 QUICK START
+
+</div>
+
+### 1️⃣ Clone
 
 ```bash
 git clone https://github.com/irfanshafi21/intelligent-candidate-discovery.git
-```
-
-```bash
 cd intelligent-candidate-discovery
 ```
 
-## 2️⃣ Create a Virtual Environment
-
-```bash
-python -m venv venv
-```
-
-### Windows
-
-```bash
-venv\Scripts\activate
-```
-
-### Linux / macOS
-
-```bash
-source venv/bin/activate
-```
-
-## 3️⃣ Install Dependencies
+### 2️⃣ Install
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 4️⃣ Run the Application
+### 3️⃣ Run
 
 ```bash
 streamlit run app.py
 ```
 
-The application will open in your browser.
+### 4️⃣ Open the Application
+
+The Streamlit application will open in your browser.
 
 ---
 
-# 📊 Example Output
+<div align="center">
 
-The system produces an easy-to-understand candidate ranking dashboard.
+## 🎬 DEMO WORKFLOW
+
+</div>
 
 ```text
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       INTELLIGENT CANDIDATE DISCOVERY
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Job Role:
-Full Stack Developer
-
-Candidates Analyzed:
-100+
-
-Top Candidates:
-
-🥇 Candidate A     92%
-🥈 Candidate B     87%
-🥉 Candidate C     82%
-
-⚠️ Suspicious Profiles:
-5
-
-📊 Average Match:
-74%
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 ENTER JOB DESCRIPTION
+          ↓
+📂 LOAD CANDIDATE DATA
+          ↓
+🧠 AI ANALYSIS
+          ↓
+📊 CALCULATE SCORES
+          ↓
+🛡️ CHECK PROFILE QUALITY
+          ↓
+🏆 RANK CANDIDATES
+          ↓
+📄 GENERATE REPORT
 ```
 
 ---
 
-# 🌍 Real-World Impact
+<div align="center">
 
-This system can support:
+## 🌍 REAL-WORLD IMPACT
+
+</div>
+
+<table>
+<tr>
+<td align="center">
 
 ### 🏢 Companies
-Reduce the time spent on initial resume screening.
+
+Reduce initial screening workload.
+
+</td>
+<td align="center">
 
 ### 👨‍💼 Recruiters
-Quickly identify promising candidates.
 
-### 👨‍💻 HR Teams
-Standardize initial candidate evaluation.
+Find relevant candidates faster.
 
-### 🚀 Startups
-Handle recruitment efficiently with limited HR resources.
+</td>
+<td align="center">
 
-### 🎓 Placement Cells
-Help organize and shortlist students for job opportunities.
+### 🎓 Colleges
+
+Support placement-cell screening.
+
+</td>
+</tr>
+</table>
 
 ---
 
-# 🔥 Innovation
+<div align="center">
 
-Our project combines several recruitment intelligence concepts into a single workflow:
+## 🔥 WHAT MAKES US DIFFERENT?
+
+</div>
+
+<table>
+<tr>
+<th>Traditional Screening</th>
+<th>Intelligent Candidate Discovery</th>
+</tr>
+<tr>
+<td>❌ Manual resume reading</td>
+<td>✅ Automated screening</td>
+</tr>
+<tr>
+<td>❌ Keyword dependent</td>
+<td>✅ Multi-signal matching</td>
+</tr>
+<tr>
+<td>❌ Difficult to scale</td>
+<td>✅ Designed for large candidate pools</td>
+</tr>
+<tr>
+<td>❌ Limited profile validation</td>
+<td>✅ Suspicious profile detection</td>
+</tr>
+<tr>
+<td>❌ Manual ranking</td>
+<td>✅ Automated candidate ranking</td>
+</tr>
+<tr>
+<td>❌ Time-consuming reports</td>
+<td>✅ Automated reporting</td>
+</tr>
+</table>
+
+---
+
+<div align="center">
+
+# 🏆 WHY THIS PROJECT?
+
+### We are not building another resume keyword search.
+
+### We are building a **candidate intelligence layer**.
+
+<br>
 
 ```text
-       Resume Screening
-              +
-       AI Matching
-              +
-       Multi-Signal Scoring
-              +
-       Suspicious Profile Detection
-              +
-       Automated Ranking
-              =
-   🧠 Intelligent Candidate Discovery
+     RESUMES
+        │
+        ▼
+   🧠 UNDERSTAND
+        │
+        ▼
+   📊 EVALUATE
+        │
+        ▼
+   🛡️ VERIFY
+        │
+        ▼
+   🏆 PRIORITIZE
+        │
+        ▼
+ BETTER RECRUITMENT
 ```
 
-The key idea is:
-
-> **Don't just search resumes. Understand, score, verify, and prioritize candidates.**
+</div>
 
 ---
 
-# ⚖️ Responsible AI
+<div align="center">
 
-Automated candidate screening should assist recruiters rather than completely replace human decision-making.
+## 🔮 FUTURE ROADMAP
 
-Therefore, the system is designed as a **decision-support tool**.
+</div>
 
-Final hiring decisions should remain with qualified human reviewers.
-
-Potential future improvements include:
-
-- Bias detection
-- Explainable AI
-- Fairness metrics
-- Human-review checkpoints
-- Better semantic models
-- Privacy-preserving candidate processing
+| Version | Feature |
+|:---:|---|
+| 🔵 V1 | Resume matching & ranking |
+| 🟣 V2 | Advanced semantic understanding |
+| 🟢 V3 | Explainable AI recommendations |
+| 🟠 V4 | AI recruitment assistant |
+| 🔴 V5 | Bias & fairness analysis |
+| ⭐ V6 | Enterprise recruitment intelligence |
 
 ---
 
-# 🚀 Future Scope
+<div align="center">
 
-The current system can be extended into a complete AI recruitment platform.
+## 🤖 FUTURE AI ASSISTANT
 
-### 🔮 Planned Enhancements
+### Recruiters could simply ask:
 
-**1. 🤖 LLM-Based Resume Understanding**
+> **"Find the top candidates for this role."**
 
-Use modern language models to understand resumes beyond keyword similarity.
+or
 
-**2. 🧩 Skill Ontology**
+> **"Why was this candidate ranked #1?"**
 
-Recognize relationships between technologies.
+or
+
+> **"Show candidates with Python and Machine Learning experience."**
+
+### And the AI recruitment assistant can provide an explanation.
+
+</div>
+
+---
+
+<div align="center">
+
+## 📊 SUCCESS METRICS
+
+</div>
 
 ```text
-Machine Learning
-      │
-      ├── Python
-      ├── Scikit-learn
-      ├── TensorFlow
-      └── PyTorch
+🎯 Candidate Relevance
+        +
+⚡ Screening Efficiency
+        +
+🛡️ Profile Reliability
+        +
+📊 Ranking Quality
+        +
+👨‍💼 Recruiter Experience
+        │
+        ▼
+🚀 MEASURABLE RECRUITMENT IMPROVEMENT
 ```
 
-**3. 💬 AI Recruitment Assistant**
+---
 
-Recruiters could ask:
+<div align="center">
 
-> "Show me the top 5 candidates with Python and ML experience."
+# 💥 OUR HACKATHON PITCH
 
-**4. 📄 Automatic Resume Summarization**
+### "From hundreds of resumes to the right candidates — intelligently."
 
-Generate a concise summary of every candidate.
+<br>
 
-**5. 🎯 Explainable Candidate Ranking**
+**AI + Machine Learning + Recruitment Intelligence**
 
-Instead of only showing:
+<br>
 
-```text
-Match Score: 91%
-```
+⭐ **Star the project if you like it!**
 
-show:
+<br>
 
-```text
-Why this candidate ranked highly:
+<a href="https://github.com/irfanshafi21/intelligent-candidate-discovery">
+<img src="https://img.shields.io/badge/VIEW%20PROJECT-GitHub-181717?style=for-the-badge&logo=github">
+</a>
 
-✓ Required skills matched
-✓ Relevant experience
-✓ Strong JD similarity
-✓ Relevant education
-✓ Reliable profile
-```
-
-**6. 🔐 Privacy & Security**
-
-Introduce secure candidate-data handling and privacy controls.
+</div>
 
 ---
 
-# 🏆 Hackathon Value Proposition
+<div align="center">
 
-### Problem
+### 👨‍💻 Built for Hackathons • Built for Impact • Built for Smarter Recruitment
 
-Recruiters spend significant time manually screening resumes.
+**Intelligent Candidate Discovery**
 
-### Solution
-
-An AI-assisted platform that automatically analyzes, scores, ranks, and flags candidate profiles.
-
-### Innovation
-
-Multi-signal candidate evaluation combined with profile reliability analysis.
-
-### Impact
-
-⏱️ Reduce screening effort  
-🎯 Improve candidate discovery  
-📊 Make evaluation more consistent  
-🛡️ Identify suspicious profiles  
-🚀 Help recruiters focus on high-potential candidates
-
----
-
-# 👥 Target Users
-
-- HR departments
-- Recruitment agencies
-- Startups
-- Enterprises
-- Placement cells
-- Hiring managers
-- Job platforms
-
----
-
-# 📈 Success Metrics
-
-The project can be evaluated using:
-
-| Metric | Purpose |
-|--------|---------|
-| Matching Accuracy | Quality of candidate recommendations |
-| Precision@K | Relevance of top-ranked candidates |
-| Screening Time | Reduction in manual effort |
-| Suspicious Profile Detection | Reliability of profile filtering |
-| Recruiter Satisfaction | Practical usefulness |
-| Ranking Quality | Quality of candidate prioritization |
-
----
-
-# 🎬 Demo Flow for Judges
-
-During the hackathon presentation, demonstrate the system in this order:
-
-```text
-1️⃣ Enter Job Description
-          ↓
-2️⃣ Load Candidate Dataset
-          ↓
-3️⃣ Start AI Analysis
-          ↓
-4️⃣ Generate Candidate Scores
-          ↓
-5️⃣ Display Ranked Candidates
-          ↓
-6️⃣ Show Suspicious Profiles
-          ↓
-7️⃣ Compare Candidates
-          ↓
-8️⃣ Export Recruitment Report
-```
-
-### 🎤 One-Line Pitch
-
-> **"We built an AI-powered recruitment assistant that doesn't just match keywords — it analyzes candidate relevance, evaluates multiple signals, detects suspicious profiles, and helps recruiters discover the right candidates faster."**
-
----
-
-# 💻 Repository
-
-**GitHub:**  
-https://github.com/irfanshafi21/intelligent-candidate-discovery
-
----
-
-# ⭐ Support the Project
-
-If you find this project useful:
-
-⭐ Star the repository  
-🍴 Fork the project  
-🐛 Report issues  
-💡 Suggest improvements  
-🤝 Contribute to the project
-
----
-
-# 👨‍💻 Team
-
-### Intelligent Candidate Discovery
-
-Built with ❤️ using **Python, Machine Learning & Streamlit**
-
-> **From hundreds of resumes to the right candidates — intelligently.**
-
----
-
-## 📜 License
-
-This project is intended for educational, research, and hackathon purposes.
+</div>

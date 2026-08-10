@@ -23,8 +23,6 @@
 
 <br>
 
-### 🏆 HACKATHON PROJECT
-
 **AI Recruitment Intelligence Platform**
 
 [🚀 View Repository](https://github.com/irfanshafi21/intelligent-candidate-discovery)
